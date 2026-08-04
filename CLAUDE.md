@@ -37,6 +37,60 @@ The `step-by-step-example/` folder contains a complete tutorial:
 ### Checklist
 Full checklist: `step-by-step-example/checklist.md`
 
+## Odysseus - Material
+
+Rules: `app/public/rules-fr.pdf` and `rules-en.pdf`. 1 to 5 players (1 player = solo mode vs the Automa).
+
+**There is no player color.** The 4 colors are the skills (`rules/src/Skill.ts`): red = Strength,
+blue = Intelligence, yellow = Cunning, green = Luck. Every player owns one cube of each color.
+
+### Copies of each component
+
+Verified against the rules and by comparing the publisher files pixel by pixel.
+
+| Component | Copies | Distinct artworks | Images |
+|---|---|---|---|
+| Ship board (Navire d'Ulysse) | 1 | 1 | `boards/ShipBoard.jpg` |
+| Story board (plateau Récit) | 5 | **1** — all identical | `boards/StoryBoard.png` |
+| Trial card (carte Épreuve) | 60 | **60 — all unique** | `cards/trials/` |
+| Player aid card | 5 | **1** — all identical | `cards/PlayerAid{Front,Back}.jpg` |
+| Automa card | 16 | unknown — fronts not delivered | `cards/automa/AutomaBack.jpg` |
+| Story token (jeton Récit) | 28 | **14 types x 2 copies** | `tokens/story/` |
+| Athena favor token | 40 | **1** — all identical | `tokens/AthenaFavor.png` |
+| Epic tile (tuile Épopée) | 5 | 5 — values 2, 4, 6, 8, 10 | `tiles/epic/` |
+| Automa difficulty tile | 4 | 4 — levels 1 to 4 | `tiles/automa/` |
+| Wooden cube | 20 | 4 colors x 5 copies | no asset delivered |
+| Score pad | 1 | 1 | `ScorePad.jpg` |
+
+The 60 trial cards are **15 adventures x 4 skills**: source files 1-4 are adventure 1, 5-8 adventure 2,
+and so on, always in the order yellow (Cunning), green (Luck), red (Strength), blue (Intelligence).
+Hence the naming `Trial<1-15><Skill>.jpg`. The adventures are still numbered, not named.
+
+Only a subset of the deck is used: the ship board gives 24 cards for 2 players, 36 for 3, 48 for 4
+(12 per player). The 5-player box reads a single `6` in the supplied artwork, almost certainly a
+truncated `60` — the whole deck. **To confirm on a physical copy before relying on it.**
+
+### Image conventions
+
+Sources are 300 dpi (118.11 px/cm), so physical sizes are read straight from the pixel count, after
+cropping to the real die-cut box — backs are delivered on a 952 px canvas whose actual card is the
+central 710 px (6 x 6 cm).
+
+- **100 px = 1 cm** for cards, tiles and tokens
+- **50 px = 1 cm** for the two large boards (same convention as `../les-jardins-suspendus`)
+- PNGs (transparency) carry a **baked drop shadow**: canvas grown by 15 px per side, so the declared
+  `width`/`height` grows by 0.30 cm in each direction.
+- **Every card is a JPEG**, shadowless: the card renderer draws its own shadow and rounds the corners
+  in CSS. The player aid was delivered die-cut with transparent corners, so the artwork was extended
+  outward to fill them before flattening.
+
+### Missing assets
+
+- **The 16 Automa card fronts.** Only the back was delivered; absent from `Adaptation numérique`,
+  `MEDIAPACK`, `VERSION FR` and `VERSION - EN`. Format deduced from the back: 6 x 6 cm.
+- **The 20 wooden cubes.** 3D components, no artwork. Their physical size cannot be derived from any
+  file — measure them, or size them against the track spaces of the story board.
+
 ## Project Structure
 
 ```
