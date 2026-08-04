@@ -1,3 +1,3 @@
-export { GameTemplateRules } from './GameTemplateRules'
-export { GameTemplateOptionsSpec } from './GameTemplateOptions'
-export { GameTemplateSetup } from './GameTemplateSetup'
+export { OdysseusRules } from './OdysseusRules'
+export { OdysseusOptionsSpec } from './OdysseusOptions'
+export { OdysseusSetup } from './OdysseusSetup'
