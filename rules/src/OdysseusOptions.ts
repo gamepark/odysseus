@@ -1,29 +1,17 @@
-import { getEnumValues, OptionsSpec } from '@gamepark/rules-api'
-import { PlayerColor } from './PlayerColor'
+import { OptionsSpec } from '@gamepark/rules-api'
 
 /**
- * This is the options for each player in the game.
- */
-type PlayerOptions = { id: PlayerColor }
-
-/**
- * This is the type of object that the game receives when a new game is started.
- * The first generic parameter, "{}", can be changed to include game options like variants or expansions.
+ * Odysseus is played by 1 to 5 players (1 player being the solo mode against the Automa).
+ * There is no identity to pick: the game has no player color, and every Story board is identical.
+ * The only setup input is therefore the number of players, which the platform provides.
  */
 export type OdysseusOptions = {
-  players: PlayerOptions[]
+  players: number
 }
 
 /**
  * This object describes all the options a game can have, and will be used by GamePark website to create automatically forms for you game
  * (forms for friendly games, or forms for matchmaking preferences, for instance).
+ * Odysseus has no option so far.
  */
-export const OdysseusOptionsSpec: OptionsSpec<OdysseusOptions> = {
-  players: {
-    id: {
-      label: (t) => t('player.id'),
-      values: getEnumValues(PlayerColor),
-      valueSpec: (id) => ({ label: (t) => t(`player.${id}`) })
-    }
-  }
-}
+export const OdysseusOptionsSpec: OptionsSpec<OdysseusOptions> = {}
