@@ -47,6 +47,7 @@ blue = Intelligence, yellow = Cunning, green = Luck. Every player owns one cube 
 ### Copies of each component
 
 Verified against the rules and by comparing the publisher files pixel by pixel.
+Source artwork: `C:\Users\romai\kDrive\Licences\Gigamic\Odysseus\ASSETS`.
 
 | Component | Copies | Distinct artworks | Images |
 |---|---|---|---|
@@ -55,20 +56,25 @@ Verified against the rules and by comparing the publisher files pixel by pixel.
 | Trial card (carte Épreuve) | 60 | **60 — all unique** | `cards/trials/` |
 | Player aid card | 5 | **1** — all identical | `cards/PlayerAid{Front,Back}.jpg` |
 | Automa card | 16 | unknown — fronts not delivered | `cards/automa/AutomaBack.jpg` |
-| Story token (jeton Récit) | 28 | **14 types x 2 copies** | `tokens/story/` |
+| Story token (jeton Récit) | 28 | **14 types x 2 copies** + 1 common back | `tokens/story/` |
 | Athena favor token | 40 | **1** — all identical | `tokens/AthenaFavor.png` |
 | Epic tile (tuile Épopée) | 5 | 5 — values 2, 4, 6, 8, 10 | `tiles/epic/` |
 | Automa difficulty tile | 4 | 4 — levels 1 to 4 | `tiles/automa/` |
-| Wooden cube | 20 | 4 colors x 5 copies | no asset delivered |
+| Wooden cube | 20 | 4 colors x 5 copies | `cubes/` |
 | Score pad | 1 | 1 | `ScorePad.jpg` |
 
 The 60 trial cards are **15 adventures x 4 skills**: source files 1-4 are adventure 1, 5-8 adventure 2,
 and so on, always in the order yellow (Cunning), green (Luck), red (Strength), blue (Intelligence).
 Hence the naming `Trial<1-15><Skill>.jpg`. The adventures are still numbered, not named.
 
-Only a subset of the deck is used: the ship board gives 24 cards for 2 players, 36 for 3, 48 for 4
-(12 per player). The 5-player box reads a single `6` in the supplied artwork, almost certainly a
-truncated `60` — the whole deck. **To confirm on a physical copy before relying on it.**
+Only a subset of the deck is used — 12 cards per player, read off the ship board:
+**24 cards for 2 players, 36 for 3, 48 for 4, 60 for 5** (the whole deck).
+
+**Epic and Automa difficulty tiles are double-sided**, which the punchboard versos reveal: the epic
+tile showing 10 has a blank wooden back, the others pair up 8/4 and 6/2 (two tiles of each pair), and
+the Automa tiles pair 1/3 and 2/4. Play never flips them — they are laid out on the wanted face — so
+only the front artwork is extracted. The story token back is the only punched back that matters,
+since those are the only pieces drawn face down.
 
 ### Image conventions
 
@@ -83,13 +89,23 @@ central 710 px (6 x 6 cm).
 - **Every card is a JPEG**, shadowless: the card renderer draws its own shadow and rounds the corners
   in CSS. The player aid was delivered die-cut with transparent corners, so the artwork was extended
   outward to fill them before flattening.
+- **Cubes** (`cubes/`) come from the 3D renders, which already carry their own shadow. The flat
+  Pantone swatches give the real size: 119 px = **1 x 1 cm cubes**. The render's top face measures
+  257 x 259 px, hence a declared **1.65 x 1.67 cm** for the whole canvas so the cube itself reads 1 cm.
+  Careful: the swatches and the 3D renders do NOT share the same colour order (03 and 04 are swapped).
+- **Icons** (`icons/`) are UI assets, not physical material: trimmed and capped at 256 px, no shadow.
+  `Skills` is the four-coloured emblem standing for the cubes; `AthenaFavorFlat` is a stylised owl
+  whose exact use is unconfirmed (`AthenaFavor` is the realistic token artwork).
 
 ### Missing assets
 
-- **The 16 Automa card fronts.** Only the back was delivered; absent from `Adaptation numérique`,
-  `MEDIAPACK`, `VERSION FR` and `VERSION - EN`. Format deduced from the back: 6 x 6 cm.
-- **The 20 wooden cubes.** 3D components, no artwork. Their physical size cannot be derived from any
-  file — measure them, or size them against the track spaces of the story board.
+- **The 16 Automa card fronts.** Only the back was delivered; absent from `ASSETS`, `COM`,
+  `VERSION FR` and `VERSION - EN`. Format deduced from the back: 6 x 6 cm.
+
+Unused source files, kept in mind rather than extracted: `ODYSSEUS-COVER.jpg`, `FOND-DOS DE BOITE.jpg`,
+`Odys_Plateau-bateau_mer_FINAL3-MER.jpg` (the sea layer of the ship board), `Odys_dauphins.psd`,
+`Die line PLATEAU PERSO-2ND LAYER` (die-cut line of the second layer of the story board),
+and the punchboard versos beyond the story token back.
 
 ## Project Structure
 
