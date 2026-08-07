@@ -52,7 +52,7 @@ Source artwork: `C:\Users\romai\kDrive\Licences\Gigamic\Odysseus\ASSETS`.
 | Component | Copies | Distinct artworks | Images |
 |---|---|---|---|
 | Ship board (Navire d'Ulysse) | 1 | 1 | `boards/ShipBoard.jpg` |
-| Story board (plateau Récit) | 5 | **1** — all identical | `boards/StoryBoard.png` |
+| Story board (plateau Récit) | 5 | **1** — all identical, **2 glued layers** | `boards/StoryBoard.png` |
 | Trial card (carte Épreuve) | 60 | **60 — all unique** | `cards/trials/` |
 | Player aid card | 5 | **1** — all identical | `cards/PlayerAid{Front,Back}.jpg` |
 | Automa card | 16 | unknown — fronts not delivered | `cards/automa/AutomaBack.jpg` |
@@ -93,6 +93,11 @@ central 710 px (6 x 6 cm).
   Pantone swatches give the real size: 119 px = **1 x 1 cm cubes**. The render's top face measures
   257 x 259 px, hence a declared **1.65 x 1.67 cm** for the whole canvas so the cube itself reads 1 cm.
   Careful: the swatches and the 3D renders do NOT share the same colour order (03 and 04 are swapped).
+- **The Story board is composed from its two layers**: `PLATEAU PERSO-1ST LAYER-2.png` (the parchment
+  with the 4 skill tracks and the map) sits under `Die line PLATEAU PERSO-2ND LAYER - 2.png` (the wood
+  and sea top layer, cut out where the cubes and the Trial cards go). Both crop to the same
+  4489 x 910 box, so they align by bounding box. The cut edges cast a short soft shadow into each
+  recess — blurred alpha of the top layer, kept only inside the holes — which is what gives the relief.
 - **Icons** (`icons/`) are UI assets, not physical material: trimmed and capped at 256 px, no shadow.
   `Skills` is the four-coloured emblem standing for the cubes; `AthenaFavorFlat` is a stylised owl
   whose exact use is unconfirmed (`AthenaFavor` is the realistic token artwork).
@@ -104,7 +109,6 @@ central 710 px (6 x 6 cm).
 
 Unused source files, kept in mind rather than extracted: `ODYSSEUS-COVER.jpg`, `FOND-DOS DE BOITE.jpg`,
 `Odys_Plateau-bateau_mer_FINAL3-MER.jpg` (the sea layer of the ship board), `Odys_dauphins.psd`,
-`Die line PLATEAU PERSO-2ND LAYER` (die-cut line of the second layer of the story board),
 and the punchboard versos beyond the story token back.
 
 ## Project Structure
