@@ -4,6 +4,7 @@ import { StoryTileType } from '@gamepark/odysseus/material/StoryTile'
 import { isMoveItemType, MaterialItem, MaterialMove } from '@gamepark/rules-api'
 import { ItemContext, TokenDescription } from '@gamepark/react-game'
 import { svgDataUri } from '../svgDataUri'
+import { StoryTileHelp } from './help/StoryTileHelp'
 import Creatures from '../images/tokens/story/Creatures.png'
 import Cunning from '../images/tokens/story/Cunning.png'
 import Encounters from '../images/tokens/story/Encounters.png'
@@ -48,6 +49,7 @@ class StoryTileDescription extends TokenDescription<number, MaterialType, Locati
   }
 
   backImage = placeholderBack
+  help = StoryTileHelp
 
   isFlipped(item: Partial<MaterialItem<number, LocationType>>): boolean {
     return item.location?.type === LocationType.TaleDeck

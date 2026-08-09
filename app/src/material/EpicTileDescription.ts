@@ -7,11 +7,13 @@ import EpicTile2 from '../images/tiles/epic/EpicTile2.png'
 import EpicTile4 from '../images/tiles/epic/EpicTile4.png'
 import EpicTile6 from '../images/tiles/epic/EpicTile6.png'
 import EpicTile8 from '../images/tiles/epic/EpicTile8.png'
+import { EpicTileHelp } from './help/EpicTileHelp'
 
 class EpicTileDescription extends TokenDescription<number, MaterialType, LocationType, EpicTile> {
   width = 3.39
   height = 3.93
   transparency = true
+  help = EpicTileHelp
 
   images = {
     [EpicTile.Value2]: EpicTile2,

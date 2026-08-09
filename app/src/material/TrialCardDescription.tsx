@@ -7,6 +7,7 @@ import { isMoveItemType, MaterialItem, MaterialMove } from '@gamepark/rules-api'
 import { CardDescription, ItemContext } from '@gamepark/react-game'
 import { Trans } from 'react-i18next'
 import { OdysseusMenuButton } from '../theme/OdysseusMenuButton'
+import { TrialCardHelp } from './help/TrialCardHelp'
 import Trial10Cunning from '../images/cards/trials/Trial10Cunning.jpg'
 import Trial10Intelligence from '../images/cards/trials/Trial10Intelligence.jpg'
 import Trial10Luck from '../images/cards/trials/Trial10Luck.jpg'
@@ -76,6 +77,7 @@ class TrialCardDescription extends CardDescription<number, MaterialType, Locatio
   // for images that already bake their own shadow into a transparent PNG, but doubles as the only way to
   // disable it entirely, which is what we want for these flat, shadowless JPEGs.
   transparency = true
+  help = TrialCardHelp
 
   images = {
     [TrialCard.Trial1Cunning]: Trial1Cunning,

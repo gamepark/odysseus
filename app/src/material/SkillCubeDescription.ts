@@ -7,11 +7,13 @@ import CunningCube from '../images/cubes/CunningCube.png'
 import IntelligenceCube from '../images/cubes/IntelligenceCube.png'
 import LuckCube from '../images/cubes/LuckCube.png'
 import StrengthCube from '../images/cubes/StrengthCube.png'
+import { SkillCubeHelp } from './help/SkillCubeHelp'
 
 class SkillCubeDescription extends TokenDescription<number, MaterialType, LocationType, Skill> {
   width = 1.65
   height = 1.67
   transparency = true
+  help = SkillCubeHelp
 
   images = {
     [Skill.Strength]: StrengthCube,

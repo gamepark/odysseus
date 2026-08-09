@@ -20,7 +20,7 @@ import { ChooseTrialCardRule } from './rules/ChooseTrialCardRule'
 import { FinishTurnRule } from './rules/FinishTurnRule'
 import { ResolveSkillGainRule } from './rules/ResolveSkillGainRule'
 import { RuleId } from './rules/RuleId'
-import { Skill } from './Skill'
+import { Skill, skills } from './Skill'
 
 /** The central pair of a ShipTrialSlot row (x 2-3) stays hidden until revealed by ChooseTrialCardRule. */
 const hideShipTrialSlotCentralPair = (item: MaterialItem<number, LocationType>) => (isShipTrialSlotFaceDown(item.location) ? ['id'] : [])
@@ -80,19 +80,27 @@ export class OdysseusRules
   }
 
   /**
-   * Sum of the successful Trial cards' VP (rules-fr.pdf p.7 "Fin de partie": a card is successful
-   * when its value is <= the player's score in its skill), plus the Tales' VP (which count every
-   * matching card, successful or not) and the Epic tile's VP (its id doubles as its VP, see EpicTile).
+   * Sum of the successful Trial cards' VP in one skill's column (rules-fr.pdf p.7 "Fin de partie": a
+   * card is successful when its value is <= the player's score in its skill). Broken out from
+   * {@link getScore} so the score detail dialog can show one row per skill (see ScorePad.jpg).
    */
+  getSkillScore(player: number, skill: Skill): number {
+    const skillValue = this.material(MaterialType.SkillCube).location(LocationType.SkillTrackCube).player(player).id(skill).getItem()!.location.x!
+    const cards = this.material(MaterialType.TrialCard)
+      .location(LocationType.PlayerAdventureColumn)
+      .player(player)
+      .locationId(skill)
+      .getItems<TrialCard>()
+    return sumBy(cards, (item) => (trialCardStats[item.id].value <= skillValue ? trialCardStats[item.id].victoryPoints : 0))
+  }
+
+  /** The Epic tile's VP (its id doubles as its VP, see EpicTile), or 0 if the player has none. */
+  getEpicScore(player: number): number {
+    return this.material(MaterialType.EpicTile).location(LocationType.PlayerEpic).player(player).getItem<EpicTile>()?.id ?? 0
+  }
+
   getScore(player: number): number {
-    const skillScore = (skill: Skill) =>
-      this.material(MaterialType.SkillCube).location(LocationType.SkillTrackCube).player(player).id(skill).getItem()!.location.x!
-    const cards = this.material(MaterialType.TrialCard).location(LocationType.PlayerAdventureColumn).player(player).getItems<TrialCard>()
-    const successScore = sumBy(cards, (item) =>
-      trialCardStats[item.id].value <= skillScore(getTrialCardSkill(item.id)) ? trialCardStats[item.id].victoryPoints : 0
-    )
-    const epic = this.material(MaterialType.EpicTile).location(LocationType.PlayerEpic).player(player).getItem<EpicTile>()
-    return successScore + this.getTaleScore(player) + (epic?.id ?? 0)
+    return sumBy(skills, (skill) => this.getSkillScore(player, skill)) + this.getTaleScore(player) + this.getEpicScore(player)
   }
 
   getTieBreaker(tieBreaker: number, player: number) {

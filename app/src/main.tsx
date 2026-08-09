@@ -8,6 +8,8 @@ import { gameAnimations } from './animations/GameAnimations'
 import { App } from './App'
 import { Locators } from './locators/Locators'
 import { Material } from './material/Material'
+import { RulesHelp } from './material/help/RulesHelp'
+import { OdysseusScoringDescription } from './scoring/OdysseusScoringDescription'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -19,6 +21,8 @@ createRoot(document.getElementById('root')!).render(
       material={Material}
       locators={Locators}
       animations={gameAnimations}
+      scoring={new OdysseusScoringDescription()}
+      rulesHelp={RulesHelp}
     >
       <App />
     </GameProvider>
