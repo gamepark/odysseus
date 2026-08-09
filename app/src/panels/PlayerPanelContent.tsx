@@ -10,7 +10,7 @@ import Cunning from '../images/icons/Cunning.png'
 import Intelligence from '../images/icons/Intelligence.png'
 import Luck from '../images/icons/Luck.png'
 import Strength from '../images/icons/Strength.png'
-import AthenaFavor from '../images/tokens/AthenaFavor.png'
+import AthenaFavor from '../images/icons/AthenaFavor.png'
 import { PANEL_WIDTH } from '../locators/PlayerPanelLayout'
 
 const skillIcons: Record<Skill, string> = {

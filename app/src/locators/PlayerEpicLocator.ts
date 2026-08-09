@@ -9,7 +9,7 @@ class PlayerEpicLocator extends Locator {
   getCoordinates(location: Location, context: MaterialContext) {
     if (!isDisplayedPlayer(location.player, context)) return playerPanelCoordinates(location.player!, context)
     const { x = 0, y = 0, z = 0 } = storyBoardPlaceLocator.getCoordinates(location, context)
-    return { x: x + 19.6, y: y + 1, z }
+    return { x: x + 19.8, y: y + 0.8, z }
   }
 
   hide(item: MaterialItem, context: MaterialContext) {

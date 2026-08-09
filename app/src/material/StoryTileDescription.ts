@@ -3,7 +3,6 @@ import { MaterialType } from '@gamepark/odysseus/material/MaterialType'
 import { StoryTileType } from '@gamepark/odysseus/material/StoryTile'
 import { isMoveItemType, MaterialItem, MaterialMove } from '@gamepark/rules-api'
 import { ItemContext, TokenDescription } from '@gamepark/react-game'
-import { svgDataUri } from '../svgDataUri'
 import { StoryTileHelp } from './help/StoryTileHelp'
 import Creatures from '../images/tokens/story/Creatures.png'
 import Cunning from '../images/tokens/story/Cunning.png'
@@ -19,16 +18,11 @@ import Value3 from '../images/tokens/story/Value3.png'
 import Value4 from '../images/tokens/story/Value4.png'
 import Value5 from '../images/tokens/story/Value5.png'
 import Value6 from '../images/tokens/story/Value6.png'
-
-// No back artwork was delivered for the Story tiles (see CLAUDE.md "Missing assets").
-// This is a plain placeholder until the real art is available.
-const placeholderBack = svgDataUri(
-  '<svg xmlns="http://www.w3.org/2000/svg" width="467" height="298"><rect width="463" height="294" x="2" y="2" rx="24" fill="#c9b896" stroke="black" stroke-opacity="0.25" stroke-width="4"/></svg>'
-)
+import Back from '../images/tokens/story/StoryTokenBack.png'
 
 class StoryTileDescription extends TokenDescription<number, MaterialType, LocationType, StoryTileType> {
-  width = 4.37
-  height = 2.68
+  width = 4.67
+  height = 2.98
   transparency = true
 
   images = {
@@ -48,7 +42,7 @@ class StoryTileDescription extends TokenDescription<number, MaterialType, Locati
     [StoryTileType.Value6]: Value6
   }
 
-  backImage = placeholderBack
+  backImage = Back
   help = StoryTileHelp
 
   isFlipped(item: Partial<MaterialItem<number, LocationType>>): boolean {

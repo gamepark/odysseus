@@ -1,5 +1,4 @@
 import { MaterialType } from '@gamepark/odysseus/material/MaterialType.ts'
-import { ShipSide } from '@gamepark/odysseus/material/ShipSide.ts'
 import { TaleStack } from '@gamepark/odysseus/material/TaleStack'
 import { DeckLocator } from '@gamepark/react-game'
 import { Location } from '@gamepark/rules-api'

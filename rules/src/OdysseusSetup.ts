@@ -27,7 +27,7 @@ export class OdysseusSetup extends MaterialGameSetup<number, MaterialType, Locat
     this.setupAthenaFavor()
     this.setupEpicTiles()
     this.setupPlayers()
-    //this.setupDebugPlayerBoards() // TODO remove after visual QA
+    //this.setupDebugPlayerBoards()
   }
 
   /**

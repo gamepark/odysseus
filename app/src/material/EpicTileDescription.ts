@@ -10,8 +10,8 @@ import EpicTile8 from '../images/tiles/epic/EpicTile8.png'
 import { EpicTileHelp } from './help/EpicTileHelp'
 
 class EpicTileDescription extends TokenDescription<number, MaterialType, LocationType, EpicTile> {
-  width = 3.39
-  height = 3.93
+  width = 3.69
+  height = 4.23
   transparency = true
   help = EpicTileHelp
 

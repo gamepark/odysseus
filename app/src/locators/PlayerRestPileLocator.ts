@@ -13,7 +13,7 @@ class PlayerRestPileLocator extends DeckLocator {
   getCoordinates(location: Location, context: MaterialContext) {
     if (!isDisplayedPlayer(location.player, context)) return playerPanelCoordinates(location.player!, context)
     const { x = 0, y = 0, z = 0 } = storyBoardPlaceLocator.getCoordinates(location, context)
-    return { x: x - 21.2, y: y + 0.2, z }
+    return { x: x - 21.4, y: y, z }
   }
 
   hide(item: MaterialItem, context: MaterialContext) {

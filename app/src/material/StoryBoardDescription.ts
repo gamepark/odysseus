@@ -5,8 +5,8 @@ import StoryBoard from '../images/boards/StoryBoard.png'
 import { StoryBoardHelp } from './help/StoryBoardHelp'
 
 class StoryBoardDescription extends BoardDescription {
-  width = 37.72
-  height = 7.42
+  width = 38.32
+  height = 8.02
   image = StoryBoard
   transparency = true
   help = StoryBoardHelp
