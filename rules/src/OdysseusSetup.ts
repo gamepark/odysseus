@@ -53,7 +53,7 @@ export class OdysseusSetup extends MaterialGameSetup<number, MaterialType, Locat
     const deck = this.material(MaterialType.TrialCard).location(LocationType.TrialDeck).deck()
     for (const side of [ShipSide.Port, ShipSide.Starboard]) {
       for (let x = 0; x < SHIP_ROW_SLOTS; x++) {
-        deck.dealOne({ type: LocationType.ShipTrialSlot, id: side, x })
+        deck.dealOne({ type: LocationType.ShipTrialSlot, id: side, x, rotation: x === 2 || x === 3 })
       }
     }
   }
@@ -104,7 +104,7 @@ export class OdysseusSetup extends MaterialGameSetup<number, MaterialType, Locat
   }
 
   start() {
-    this.startPlayerTurn(RuleId.TheFirstStep, this.players[0])
+    this.startPlayerTurn(RuleId.ChooseTrialCard, this.players[0])
   }
 
   /**

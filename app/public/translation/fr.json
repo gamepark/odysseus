@@ -1,1 +1,30 @@
-{}
+{
+  "header": {
+    "chooseTrialCard": {
+      "you": "Choisissez une carte Épreuve.",
+      "youWithFavor": "Choisissez une carte Épreuve, ou <spendFavor>dépensez 3 Faveurs d'Athéna pour un Récit</spendFavor>",
+      "player": "{{player}} choisit une carte Épreuve."
+    },
+    "resolveSkillGain": {
+      "you": "Augmentez une compétence.",
+      "fixed": "<increase>Augmentez {{skill}}</increase>",
+      "fixedWithFavor": "<increase>Augmentez {{skill}}</increase> ou <spendFavor>utilisez 1 Faveur d'Athéna</spendFavor> pour choisir une autre compétence",
+      "player": "{{player}} augmente une compétence."
+    },
+    "chooseTale": {
+      "you": "Choisissez un jeton Récit.",
+      "player": "{{player}} choisit un jeton Récit."
+    },
+    "finishTurn": "Fin du tour."
+  },
+  "action": {
+    "adventure": "Partir à l'aventure",
+    "rest": "Se reposer"
+  },
+  "skill": {
+    "strength": "la Force",
+    "intelligence": "l'Intelligence",
+    "cunning": "la Ruse",
+    "luck": "la Chance"
+  }
+}

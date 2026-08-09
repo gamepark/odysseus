@@ -1,8 +1,12 @@
+import { faPersonHiking, faBed } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { LocationType } from '@gamepark/odysseus/material/LocationType'
 import { MaterialType } from '@gamepark/odysseus/material/MaterialType'
 import { isShipTrialSlotFaceDown, TrialCard } from '@gamepark/odysseus/material/TrialCard'
-import { MaterialItem } from '@gamepark/rules-api'
-import { CardDescription } from '@gamepark/react-game'
+import { isMoveItemType, MaterialItem, MaterialMove } from '@gamepark/rules-api'
+import { CardDescription, ItemContext } from '@gamepark/react-game'
+import { Trans } from 'react-i18next'
+import { OdysseusMenuButton } from '../theme/OdysseusMenuButton'
 import Trial10Cunning from '../images/cards/trials/Trial10Cunning.jpg'
 import Trial10Intelligence from '../images/cards/trials/Trial10Intelligence.jpg'
 import Trial10Luck from '../images/cards/trials/Trial10Luck.jpg'
@@ -144,10 +148,44 @@ class TrialCardDescription extends CardDescription<number, MaterialType, Locatio
       case LocationType.PlayerRestPile:
         return true
       case LocationType.ShipTrialSlot:
-        return isShipTrialSlotFaceDown(item.location.x)
+        return isShipTrialSlotFaceDown(item.location)
       default:
         return false
     }
+  }
+
+  /**
+   * A Ship card's "go on adventure" / "rest" buttons only show once it's clicked, and clicking another
+   * card swaps the buttons over to it — both come for free from the framework as soon as getItemMenu()
+   * returns something for an item (menuAlwaysVisible defaults to false): see DraggableMaterial's
+   * onShortClickMove, which plays a local selectItem/unselectItem move for us. Both moves go straight
+   * from the Ship to the card's final spot (rules-fr.pdf p.4-5 are a single decision from the player's
+   * standpoint — pick a card, then say what to do with it — so there's no staging location in between).
+   */
+  getItemMenu(item: MaterialItem, context: ItemContext, legalMoves: MaterialMove[]) {
+    if (item.location.type !== LocationType.ShipTrialSlot) return null
+    const isTrialCardMove = isMoveItemType(MaterialType.TrialCard)
+    const adventureMove = legalMoves.find(
+      (move) => isTrialCardMove(move) && move.itemIndex === context.index && move.location.type === LocationType.PlayerAdventureColumn
+    )
+    const restMove = legalMoves.find(
+      (move) => isTrialCardMove(move) && move.itemIndex === context.index && move.location.type === LocationType.PlayerRestPile
+    )
+    if (!adventureMove && !restMove) return null
+    return (
+      <>
+        {adventureMove && (
+          <OdysseusMenuButton x={-1.8} y={-4} move={adventureMove} label={<Trans i18nKey="action.adventure" />} labelPosition="left">
+            <FontAwesomeIcon icon={faPersonHiking} />
+          </OdysseusMenuButton>
+        )}
+        {restMove && (
+          <OdysseusMenuButton x={1.8} y={-4} move={restMove} label={<Trans i18nKey="action.rest" />} labelPosition="right">
+            <FontAwesomeIcon icon={faBed} />
+          </OdysseusMenuButton>
+        )}
+      </>
+    )
   }
 }
 

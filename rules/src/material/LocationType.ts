@@ -14,4 +14,6 @@ export enum LocationType {
   PlayerTale, // player — gathered tale tiles (max 6)
   PlayerEpic, // player — earned epic tile (0 or 1)
   PlayerAthenaFavor, // player
+  /** UI-only: a player's info panel (avatar, name, score), displayed as part of the table so it scales with it (location.player = its owner), no item ever goes there */
+  PlayerPanel
 }

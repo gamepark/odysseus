@@ -77,8 +77,9 @@ export const getTrialCardAdventure = (card: TrialCard) => Math.floor((card - 1) 
 export const getTrialCardSkill = (card: TrialCard): Skill => skillOrder[(card - 1) % 4]
 
 /**
- * Within a ShipTrialSlot row (x: 0-5), the central pair (x 2-3) stays face down until revealed.
- * Shared by the client (TrialCardDescription.isFlipped) and the server (OdysseusRules.hidingStrategies)
- * so the visual flip and the actual hidden data never drift apart.
+ * Within a ShipTrialSlot row (x: 0-5), the central pair (x 2-3) is dealt with `rotation: true` and
+ * stays face down until a neighboring card is picked (see ChooseTrialCardRule), which reveals it via
+ * `rotateItem(false)`. Shared by the client (TrialCardDescription.isFlipped) and the server
+ * (OdysseusRules.hidingStrategies) so the visual flip and the actual hidden data never drift apart.
  */
-export const isShipTrialSlotFaceDown = (x?: number) => x === 2 || x === 3
+export const isShipTrialSlotFaceDown = (location: { rotation?: boolean }) => location.rotation === true

@@ -2,8 +2,9 @@ import { MaterialType } from '@gamepark/odysseus/material/MaterialType'
 import { Skill } from '@gamepark/odysseus/Skill'
 import { Locator, MaterialContext } from '@gamepark/react-game'
 import { Location, MaterialItem } from '@gamepark/rules-api'
-import { hideUnlessDisplayedPlayer } from '../DisplayedPlayer'
+import { hideUnlessDisplayedPlayer, isDisplayedPlayer } from '../DisplayedPlayer'
 import { storyBoardDescription } from '../material/StoryBoardDescription'
+import { playerPanelCoordinates } from './PlayerPanelLocator'
 
 // The "0" space isn't on the same row as 1-6: it sits in its own box directly under space "1"
 // (see StoryBoard.png). Percentages measured on the image (1916x401px) with each track's space "1" x.
@@ -28,6 +29,13 @@ class SkillTrackCubeLocator extends Locator {
     const startX = trackStartX[id as Skill]
     if (x === 0) return { x: startX, y: ZERO_ROW_Y }
     return { x: startX + (x - 1) * TRACK_STEP_X, y: TRACK_ROW_Y }
+  }
+
+  // getParentItem already returns undefined for a non-displayed player (StoryBoardDescription only ever
+  // has a static item for the currently displayed player), so getPositionOnParent above never applies —
+  // this is what getItemCoordinates falls back to instead (see Locator.placeItem).
+  getCoordinates(location: Location, context: MaterialContext) {
+    return isDisplayedPlayer(location.player, context) ? this.coordinates : playerPanelCoordinates(location.player!, context)
   }
 
   hide(item: MaterialItem, context: MaterialContext) {

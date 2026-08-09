@@ -1,7 +1,8 @@
 import { Skill } from '@gamepark/odysseus/Skill'
 import { ListLocator, MaterialContext } from '@gamepark/react-game'
 import { Location, MaterialItem } from '@gamepark/rules-api'
-import { hideUnlessDisplayedPlayer } from '../DisplayedPlayer'
+import { hideUnlessDisplayedPlayer, isDisplayedPlayer } from '../DisplayedPlayer'
+import { playerPanelCoordinates } from './PlayerPanelLocator'
 import { storyBoardPlaceLocator } from './StoryBoardPlaceLocator'
 
 const columnOffsets: Record<Skill, number> = {
@@ -19,8 +20,9 @@ class PlayerAdventureColumnLocator extends ListLocator {
   gap = { y: -2.2, z: -0.1 }
 
   getCoordinates(location: Location, context: MaterialContext) {
-    const { x = 0, y = 0 } = storyBoardPlaceLocator.getCoordinates(location, context)
-    return { x: x + columnOffsets[location.id as Skill], y: y - 3, z: -1 }
+    if (!isDisplayedPlayer(location.player, context)) return playerPanelCoordinates(location.player!, context)
+    const { x = 0, y = 0, z = 0 } = storyBoardPlaceLocator.getCoordinates(location, context)
+    return { x: x + columnOffsets[location.id as Skill], y: y - 3, z: z - 1 }
   }
 
   hide(item: MaterialItem, context: MaterialContext) {

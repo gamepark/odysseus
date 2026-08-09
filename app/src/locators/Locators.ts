@@ -7,6 +7,7 @@ import { epicDeckLocator } from './EpicDeckLocator'
 import { playerAdventureColumnLocator } from './PlayerAdventureColumnLocator'
 import { playerAthenaFavorLocator } from './PlayerAthenaFavorLocator'
 import { playerEpicLocator } from './PlayerEpicLocator'
+import { playerPanelLocator } from './PlayerPanelLocator'
 import { playerRestPileLocator } from './PlayerRestPileLocator'
 import { playerTaleLocator } from './PlayerTaleLocator'
 import { shipBoardPlaceLocator } from './ShipBoardPlaceLocator'
@@ -32,5 +33,6 @@ export const Locators: Partial<Record<LocationType, Locator<number, MaterialType
   [LocationType.PlayerRestPile]: playerRestPileLocator,
   [LocationType.PlayerTale]: playerTaleLocator,
   [LocationType.PlayerEpic]: playerEpicLocator,
-  [LocationType.PlayerAthenaFavor]: playerAthenaFavorLocator
+  [LocationType.PlayerAthenaFavor]: playerAthenaFavorLocator,
+  [LocationType.PlayerPanel]: playerPanelLocator
 }

@@ -1,3 +1,7 @@
 export enum RuleId {
-  TheFirstStep = 1
+  /** Also resolves "go on adventure or rest" for the chosen card in the same move (see ChooseTrialCardRule). */
+  ChooseTrialCard = 1,
+  ResolveSkillGain,
+  ChooseTale,
+  FinishTurn
 }

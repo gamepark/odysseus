@@ -1,8 +1,8 @@
 import { LocationType } from '@gamepark/odysseus/material/LocationType'
 import { MaterialType } from '@gamepark/odysseus/material/MaterialType'
 import { StoryTileType } from '@gamepark/odysseus/material/StoryTile'
-import { MaterialItem } from '@gamepark/rules-api'
-import { TokenDescription } from '@gamepark/react-game'
+import { isMoveItemType, MaterialItem, MaterialMove } from '@gamepark/rules-api'
+import { ItemContext, TokenDescription } from '@gamepark/react-game'
 import { svgDataUri } from '../svgDataUri'
 import Creatures from '../images/tokens/story/Creatures.png'
 import Cunning from '../images/tokens/story/Cunning.png'
@@ -51,6 +51,15 @@ class StoryTileDescription extends TokenDescription<number, MaterialType, Locati
 
   isFlipped(item: Partial<MaterialItem<number, LocationType>>): boolean {
     return item.location?.type === LocationType.TaleDeck
+  }
+
+  /**
+   * The PlayerTale destination has no drop zone to aim at: PositiveSequenceStrategy assigns the
+   * leftmost free slot itself once the move is played (see OdysseusRules), so the move's location
+   * carries no x. A short click plays that same move directly instead.
+   */
+  canShortClick(move: MaterialMove, context: ItemContext): boolean {
+    return isMoveItemType(MaterialType.StoryTile)(move) && move.location.type === LocationType.PlayerTale && move.itemIndex === context.index
   }
 }
 
