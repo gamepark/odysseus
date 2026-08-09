@@ -59,6 +59,11 @@ const panelStyle = css`
   right: 0;
   font-size: ${PANEL_WIDTH / 28}em;
   cursor: pointer;
+  /* PlayerPanelDescription is a LocationDescription, and LocationComponent sets pointer-events: none
+   * on the whole location unless it has an onShortClick/onLongClick (from displayHelp), which this one
+   * doesn't. That disables pointer-events for the entire subtree by inheritance, swallowing our onClick
+   * below — restore it here. */
+  pointer-events: auto;
 `
 
 const selectedPanel = css`

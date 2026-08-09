@@ -5,9 +5,9 @@ import { useSyncExternalStore } from 'react'
 // Only one player's Story board (and personal material) is shown on the table at a time, chosen by
 // clicking their panel (see PlayerPanelContent). Locators and static-item descriptions are plain
 // objects/methods, not React components, so they cannot read React state directly — they read this
-// module-level store instead. PlayerPanelContent both reads it (via useDisplayedPlayer, for the
-// "selected" ring) and writes it (on click), so every subscriber — including non-React locators —
-// picks up the change immediately.
+// module-level store instead. They are not subscribers though: GameDisplay is the one that calls
+// useDisplayedPlayer, so its re-render (cascading through the whole GameTable subtree) is what makes
+// them recompute with the fresh value after a click.
 let displayedPlayer: number | undefined
 const listeners = new Set<() => void>()
 

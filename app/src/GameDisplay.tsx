@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import { DevToolsHub, GameTable, GameTableNavigation, usePlayerId, usePlayers } from '@gamepark/react-game'
 import { useEffect } from 'react'
-import { initDisplayedPlayer } from './DisplayedPlayer'
+import { initDisplayedPlayer, useDisplayedPlayer } from './DisplayedPlayer'
 
 export function GameDisplay() {
   const margin = { top: 7, left: 0, right: 0, bottom: 0 }
@@ -14,6 +14,12 @@ export function GameDisplay() {
   useEffect(() => {
     if (players.length > 0) initDisplayedPlayer(myPlayerId ?? players[0].id)
   }, [myPlayerId, players])
+
+  // Locators and static-item descriptions read the displayed player directly from the module-level
+  // store (they're plain objects, not React components). Subscribing here re-renders this component,
+  // and with it the whole GameTable subtree, whenever the store changes — otherwise a click on a
+  // player panel updates the store but nothing ever re-renders to reflect it.
+  useDisplayedPlayer(myPlayerId ?? players[0]?.id ?? 0)
 
   return (
     <>
