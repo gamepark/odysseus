@@ -3,6 +3,7 @@ import { css } from '@emotion/react'
 import { ItemButtonProps, ItemMenuButton } from '@gamepark/react-game'
 import { HTMLAttributes, ReactNode } from 'react'
 import { colors } from './colors'
+import { fontDisplay } from './typography'
 
 type Props = ItemButtonProps & HTMLAttributes<HTMLButtonElement> & { children?: ReactNode }
 
@@ -36,6 +37,7 @@ const menuButtonCss = css`
 
   > span {
     font-size: 0.82em;
+    font-family: ${fontDisplay};
     font-weight: 700;
     color: ${colors.cream};
     background: ${colors.tealDeep};

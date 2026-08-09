@@ -11,6 +11,7 @@ import { OdysseusLogDescription } from './logs/OdysseusLogDescription'
 import { Material } from './material/Material'
 import { RulesHelp } from './material/help/RulesHelp'
 import { OdysseusScoringDescription } from './scoring/OdysseusScoringDescription'
+import { theme } from './theme'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -25,6 +26,7 @@ createRoot(document.getElementById('root')!).render(
       scoring={new OdysseusScoringDescription()}
       rulesHelp={RulesHelp}
       logs={new OdysseusLogDescription()}
+      theme={theme}
     >
       <App />
     </GameProvider>
