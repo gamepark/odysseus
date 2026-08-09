@@ -21,6 +21,17 @@
     "adventure": "Partir à l'aventure",
     "rest": "Se reposer"
   },
+  "log": {
+    "adventure": "{player} part à l'aventure avec <card/>",
+    "rest": "{player} se repose",
+    "gainFavor": "{player} remporte une Faveur d'Athéna",
+    "increaseSkill": "{player} augmente {skill}",
+    "redirectSkill": "{player} dépense 1 Faveur d'Athéna pour rediriger son gain",
+    "winTale": "{player} remporte le Récit <tile/>",
+    "winEpic": "{player} complète son Épopée et remporte <tile/>",
+    "spendFavorForTale": "{player} dépense 3 Faveurs d'Athéna pour un Récit",
+    "restockShip": "Le Navire est réapprovisionné"
+  },
   "skill": {
     "strength": "la Force",
     "intelligence": "l'Intelligence",

@@ -7,6 +7,7 @@ import { createRoot } from 'react-dom/client'
 import { gameAnimations } from './animations/GameAnimations'
 import { App } from './App'
 import { Locators } from './locators/Locators'
+import { OdysseusLogDescription } from './logs/OdysseusLogDescription'
 import { Material } from './material/Material'
 import { RulesHelp } from './material/help/RulesHelp'
 import { OdysseusScoringDescription } from './scoring/OdysseusScoringDescription'
@@ -23,6 +24,7 @@ createRoot(document.getElementById('root')!).render(
       animations={gameAnimations}
       scoring={new OdysseusScoringDescription()}
       rulesHelp={RulesHelp}
+      logs={new OdysseusLogDescription()}
     >
       <App />
     </GameProvider>
