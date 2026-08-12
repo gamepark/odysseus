@@ -1,13 +1,13 @@
-import { faPersonHiking, faBed } from '@fortawesome/free-solid-svg-icons'
+import { css } from '@emotion/react'
+import { faSailboat } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { LocationType } from '@gamepark/odysseus/material/LocationType'
 import { MaterialType } from '@gamepark/odysseus/material/MaterialType'
 import { isShipTrialSlotFaceDown, TrialCard } from '@gamepark/odysseus/material/TrialCard'
-import { isMoveItemType, MaterialItem, MaterialMove } from '@gamepark/rules-api'
 import { CardDescription, ItemContext } from '@gamepark/react-game'
+import { isMoveItemType, MaterialItem, MaterialMove } from '@gamepark/rules-api'
 import { Trans } from 'react-i18next'
-import { OdysseusMenuButton } from '../theme/OdysseusMenuButton'
-import { TrialCardHelp } from './help/TrialCardHelp'
+import TrialBack from '../images/cards/TrialBack.jpg'
 import Trial10Cunning from '../images/cards/trials/Trial10Cunning.jpg'
 import Trial10Intelligence from '../images/cards/trials/Trial10Intelligence.jpg'
 import Trial10Luck from '../images/cards/trials/Trial10Luck.jpg'
@@ -68,7 +68,19 @@ import Trial9Cunning from '../images/cards/trials/Trial9Cunning.jpg'
 import Trial9Intelligence from '../images/cards/trials/Trial9Intelligence.jpg'
 import Trial9Luck from '../images/cards/trials/Trial9Luck.jpg'
 import Trial9Strength from '../images/cards/trials/Trial9Strength.jpg'
-import TrialBack from '../images/cards/TrialBack.jpg'
+import { OdysseusMenuButton } from '../theme/OdysseusMenuButton'
+import { fontDisplay } from '../theme/typography'
+import { TrialCardHelp } from './help/TrialCardHelp'
+
+/** Sleep, for want of a Font Awesome icon that says it: the comic-strip "Zzz", set in the game's own font. */
+const zzzCss = css`
+  font-family: ${fontDisplay};
+  /* Three letters where the other button has one glyph: they have to come down to fit the same disc. */
+  font-size: 0.7em;
+  font-weight: 700;
+  font-style: italic;
+  letter-spacing: -0.05em;
+`
 
 class TrialCardDescription extends CardDescription<number, MaterialType, LocationType, TrialCard> {
   width = 6
@@ -153,12 +165,19 @@ class TrialCardDescription extends CardDescription<number, MaterialType, Locatio
   }
 
   /**
-   * A Ship card's "go on adventure" / "rest" buttons only show once it's clicked, and clicking another
-   * card swaps the buttons over to it — both come for free from the framework as soon as getItemMenu()
-   * returns something for an item (menuAlwaysVisible defaults to false): see DraggableMaterial's
-   * onShortClickMove, which plays a local selectItem/unselectItem move for us. Both moves go straight
-   * from the Ship to the card's final spot (rules-fr.pdf p.4-5 are a single decision from the player's
-   * standpoint — pick a card, then say what to do with it — so there's no staging location in between).
+   * The "go on adventure" / "rest" buttons stand out on every pickable card at once, rather than
+   * appearing on the one that was clicked. What this buys is the click itself: as long as a menu has to
+   * be opened, DraggableMaterial spends the short click on selecting the item (see its onShortClickMove),
+   * and the help dialog is only reachable by a long press. With the menu already there it has nothing to
+   * select, so ItemDisplay falls back on displayHelp — a click on a Trial reads its card, wherever it is.
+   */
+  menuAlwaysVisible = true
+
+  /**
+   * Both moves go straight from the Ship to the card's final spot (rules-fr.pdf p.4-5 are a single
+   * decision from the player's standpoint — pick a card, then say what to do with it — so there's no
+   * staging location in between). Returns nothing outside your own turn, which is what keeps the buttons
+   * off the board the rest of the time.
    */
   getItemMenu(item: MaterialItem, context: ItemContext, legalMoves: MaterialMove[]) {
     if (item.location.type !== LocationType.ShipTrialSlot) return null
@@ -173,13 +192,19 @@ class TrialCardDescription extends CardDescription<number, MaterialType, Locatio
     return (
       <>
         {adventureMove && (
-          <OdysseusMenuButton x={-1.8} y={-4} move={adventureMove} label={<Trans i18nKey="action.adventure" />} labelPosition="left">
-            <FontAwesomeIcon icon={faPersonHiking} />
+          <OdysseusMenuButton
+            x={1}
+            y={0}
+            move={adventureMove}
+            label={<Trans i18nKey="action.adventure" />}
+            labelPosition="right"
+          >
+            <FontAwesomeIcon icon={faSailboat} />
           </OdysseusMenuButton>
         )}
         {restMove && (
-          <OdysseusMenuButton x={1.8} y={-4} move={restMove} label={<Trans i18nKey="action.rest" />} labelPosition="right">
-            <FontAwesomeIcon icon={faBed} />
+          <OdysseusMenuButton x={3} y={2.5} move={restMove} label={<Trans i18nKey="action.rest" />} labelPosition="right">
+            <b css={zzzCss}>Zzz</b>
           </OdysseusMenuButton>
         )}
       </>
