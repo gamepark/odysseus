@@ -1,3 +1,3 @@
 export { OdysseusRules } from './OdysseusRules'
-export { OdysseusOptionsSpec } from './OdysseusOptions'
+export { OdysseusOptionsSpecV2 } from './OdysseusOptions'
 export { OdysseusSetup } from './OdysseusSetup'

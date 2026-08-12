@@ -15,6 +15,7 @@ https://raw.githubusercontent.com/gamepark/gamepark.github.io/main/docs/[path]
 | Topic | Path |
 |-------|------|
 | Core concepts | `concepts/core-concepts.md` |
+| Game options | `features/game-options.md` |
 | Items & Locations | `concepts/items-and-locations.md` |
 | Hiding data | `concepts/hiding-data.md` |
 | Item moves | `features/item-moves.md` |
@@ -123,7 +124,11 @@ rules/src/                    # Server-side game logic
   │   └── *Rule.ts            # Rule implementations
   ├── [Game]Rules.ts          # Main rules class
   ├── [Game]Setup.ts          # Initial game setup
-  └── [Game]Options.ts        # Game configuration
+  └── [Game]Options.ts        # OptionsSpecV2: option structure, no text
+
+app/public/
+  ├── translation/*.json      # Game texts, one file per locale
+  └── options/*.json          # Option labels, one file per locale (none yet: no option)
 
 app/src/                      # Client-side React UI
   ├── material/Material.ts    # Visual descriptions (sizes, images)
@@ -223,6 +228,8 @@ Translation files are located in `app/public/translation/` (one JSON file per la
 
 **Before production release**: when asked, translate all texts into every other supported language in a dedicated pass.
 
+:bulb: The same native-language rule applies to `app/public/options/*.json`.
+
 ### Where translations are used
 - `app/public/translation/*.json` — UI texts (headers, dialogs, tooltips, buttons)
 - `Headers.tsx` — uses `useTranslation()` to display in-game messages
@@ -230,6 +237,34 @@ Translation files are located in `app/public/translation/` (one JSON file per la
 
 ### Translation keys convention
 Follow existing key naming patterns in the JSON files. Keep keys descriptive and organized by feature/screen.
+
+## Game Options
+
+Options are declared in `rules/src/OdysseusOptions.ts` with `OptionsSpecV2` — **plain JSON, no functions
+and no text**. The platform snapshots it when the bundle is prepared and reads it from its database.
+
+```typescript
+export const OdysseusOptionsSpecV2: OptionsSpecV2 = {
+  specVersion: 2,
+  players: { min: 2, max: 5 }
+}
+```
+
+Odysseus has no option and no identity (there is no player color), so `players` is the whole declaration
+and `app/public/options/` does not exist yet. The minimum is 2 because the solo Automa is not implemented.
+
+Three things do **not** belong in it:
+
+- **Texts** go to `app/public/options/{locale}.json`, keyed by convention: `option.<option>`,
+  `option.<option>.<value>`, `identities.<value>`, plus optional `.help` and `.warn` variants. Values
+  are addressed by value, so a value `1` gives `identities.1`.
+- **`subscriberRequired`, `competitiveDisabled`, `competitivePlayers`** belong to the platform database.
+- **`validate`** no longer exists. Express constraints as `playerCount` (on an option or a value),
+  `requires` on a value, or a `forbidden-combination` rule whose `message` is a key in the options
+  document.
+
+Read `features/game-options.md` before changing this file — the shape is precise and the platform
+depends on it. Never reintroduce a v1 `OptionsSpec`.
 
 ## When Helping
 
