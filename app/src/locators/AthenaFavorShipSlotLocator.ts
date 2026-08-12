@@ -8,12 +8,11 @@ class AthenaFavorShipSlotLocator extends Locator {
   parentItemType = MaterialType.ShipBoard
 
   getPositionOnParent({ id }: Location) {
-    return { x: 50, y: id === ShipSide.Port ? 7 : 94
-    }
+    return { x: id === ShipSide.Port ? 7 : 94, y: 50 }
   }
 
   getRotateZ({ id }: Location) {
-    return id === ShipSide.Port ? 180 : 0
+    return id === ShipSide.Port ? 90 : -90
   }
 }
 

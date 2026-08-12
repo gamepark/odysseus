@@ -48,8 +48,9 @@ padding absolu de 15 px/côté vaut 0,30 cm par côté = 0,60 cm au total, contr
 total pour les jetons/tuiles à 100 px = 1 cm).
 
 Deux cas servent de témoin et confirment que ce n'est pas du bruit :
-- `ShipBoardDescription` (image JPEG, donc **sans** ombre portée à retirer) déclare 49.02 × 24.52, qui
-  correspond exactement à `ShipBoard.jpg` / 50 — zéro écart.
+- `ShipBoardDescription` (image JPEG, donc **sans** ombre portée à retirer) déclare 24.52 × 49.02, qui
+  correspond exactement à `ShipBoard.jpg` / 50 — zéro écart. (Le fichier est stocké proue en haut, donc
+  au format portrait 1226 × 2451 px ; aucune rotation n'est appliquée dans le code.)
 - Les 4 cubes (`SkillCubeDescription`, 1.65 × 1.67) suivent leur propre formule spéciale documentée dans
   `CLAUDE.md` (taille déclarée = canevas complet, sans soustraction) et correspondent eux aussi exactement
   à leurs fichiers PNG (165×167px).

@@ -3,11 +3,11 @@ import { ListLocator } from '@gamepark/react-game'
 
 class TaleDisplayLocator extends ListLocator {
   parentItemType = MaterialType.ShipBoard
-  gap = { x: 3 }
-  rotateZ = 90
+  // The board is stored bow up, so the display runs up the hull, toward the bow.
+  gap = { y: -3 }
 
   getPositionOnParent() {
-    return { x: 27.3, y: 50 }
+    return { x: 50, y: 72.7 }
   }
 }
 export const taleDisplayLocator = new TaleDisplayLocator()

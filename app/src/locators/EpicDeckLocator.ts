@@ -3,10 +3,9 @@ import { DeckLocator } from '@gamepark/react-game'
 
 class EpicDeckLocator extends DeckLocator {
   parentItemType = MaterialType.ShipBoard
-  rotateZ = 90
 
   getPositionOnParent() {
-    return { x: 19, y: 50 }
+    return { x: 50, y: 81 }
   }
 }
 export const epicDeckLocator = new EpicDeckLocator()

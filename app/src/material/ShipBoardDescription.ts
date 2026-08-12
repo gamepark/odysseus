@@ -4,8 +4,8 @@ import ShipBoard from '../images/boards/ShipBoard.jpg'
 import { ShipBoardHelp } from './help/ShipBoardHelp'
 
 class ShipBoardDescription extends BoardDescription {
-  width = 49.02
-  height = 24.52
+  width = 24.52
+  height = 49.02
   image = ShipBoard
   transparency = true
   help = ShipBoardHelp
