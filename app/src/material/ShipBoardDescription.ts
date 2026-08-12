@@ -7,7 +7,6 @@ class ShipBoardDescription extends BoardDescription {
   width = 24.52
   height = 49.02
   image = ShipBoard
-  transparency = true
   help = ShipBoardHelp
 
   staticItem = { location: { type: LocationType.ShipBoardPlace } }

@@ -73,10 +73,6 @@ import TrialBack from '../images/cards/TrialBack.jpg'
 class TrialCardDescription extends CardDescription<number, MaterialType, LocationType, TrialCard> {
   width = 6
   height = 6
-  // Opts out of the framework's default box-shadow outline (see componentSizeCss.shadowCss): it's meant
-  // for images that already bake their own shadow into a transparent PNG, but doubles as the only way to
-  // disable it entirely, which is what we want for these flat, shadowless JPEGs.
-  transparency = true
   help = TrialCardHelp
 
   images = {
