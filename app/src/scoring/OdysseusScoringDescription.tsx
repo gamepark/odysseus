@@ -3,12 +3,9 @@ import { OdysseusRules } from '@gamepark/odysseus/OdysseusRules'
 import { Skill } from '@gamepark/odysseus/Skill'
 import { Picture, ScoringDescription, ScoringValue } from '@gamepark/react-game'
 import { getEnumValues } from '@gamepark/rules-api'
-import Cunning from '../images/icons/Cunning.png'
 import EpicTile from '../images/icons/EpicTile.png'
-import Intelligence from '../images/icons/Intelligence.png'
-import Luck from '../images/icons/Luck.png'
-import Strength from '../images/icons/Strength.png'
 import StoryToken from '../images/icons/StoryToken.png'
+import { skillIcons } from '../images/Icons'
 
 /** Mirrors ScorePad.jpg's row order: the 4 skills, then Récits (lyre icon), then Épopée, then the total. */
 enum ScoringKey {
@@ -29,13 +26,13 @@ export class OdysseusScoringDescription implements ScoringDescription<number, Od
   getScoringHeader(key: ScoringKey): ScoringValue {
     switch (key) {
       case ScoringKey.Strength:
-        return <Picture src={Strength} css={iconCss} />
+        return <Picture src={skillIcons[Skill.Strength]} css={iconCss} />
       case ScoringKey.Intelligence:
-        return <Picture src={Intelligence} css={iconCss} />
+        return <Picture src={skillIcons[Skill.Intelligence]} css={iconCss} />
       case ScoringKey.Cunning:
-        return <Picture src={Cunning} css={iconCss} />
+        return <Picture src={skillIcons[Skill.Cunning]} css={iconCss} />
       case ScoringKey.Luck:
-        return <Picture src={Luck} css={iconCss} />
+        return <Picture src={skillIcons[Skill.Luck]} css={iconCss} />
       case ScoringKey.Tale:
         return <Picture src={StoryToken} css={iconCss} />
       case ScoringKey.Epic:

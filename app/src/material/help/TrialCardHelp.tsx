@@ -4,15 +4,7 @@ import { AdventureType, adventureTypeOf, Gain, trialCardStats } from '@gamepark/
 import { Skill } from '@gamepark/odysseus/Skill'
 import { MaterialHelpProps } from '@gamepark/react-game'
 import { Trans, useTranslation } from 'react-i18next'
-import Creatures from '../../images/icons/Creatures.png'
-import Cunning from '../../images/icons/Cunning.png'
-import Encounters from '../../images/icons/Encounters.png'
-import Gods from '../../images/icons/Gods.png'
-import Intelligence from '../../images/icons/Intelligence.png'
-import Ithaca from '../../images/icons/Ithaca.png'
-import Luck from '../../images/icons/Luck.png'
-import Navigation from '../../images/icons/Navigation.png'
-import Strength from '../../images/icons/Strength.png'
+import { adventureTypeIcons, skillIcons } from '../../images/Icons'
 
 const adventureTypeKeys: Record<AdventureType, string> = {
   [AdventureType.Navigation]: 'navigation',
@@ -20,21 +12,6 @@ const adventureTypeKeys: Record<AdventureType, string> = {
   [AdventureType.Creatures]: 'creatures',
   [AdventureType.Encounters]: 'encounters',
   [AdventureType.Ithaca]: 'ithaca'
-}
-
-const adventureTypeIcons: Record<AdventureType, string> = {
-  [AdventureType.Navigation]: Navigation,
-  [AdventureType.Gods]: Gods,
-  [AdventureType.Creatures]: Creatures,
-  [AdventureType.Encounters]: Encounters,
-  [AdventureType.Ithaca]: Ithaca
-}
-
-const skillIcons: Record<Skill, string> = {
-  [Skill.Strength]: Strength,
-  [Skill.Intelligence]: Intelligence,
-  [Skill.Cunning]: Cunning,
-  [Skill.Luck]: Luck
 }
 
 const inlineIcon = css`
