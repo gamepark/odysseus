@@ -107,10 +107,9 @@ export class ChooseTrialCardRule extends PlayerTurnRule {
     return []
   }
 
-  /** The reserve (40 Athena Favor tokens total) can run dry — grant one only while it still has any. */
-  get favorFromSupply(): MaterialMove[] {
-    const supply = this.material(MaterialType.AthenaFavorToken).location(LocationType.AthenaFavorSupply)
-    return supply.length ? [supply.moveItem({ type: LocationType.PlayerAthenaFavor, player: this.player }, 1)] : []
+  /** The reserve is an unlimited stock (see OdysseusSetup.setupAthenaFavor): a granted Favor is simply created. */
+  get favorFromSupply(): MaterialMove {
+    return this.material(MaterialType.AthenaFavorToken).createItem({ location: { type: LocationType.PlayerAthenaFavor, player: this.player } })
   }
 
   resolveAdventure(move: MoveItem<number, MaterialType, LocationType>) {
@@ -119,7 +118,7 @@ export class ChooseTrialCardRule extends PlayerTurnRule {
     const pending: PendingGain[] = []
     for (const gain of trialCardStats[card].gains) {
       if (gain === 'AthenaFavor') {
-        moves.push(...this.favorFromSupply)
+        moves.push(this.favorFromSupply)
       } else {
         pending.push(gain)
       }
@@ -131,7 +130,7 @@ export class ChooseTrialCardRule extends PlayerTurnRule {
   }
 
   resolveRest() {
-    const moves: MaterialMove[] = [...this.favorFromSupply]
+    const moves: MaterialMove[] = [this.favorFromSupply]
     this.memorize(Memory.PendingGains, ['Choice'] satisfies PendingGain[], this.player)
     this.forget(Memory.PlacedAdventureRow, this.player)
     moves.push(this.startRule(RuleId.ResolveSkillGain))
@@ -143,10 +142,7 @@ export class ChooseTrialCardRule extends PlayerTurnRule {
       this.memorize(Memory.TaleBoughtThisTurn, true, this.player)
       this.memorize(Memory.TaleReturnsTo, RuleId.ChooseTrialCard, this.player)
       return [
-        this.material(MaterialType.AthenaFavorToken)
-          .location(LocationType.PlayerAthenaFavor)
-          .player(this.player)
-          .moveItem({ type: LocationType.AthenaFavorSupply }, TALE_COST),
+        this.material(MaterialType.AthenaFavorToken).location(LocationType.PlayerAthenaFavor).player(this.player).deleteItem(TALE_COST),
         this.startRule(RuleId.ChooseTale)
       ]
     }

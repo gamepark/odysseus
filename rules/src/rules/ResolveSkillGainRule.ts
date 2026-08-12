@@ -73,12 +73,7 @@ export class ResolveSkillGainRule extends PlayerTurnRule {
   onCustomMove(move: CustomMove) {
     if (move.type === CustomMoveType.SpendFavorForSkillChange) {
       this.memorize<PendingGain[]>(Memory.PendingGains, ([, ...rest]) => ['Choice', ...rest], this.player)
-      return [
-        this.material(MaterialType.AthenaFavorToken)
-          .location(LocationType.PlayerAthenaFavor)
-          .player(this.player)
-          .moveItem({ type: LocationType.AthenaFavorSupply }, 1)
-      ]
+      return [this.material(MaterialType.AthenaFavorToken).location(LocationType.PlayerAthenaFavor).player(this.player).deleteItem(1)]
     }
     return []
   }

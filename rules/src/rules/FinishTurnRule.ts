@@ -37,10 +37,7 @@ export class FinishTurnRule extends PlayerTurnRule {
       }
     }
     for (const side of [ShipSide.Port, ShipSide.Starboard]) {
-      const supply = this.material(MaterialType.AthenaFavorToken).location(LocationType.AthenaFavorSupply)
-      if (supply.getQuantity() > 0) {
-        moves.push(supply.moveItem({ type: LocationType.AthenaFavorShipSlot, id: side }, 1))
-      }
+      moves.push(this.material(MaterialType.AthenaFavorToken).createItem({ location: { type: LocationType.AthenaFavorShipSlot, id: side } }))
     }
     moves.push(this.startPlayerTurn(RuleId.ChooseTrialCard, this.nextPlayer))
     return moves

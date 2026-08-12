@@ -74,14 +74,16 @@ export class OdysseusSetup extends MaterialGameSetup<number, MaterialType, Locat
     }
   }
 
-  /** 40 tokens in supply, 1 placed on each side of the ship (between the facedown central pair). */
+  /**
+   * 1 token placed on each side of the ship (between the facedown central pair). The reserve itself holds
+   * no item: it is an unlimited stock (a static item, see AthenaFavorTokenDescription) that tokens are
+   * created from and deleted back into. The rulebook never mentions the reserve running out — the box's
+   * 40 tokens are a quantity deemed sufficient, not a rule (rules-fr.pdf p.2 §6, p.7).
+   */
   setupAthenaFavor() {
-    this.material(MaterialType.AthenaFavorToken).createItem({ quantity: 40, location: { type: LocationType.AthenaFavorSupply } })
-    for (const side of [ShipSide.Port, ShipSide.Starboard]) {
-      this.material(MaterialType.AthenaFavorToken)
-        .location(LocationType.AthenaFavorSupply)
-        .moveItem({ type: LocationType.AthenaFavorShipSlot, id: side }, 1)
-    }
+    this.material(MaterialType.AthenaFavorToken).createItems(
+      [ShipSide.Port, ShipSide.Starboard].map((side) => ({ location: { type: LocationType.AthenaFavorShipSlot, id: side } }))
+    )
   }
 
   /** Largest value on top of the stack. */
@@ -97,9 +99,7 @@ export class OdysseusSetup extends MaterialGameSetup<number, MaterialType, Locat
     for (const player of this.players) {
       this.material(MaterialType.SkillCube).createItems(skills.map((id) => ({ id, location: { type: LocationType.SkillTrackCube, player, id, x: 0 } })))
       taleStackSecond.dealOne({ type: LocationType.PlayerTale, player })
-      this.material(MaterialType.AthenaFavorToken)
-        .location(LocationType.AthenaFavorSupply)
-        .moveItem({ type: LocationType.PlayerAthenaFavor, player }, 1)
+      this.material(MaterialType.AthenaFavorToken).createItem({ location: { type: LocationType.PlayerAthenaFavor, player } })
     }
   }
 

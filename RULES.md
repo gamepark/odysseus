@@ -38,8 +38,13 @@ aléatoires, toujours vertes).
   `setupShipRows`.
 - Jetons Récit : 28 (14 types × 2) répartis en 2 pioches face cachée, 4 révélés depuis l'une d'elles —
   `setupTaleTiles`.
-- Faveur d'Athéna : 40 au total, 1 posée de chaque côté du Navire, le reste en réserve —
-  `setupAthenaFavor`.
+- Faveur d'Athéna : 1 posée de chaque côté du Navire, "formez une réserve avec les jetons restants"
+  (p.2, §6) — `setupAthenaFavor`. Le livret ne dit rien d'une réserve épuisée, ni en mise en place ni
+  p.7 : les 40 jetons sont une quantité de matériel jugée suffisante, pas une règle. La réserve est donc
+  modélisée comme un stock illimité (aucun item, un `staticItem` côté affichage) : les Faveurs octroyées
+  sont créées, les Faveurs dépensées supprimées. C'est l'ancien code qui déviait, en supprimant
+  silencieusement l'octroi quand la réserve était vide — cas atteignable en théorie (une partie à 5 où
+  tout le monde se repose systématiquement distribue jusqu'à ~65 Faveurs sans en dépenser aucune).
 - Tuiles Épopée : empilées pour que la **plus grande** valeur soit distribuée en premier — vérifié via
   le tri par défaut de `Material.deck()` (`item => -item.location.x`, x décroissant distribué en
   premier) combiné à l'assignation `x: index` croissante de `setupEpicTiles` (id 10 au x le plus haut).

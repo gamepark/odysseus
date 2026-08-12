@@ -3,7 +3,7 @@ import { MaterialType } from '@gamepark/odysseus/material/MaterialType'
 import { CustomMoveType } from '@gamepark/odysseus/rules/CustomMoveType'
 import { RuleId } from '@gamepark/odysseus/rules/RuleId'
 import { LogDescription, MoveComponentContext, MovePlayedLogDescription } from '@gamepark/react-game'
-import { isCustomMoveType, isDeleteItemType, isMoveItemType, MaterialGame, MaterialMove } from '@gamepark/rules-api'
+import { isCreateItemType, isCustomMoveType, isDeleteItemType, isMoveItemType, MaterialGame, MaterialMove } from '@gamepark/rules-api'
 import { AdventureLog } from './AdventureLog'
 import { GainFavorLog } from './GainFavorLog'
 import { IncreaseSkillLog } from './IncreaseSkillLog'
@@ -27,6 +27,10 @@ export class OdysseusLogDescription implements LogDescription<MaterialMove, numb
       }
       if (isMoveItemType(MaterialType.AthenaFavorToken)(move) && move.location.type === LocationType.PlayerAthenaFavor) {
         return { player: move.location.player, Component: GainFavorLog, depth: 1 }
+      }
+      // Favors granted by a card or by resting are created out of the unlimited reserve, not moved from it.
+      if (isCreateItemType(MaterialType.AthenaFavorToken)(move) && move.item.location.type === LocationType.PlayerAthenaFavor) {
+        return { player: move.item.location.player, Component: GainFavorLog, depth: 1 }
       }
       if (isCustomMoveType(CustomMoveType.SpendFavorForTale)(move)) {
         return { player: context.game.rule?.player, Component: SpendFavorForTaleLog }
