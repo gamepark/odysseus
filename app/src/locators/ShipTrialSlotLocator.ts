@@ -24,8 +24,12 @@ class ShipTrialSlotLocator extends Locator {
     return { x: xPercents[x], y: yPercent[id as ShipSide][x] }
   }
 
+  // The extra quarter turn cancels the ship board's own (see ShipBoardPlaceLocator), so the Trials stay
+  // upright and readable while the board is laid out lengthwise. Trial cards are square, so a card turned
+  // a quarter more than its slot still covers exactly the same printed rectangle — only its artwork, and
+  // the "adventure" / "rest" buttons above it, turn back the right way up.
   getRotateZ({ id, x = 0 }: Location) {
-    return rotations[id as ShipSide][x]
+    return rotations[id as ShipSide][x] + 90
   }
 }
 

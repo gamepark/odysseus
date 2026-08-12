@@ -1,4 +1,4 @@
-import { OdysseusOptionsSpec } from '@gamepark/odysseus/OdysseusOptions'
+import { OdysseusOptionsSpecV2 } from '@gamepark/odysseus/OdysseusOptions'
 import { OdysseusRules } from '@gamepark/odysseus/OdysseusRules'
 import { OdysseusSetup } from '@gamepark/odysseus/OdysseusSetup'
 import { GameProvider } from '@gamepark/react-game'
@@ -18,7 +18,7 @@ createRoot(document.getElementById('root')!).render(
     <GameProvider
       game="odysseus"
       Rules={OdysseusRules}
-      optionsSpec={OdysseusOptionsSpec}
+      optionsSpec={OdysseusOptionsSpecV2}
       GameSetup={OdysseusSetup}
       material={Material}
       locators={Locators}

@@ -1,47 +1,22 @@
 import { MaterialContext } from '@gamepark/react-game'
-import { MaterialItem } from '@gamepark/rules-api'
-import { useSyncExternalStore } from 'react'
 
-// Only one player's Story board (and personal material) is shown on the table at a time, chosen by
-// clicking their panel (see PlayerPanelContent). Locators and static-item descriptions are plain
-// objects/methods, not React components, so they cannot read React state directly — they read this
-// module-level store instead. They are not subscribers though: GameDisplay is the one that calls
-// useDisplayedPlayer, so its re-render (cascading through the whole GameTable subtree) is what makes
-// them recompute with the fresh value after a click.
-let displayedPlayer: number | undefined
-const listeners = new Set<() => void>()
+// Every player's Story board is on the table, and up to 3 players so are everyone's Trials — this whole
+// notion then decides nothing but the panel's own highlight. Past that the height only affords one column
+// at a time: the others stay hidden under their own board (see PlayerAdventureColumnLocator), and every
+// board's row depends on which player that is (see PlayerRowLayout).
+//
+// That player is the framework's own "view": clicking a panel plays MaterialMoveBuilder.changeView as a
+// transient local move (see PlayerPanelContent), which is exactly what react-game watches to reposition
+// items — it hands `rules.game.view` to every locator's position dependencies for free. Keeping the choice
+// anywhere else (a module-level store, say) leaves the framework blind to it, and only the pieces it
+// happens to re-render for other reasons ever move.
 
-export function getDisplayedPlayer(fallback: number): number {
-  return displayedPlayer ?? fallback
+/** The player whose Trials are laid out above their board: the viewer's own board until they pick another. */
+export function getDisplayedPlayer(context: MaterialContext): number {
+  return context.rules.game.view ?? context.player ?? context.rules.players[0]
 }
 
-export function setDisplayedPlayer(player: number) {
-  if (player === displayedPlayer) return
-  displayedPlayer = player
-  listeners.forEach((listener) => listener())
-}
-
-/** Sets the displayed player only if none was chosen yet — called once the game has loaded, see GameDisplay. */
-export function initDisplayedPlayer(player: number) {
-  if (displayedPlayer === undefined) setDisplayedPlayer(player)
-}
-
-function subscribe(listener: () => void) {
-  listeners.add(listener)
-  return () => listeners.delete(listener)
-}
-
-/** React binding (e.g. for PlayerPanelContent) that re-renders when the displayed player changes. */
-export function useDisplayedPlayer(fallback: number): number {
-  return useSyncExternalStore(subscribe, () => getDisplayedPlayer(fallback))
-}
-
-/** Whether a player-owned location's `player` belongs to the Story board currently on the table. */
+/** Whether a player-owned location's `player` is the one whose Trials are laid out above their board. */
 export function isDisplayedPlayer(player: number | undefined, context: MaterialContext): boolean {
-  return player === getDisplayedPlayer(context.player ?? context.rules.players[0])
-}
-
-/** For Locator.hide() overrides on every player-owned LocationType: hidden unless it's on the displayed player's board. */
-export function hideUnlessDisplayedPlayer(item: MaterialItem, context: MaterialContext): boolean {
-  return !isDisplayedPlayer(item.location.player, context)
+  return player === getDisplayedPlayer(context)
 }

@@ -3,15 +3,15 @@ import { LocationType } from '@gamepark/odysseus/material/LocationType'
 import { MaterialType } from '@gamepark/odysseus/material/MaterialType'
 import { OdysseusRules } from '@gamepark/odysseus/OdysseusRules'
 import { Skill, skills } from '@gamepark/odysseus/Skill'
-import { CounterProps, StyledPlayerPanel, usePlayer, useRules } from '@gamepark/react-game'
-import { Location } from '@gamepark/rules-api'
-import { setDisplayedPlayer, useDisplayedPlayer } from '../DisplayedPlayer'
+import { CounterProps, StyledPlayerPanel, useMaterialContext, usePlay, usePlayer, useRules } from '@gamepark/react-game'
+import { Location, MaterialMoveBuilder } from '@gamepark/rules-api'
 import Cunning from '../images/icons/Cunning.png'
 import Intelligence from '../images/icons/Intelligence.png'
 import Luck from '../images/icons/Luck.png'
 import Strength from '../images/icons/Strength.png'
 import AthenaFavor from '../images/icons/AthenaFavor.png'
 import { PANEL_WIDTH } from '../locators/PlayerPanelLayout'
+import { showsAllTrials } from '../locators/PlayerRowLayout'
 
 const skillIcons: Record<Skill, string> = {
   [Skill.Strength]: Strength,
@@ -22,8 +22,14 @@ const skillIcons: Record<Skill, string> = {
 
 export const PlayerPanelContent = ({ location }: { location: Location<number> }) => {
   const rules = useRules<OdysseusRules>()!
+  const play = usePlay()
+  const context = useMaterialContext()
   const player = usePlayer<number>(location.player)
-  const displayedPlayer = useDisplayedPlayer(rules.players[0])
+  // The player whose Trials are laid out above their board (see DisplayedPlayer): the framework's own
+  // "view", which every locator reads back from the game. Nothing to select while everyone's Trials are
+  // out at once — the panel is then just a read-out, sitting beside the board it belongs to.
+  const selectable = !showsAllTrials(context)
+  const displayedPlayer = rules.game.view ?? rules.players[0]
   if (!player) return null
 
   const counters: CounterProps[] = [
@@ -43,8 +49,8 @@ export const PlayerPanelContent = ({ location }: { location: Location<number> })
       counters={counters}
       countersPerLine={3}
       activeRing
-      onClick={() => setDisplayedPlayer(player.id)}
-      css={[panelStyle, player.id === displayedPlayer && selectedPanel]}
+      onClick={selectable ? () => play(MaterialMoveBuilder.changeView(player.id), { transient: true }) : undefined}
+      css={[panelStyle, selectable && selectablePanel, selectable && player.id === displayedPlayer && selectedPanel]}
     />
   )
 }
@@ -58,6 +64,9 @@ const panelStyle = css`
   top: 0;
   right: 0;
   font-size: ${PANEL_WIDTH / 28}em;
+`
+
+const selectablePanel = css`
   cursor: pointer;
   /* PlayerPanelDescription is a LocationDescription, and LocationComponent sets pointer-events: none
    * on the whole location unless it has an onShortClick/onLongClick (from displayHelp), which this one
