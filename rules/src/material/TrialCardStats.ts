@@ -24,6 +24,14 @@ export type Gain = Skill | 'Choice' | 'AthenaFavor'
 /** A {@link Gain} that requires a player decision to resolve (the AthenaFavor gain is immediate). */
 export type PendingGain = Exclude<Gain, 'AthenaFavor'>
 
+/**
+ * What is left of a card's gains while they are being resolved: the gains still on offer, and the
+ * number of skill increases still due. The two only part ways when an Athena Favor redirects a point
+ * to a skill the card does not offer: that point is spent, but no gain in particular was — so every
+ * gain stays on offer for the increases still due, and each of them stays free.
+ */
+export type PendingGains = { gains: PendingGain[]; left: number }
+
 export interface TrialCardStats {
   /** The skill value to reach for this card to be successful at the end of the game. */
   value: number

@@ -2,7 +2,7 @@ import { isMoveItemType, ItemMove, MaterialMove } from '@gamepark/rules-api'
 import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
 import { TrialCard } from '../material/TrialCard'
-import { adventureTypeOf, PendingGain } from '../material/TrialCardStats'
+import { adventureTypeOf, PendingGains } from '../material/TrialCardStats'
 import { Skill, skills } from '../Skill'
 import { Memory } from './Memory'
 import { MAX_TALES, OdysseusPlayerTurnRule } from './OdysseusPlayerTurnRule'
@@ -16,26 +16,29 @@ const ADVENTURE_TYPES_FOR_EPIC = 5
  * printed on the card, or the rainbow icon that lets you pick any skill. Also used client-side, to
  * tell the free buttons from the ones that cost a Favor (see SkillCubeDescription).
  */
-export const isFreeSkillGain = (pending: PendingGain[], skill: Skill) => pending.includes(skill) || pending.includes('Choice')
+export const isFreeSkillGain = (pending: PendingGains | undefined, skill: Skill) =>
+  !!pending && (pending.gains.includes(skill) || pending.gains.includes('Choice'))
 
 /**
  * Resolves the gains printed at the bottom of the Trial card that was just played (rules-fr.pdf p.5
  * "2.A Partir à l'aventure"), all of them in one rule: the player raises the skills they want, one
- * cube step each, and every step eats one gain. Raising a skill the card offers is free; raising any
- * other one spends an Athena Favor to redirect a gain (rules-fr.pdf p.7 "À chaque fois que vous
- * augmentez une compétence d'un point, vous pouvez dépenser une Faveur d'Athéna pour la changer en
- * une autre compétence"), which is paid on the spot rather than asked for first — hence a plain cube
- * move as the player's move, the Favor going out with it as a consequence. Once nothing is left to
- * resolve, checks the Epic tile and completed-row Tale consequences of the card that was just played
- * on adventure (rest never triggers either).
+ * cube step each, and every step uses up one of them. Raising a skill the card offers is free and
+ * takes that very gain; raising any other one spends an Athena Favor to redirect a gain (rules-fr.pdf
+ * p.7 "À chaque fois que vous augmentez une compétence d'un point, vous pouvez dépenser une Faveur
+ * d'Athéna pour la changer en une autre compétence") without taking any gain in particular, so the
+ * increases still due keep every icon of the card to choose from (see {@link PendingGains}). The
+ * Favor is paid on the spot rather than asked for first — hence a plain cube move as the player's
+ * move, the Favor going out with it as a consequence. Once nothing is left to resolve, checks the
+ * Epic tile and completed-row Tale consequences of the card that was just played on adventure (rest
+ * never triggers either).
  */
 export class ResolveSkillGainRule extends OdysseusPlayerTurnRule {
   onRuleStart() {
     return this.dropUnresolvableGains()
   }
 
-  get pending(): PendingGain[] {
-    return this.remind<PendingGain[]>(Memory.PendingGains, this.player) ?? []
+  get pending(): PendingGains {
+    return this.remind<PendingGains>(Memory.PendingGains, this.player) ?? { gains: [], left: 0 }
   }
 
   get cubesUnderMax() {
@@ -50,16 +53,19 @@ export class ResolveSkillGainRule extends OdysseusPlayerTurnRule {
    */
   dropUnresolvableGains(): MaterialMove[] {
     const cubes = this.cubesUnderMax
-    const pending = cubes.length ? this.pending.filter((gain) => gain === 'Choice' || cubes.id(gain).length > 0) : []
-    this.memorize<PendingGain[]>(Memory.PendingGains, pending, this.player)
-    return pending.length ? [] : this.resolveConsequences()
+    const { gains, left } = this.pending
+    const raisable = cubes.length ? gains.filter((gain) => gain === 'Choice' || cubes.id(gain).length > 0) : []
+    // A dropped gain also costs an increase: it is that very gain that has nowhere left to go.
+    const increases = Math.min(left, raisable.length)
+    this.memorize<PendingGains>(Memory.PendingGains, { gains: increases ? raisable : [], left: increases }, this.player)
+    return increases ? [] : this.resolveConsequences()
   }
 
   /** One step forward per skill still under 6: free if a pending gain grants it, otherwise offered only if a Favor can pay for it. */
   getPlayerMoves() {
     const moves: MaterialMove[] = []
     const pending = this.pending
-    if (pending.length) {
+    if (pending.left) {
       const canPayFavor = this.favors.getQuantity() > 0
       const cubes = this.cubesUnderMax
       moves.push(
@@ -83,18 +89,19 @@ export class ResolveSkillGainRule extends OdysseusPlayerTurnRule {
     if (!isMoveItemType(MaterialType.SkillCube)(move)) return super.beforeItemMove(move)
     const skill = this.material(MaterialType.SkillCube).getItem<Skill>(move.itemIndex).id!
     const moves: MaterialMove[] = []
-    const pending = [...this.pending]
-    // The card's own icon for that skill first, then the rainbow one. Failing both, the first gain in
-    // line will do — it is being redirected, and that costs 1 Favor. Taking the free skills first is
-    // therefore what leaves the player the most choice.
-    let index = pending.indexOf(skill)
-    if (index < 0) index = pending.indexOf('Choice')
+    const { gains, left } = this.pending
+    // The card's own icon for that skill first, then the rainbow one: taking the free skills first is
+    // what leaves the player the most choice. Failing both, the point is redirected for 1 Favor, and
+    // no gain in particular pays for it — they all stay on offer, one increase short.
+    const remaining = [...gains]
+    let index = remaining.indexOf(skill)
+    if (index < 0) index = remaining.indexOf('Choice')
     if (index < 0) {
-      index = 0
       moves.push(this.favors.deleteItem(1))
+    } else {
+      remaining.splice(index, 1)
     }
-    pending.splice(index, 1)
-    this.memorize<PendingGain[]>(Memory.PendingGains, pending, this.player)
+    this.memorize<PendingGains>(Memory.PendingGains, { gains: remaining, left: left - 1 }, this.player)
     return moves
   }
 

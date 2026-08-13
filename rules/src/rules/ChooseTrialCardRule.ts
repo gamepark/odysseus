@@ -3,7 +3,7 @@ import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
 import { ShipSide } from '../material/ShipSide'
 import { getTrialCardSkill, TrialCard } from '../material/TrialCard'
-import { PendingGain, trialCardStats } from '../material/TrialCardStats'
+import { PendingGain, PendingGains, trialCardStats } from '../material/TrialCardStats'
 import { Memory } from './Memory'
 import { OdysseusPlayerTurnRule } from './OdysseusPlayerTurnRule'
 import { RuleId } from './RuleId'
@@ -95,15 +95,15 @@ export class ChooseTrialCardRule extends OdysseusPlayerTurnRule {
   resolveAdventure(move: MoveItem<number, MaterialType, LocationType>) {
     const card = this.material(MaterialType.TrialCard).getItem<TrialCard>(move.itemIndex).id
     const moves: MaterialMove[] = []
-    const pending: PendingGain[] = []
+    const gains: PendingGain[] = []
     for (const gain of trialCardStats[card].gains) {
       if (gain === 'AthenaFavor') {
         moves.push(this.favorFromSupply)
       } else {
-        pending.push(gain)
+        gains.push(gain)
       }
     }
-    this.memorize(Memory.PendingGains, pending, this.player)
+    this.memorize(Memory.PendingGains, { gains, left: gains.length } satisfies PendingGains, this.player)
     this.memorize(Memory.PlacedAdventureRow, move.location.y, this.player)
     moves.push(this.startRule(RuleId.ResolveSkillGain))
     return moves
@@ -111,7 +111,7 @@ export class ChooseTrialCardRule extends OdysseusPlayerTurnRule {
 
   resolveRest() {
     const moves: MaterialMove[] = [this.favorFromSupply]
-    this.memorize(Memory.PendingGains, ['Choice'] satisfies PendingGain[], this.player)
+    this.memorize(Memory.PendingGains, { gains: ['Choice'], left: 1 } satisfies PendingGains, this.player)
     this.forget(Memory.PlacedAdventureRow, this.player)
     moves.push(this.startRule(RuleId.ResolveSkillGain))
     return moves

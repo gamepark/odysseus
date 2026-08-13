@@ -2,7 +2,7 @@ import { faArrowUp } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { LocationType } from '@gamepark/odysseus/material/LocationType'
 import { MaterialType } from '@gamepark/odysseus/material/MaterialType'
-import { PendingGain } from '@gamepark/odysseus/material/TrialCardStats'
+import { PendingGains } from '@gamepark/odysseus/material/TrialCardStats'
 import { Memory } from '@gamepark/odysseus/rules/Memory'
 import { isFreeSkillGain } from '@gamepark/odysseus/rules/ResolveSkillGainRule'
 import { Skill } from '@gamepark/odysseus/Skill'
@@ -54,8 +54,7 @@ class SkillCubeDescription extends TokenDescription<number, MaterialType, Locati
   getItemMenu(item: MaterialItem<number, LocationType, Skill>, context: ItemContext<number, MaterialType, LocationType>, legalMoves: MaterialMove[]) {
     const move = legalMoves.find((move) => isMoveItemType(MaterialType.SkillCube)(move) && move.itemIndex === context.index)
     if (!move) return null
-    const pending = context.rules.remind<PendingGain[]>(Memory.PendingGains, item.location.player) ?? []
-    const free = isFreeSkillGain(pending, item.id!)
+    const free = isFreeSkillGain(context.rules.remind<PendingGains>(Memory.PendingGains, item.location.player), item.id!)
     return (
       <OdysseusMenuButton x={0} y={BUTTON_Y} move={move} cost={!free} label={free ? undefined : <FavorCost cost={1} />} labelPosition="right">
         <FontAwesomeIcon icon={faArrowUp} />
