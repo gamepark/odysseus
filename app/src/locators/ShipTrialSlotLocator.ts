@@ -1,7 +1,10 @@
+import { LocationType } from '@gamepark/odysseus/material/LocationType'
 import { MaterialType } from '@gamepark/odysseus/material/MaterialType'
 import { ShipSide } from '@gamepark/odysseus/material/ShipSide'
-import { Locator } from '@gamepark/react-game'
-import { Location } from '@gamepark/rules-api'
+import { ItemContext, Locator, MaterialContext } from '@gamepark/react-game'
+import { Location, MaterialItem } from '@gamepark/rules-api'
+import { shipBoardDescription } from '../material/ShipBoardDescription'
+import { shipBoardPlaceLocator } from './ShipBoardPlaceLocator'
 
 // Measured directly on ShipBoard.jpg (edge detection on the printed slot borders, not a formula):
 // percentages of the board's width/height for the 12 printed slots (6 per side), and each one's own
@@ -31,6 +34,30 @@ class ShipTrialSlotLocator extends Locator {
   getRotateZ({ id, x = 0 }: Location) {
     return rotations[id as ShipSide][x]
   }
+
+  /**
+   * A card being dragged straightens up, like a card taken out of a hand does (see HandLocator): the tilt
+   * belongs to the slot it is printed on, not to the card the player is carrying to its destination. The
+   * flag is set by ItemDisplay as soon as a drag transform is applied, and the drop animation is built
+   * from the same upright transform, so the card lands without a spin.
+   */
+  getItemRotateZ(item: MaterialItem, context: ItemContext) {
+    if (context.isDragging) return 0
+    return super.getItemRotateZ(item, context)
+  }
 }
 
 export const shipTrialSlotLocator = new ShipTrialSlotLocator()
+
+/**
+ * Where a slot falls on the table. The locator itself never needs this — a Trial on the Ship is placed on
+ * its parent board, in percentages of it — but anything reasoning about the table's own edges does (see
+ * TrialCardDescription, which slides a hovered Trial back inside them).
+ */
+export function getShipTrialSlotCoordinates({ id, x = 0 }: Location, context: MaterialContext) {
+  const { x: boardX = 0, y: boardY = 0 } = shipBoardPlaceLocator.getCoordinates({ type: LocationType.ShipBoardPlace }, context)
+  return {
+    x: boardX + (shipBoardDescription.width * (xPercent[id as ShipSide][x] - 50)) / 100,
+    y: boardY + (shipBoardDescription.height * (yPercents[x] - 50)) / 100
+  }
+}

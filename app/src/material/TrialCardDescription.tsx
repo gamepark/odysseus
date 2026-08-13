@@ -7,6 +7,8 @@ import { isShipTrialSlotFaceDown, TrialCard } from '@gamepark/odysseus/material/
 import { CardDescription, ItemContext } from '@gamepark/react-game'
 import { isMoveItemType, MaterialItem, MaterialMove } from '@gamepark/rules-api'
 import { Trans } from 'react-i18next'
+import { getShipTrialSlotCoordinates } from '../locators/ShipTrialSlotLocator'
+import { TABLE_X_MAX, TABLE_X_MIN, TABLE_Y_MAX, TABLE_Y_MIN } from '../locators/TableLayout'
 import TrialBack from '../images/cards/TrialBack.jpg'
 import Trial10Cunning from '../images/cards/trials/Trial10Cunning.jpg'
 import Trial10Intelligence from '../images/cards/trials/Trial10Intelligence.jpg'
@@ -71,6 +73,14 @@ import Trial9Strength from '../images/cards/trials/Trial9Strength.jpg'
 import { OdysseusMenuButton } from '../theme/OdysseusMenuButton'
 import { fontDisplay } from '../theme/typography'
 import { TrialCardHelp } from './help/TrialCardHelp'
+
+/** How much a Trial grows under the pointer. Twice its size is what it takes to read its value and its gains at a glance. */
+const HOVER_SCALE = 2
+
+/** How high it rises with it: enough to clear everything it now covers, in a table where nothing else stands above 20. */
+const HOVER_LIFT = 10
+
+const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max)
 
 /** Sleep, for want of a Font Awesome icon that says it: the comic-strip "Zzz", set in the game's own font. */
 const zzzCss = css`
@@ -162,6 +172,41 @@ class TrialCardDescription extends CardDescription<number, MaterialType, Locatio
       default:
         return false
     }
+  }
+
+  /**
+   * A Trial showing its face grows to twice its size under the pointer, and straightens up: the Ship's
+   * slots are printed askew (see ShipTrialSlotLocator), and the tilt that reads well on the board only
+   * gets in the way of a card being read. The card underneath does not move — the transform lands on the
+   * inner wrapper ItemDisplay keeps for this, over the item's own placement, so `rotateZ` first undoes
+   * whatever the locator applied and the rest is worked out square with the table.
+   */
+  getHoverTransform(item: MaterialItem, context: ItemContext): string[] {
+    if (this.isFlipped(item)) return []
+    const rotateZ = context.locators[item.location.type]?.getItemRotateZ(item, context) ?? 0
+    const { x, y } = this.getHoverShift(item, context)
+    return [`rotateZ(${-rotateZ}deg)`, `translate3d(${x}em, ${y}em, ${HOVER_LIFT}em)`, `scale(${HOVER_SCALE})`]
+  }
+
+  /**
+   * How far a hovered Trial has to slide to stay on the table: twice its size, a card on the Ship hangs
+   * over the table's left edge, where the screen cuts it off. Only what the edge calls for, and only while
+   * the pointer is on it — the card is back on its printed slot as soon as it leaves.
+   */
+  private getHoverShift(item: MaterialItem, context: ItemContext) {
+    const { x = 0, y = 0 } = this.getTableCoordinates(item, context)
+    const halfWidth = (this.width * HOVER_SCALE) / 2
+    const halfHeight = (this.height * HOVER_SCALE) / 2
+    return {
+      x: clamp(x, TABLE_X_MIN + halfWidth, TABLE_X_MAX - halfWidth) - x,
+      y: clamp(y, TABLE_Y_MIN + halfHeight, TABLE_Y_MAX - halfHeight) - y
+    }
+  }
+
+  /** Where the card sits on the table. On the Ship it is placed on the board, in percentages of it, so it takes a detour. */
+  private getTableCoordinates(item: MaterialItem, context: ItemContext) {
+    if (item.location.type === LocationType.ShipTrialSlot) return getShipTrialSlotCoordinates(item.location, context)
+    return context.locators[item.location.type]?.getItemCoordinates(item, context) ?? {}
   }
 
   /**
