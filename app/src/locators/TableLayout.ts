@@ -22,3 +22,24 @@ export const TABLE_X_MIN = -35.96
 export const TABLE_X_MAX = 58.6
 export const TABLE_Y_MIN = -24.51
 export const TABLE_Y_MAX = 24.51
+
+/** x of the ship board's axis, which everything laid on the ship shares: the deck, the stern, the Epic tiles. */
+export const SHIP_BOARD_X = -23.7
+
+/** Band left free above the table, in screen em (1em = 1vh), for the header bar to write in. */
+export const TABLE_MARGIN_TOP = 7
+
+/**
+ * Screen em bought by one table unit once the table is drawn at its default scale — the scale it opens on,
+ * and the only one it ever has until someone zooms in.
+ *
+ * GameTable draws the table at 5em per unit then scales it by `minScale = (100 - vertical margin) / 5 /
+ * table height`, so a unit is worth `(100 - margin) / height` em whatever the screen: the em itself is 1vh,
+ * or 1vw / table ratio once the screen is narrower than the table, and the whole box follows. Which is what
+ * makes the table's place on screen knowable in CSS — see OdysseusTableNavigation, the one thing outside the
+ * table that has to line up with something inside it.
+ */
+export const TABLE_UNIT = (100 - TABLE_MARGIN_TOP) / (TABLE_Y_MAX - TABLE_Y_MIN)
+
+/** x of the table's center, which is where the browser centers it horizontally (GameTable's `centerZoomedOut`). */
+export const TABLE_CENTER_X = (TABLE_X_MIN + TABLE_X_MAX) / 2
