@@ -1,3 +1,4 @@
 export enum CustomMoveType {
-  SpendFavorForTale = 1
+  /** Declining the last chance to buy a Tale before the turn ends (see BuyTaleRule). */
+  Pass = 1
 }

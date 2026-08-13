@@ -10,22 +10,23 @@ déviation volontaire reste en place (documentée). Le mode solo/Automa (p.8) n'
 
 ## Historique des bugs trouvés et corrigés
 
-Les trois bugs suivants ont été trouvés lors des passes précédentes de cette revue et sont **tous
-corrigés** — revérifiés dans cette troisième passe (compilation + `__verify.test.ts`, 100 parties
-aléatoires, toujours vertes).
+Les quatre bugs suivants ont été trouvés au fil des passes de cette revue et sont **tous corrigés** —
+revérifiés à chaque fois (compilation + `__verify.test.ts`, 100 parties aléatoires, toujours vertes).
 
 1. **"Une fois par tour" du Récit contre Faveurs pas respecté** — `ChooseTrialCardRule.onRuleStart()`
    remettait `Memory.TaleBoughtThisTurn` à `false` même en revenant d'un achat de Récit dans le même
-   tour (rules-fr.pdf p.7 : "une seule fois pendant votre tour"). Corrigé : le flag n'est remis à zéro
-   que si on ne revient pas de `RuleId.ChooseTale`.
+   tour (rules-fr.pdf p.7 : "une seule fois pendant votre tour"). Corrigé : l'achat ne provoque plus de
+   changement de règle, et `ChooseTrialCardRule` n'est plus atteinte qu'au début d'un tour, donc son
+   `onRuleStart()` est bien le seul endroit qui remet le flag à zéro (voir "Achat d'un Récit" plus bas).
 2. **`ChooseTaleRule` cassait l'undo** — utilisait `startPlayerTurn` avec le même joueur au lieu de
    `startRule` sur le chemin de retour vers `ChooseTrialCardRule`, en violation de
-   `features/rule-moves.md` ("do not use startPlayerTurn if the player does not change"). Corrigé : les
-   deux branches de `returnFromTale()` utilisent `startRule`.
+   `features/rule-moves.md` ("do not use startPlayerTurn if the player does not change"). Corrigé : la
+   règle n'a plus qu'une seule sortie, `startRule(RuleId.FinishTurn)`.
 3. **Donnée erronée sur une carte** — `Trial5Intelligence` avait `gains: ['AthenaFavor']` au lieu de
    `gains: [Skill.Strength, Skill.Strength]` (l'image de la carte montre bien 2 icônes Force). Trouvé
    suite à un signalement joueur, confirmé en comparant les 60 images de cartes une par une aux données
    de `TrialCardStats.ts`. Corrigé.
+4. **Répartition des jetons Récit entre les 2 pioches pas aléatoire** — voir "Mise en place" ci-dessous.
 
 ## Vérification détaillée face au livret
 
@@ -36,8 +37,13 @@ aléatoires, toujours vertes).
 - Rangées du Navire : la paire centrale (x 2-3) de chaque côté distribuée face cachée (4 cartes au
   total), les 4 emplacements restants par côté (x 0,1,4,5) distribués face visible (8 au total) —
   `setupShipRows`.
-- Jetons Récit : 28 (14 types × 2) répartis en 2 pioches face cachée, 4 révélés depuis l'une d'elles —
-  `setupTaleTiles`.
+- Jetons Récit : 28 (14 types × 2) mélangés **puis** coupés en 2 pioches face cachée, 4 révélés depuis
+  l'une d'elles — `setupTaleTiles`. L'ancien code formait les deux piles en alternant les exemplaires
+  avant de mélanger chaque pile : chacune contenait alors exactement un exemplaire de chaque type, donc
+  ni les 4 jetons révélés ni les jetons de départ ne pouvaient jamais être en double. Corrigé (bug #4) :
+  les 28 jetons sont créés en une pile, mélangés, puis 14 sont déplacés vers la seconde. Vérifié sur
+  300 mises en place : ~22 % des parties révèlent un doublon parmi les 4 visibles, ce qui correspond
+  bien à la probabilité théorique (1 − 26×24×22 / 27×26×25 ≈ 21,8 %).
 - Faveur d'Athéna : 1 posée de chaque côté du Navire, "formez une réserve avec les jetons restants"
   (p.2, §6) — `setupAthenaFavor`. Le livret ne dit rien d'une réserve épuisée, ni en mise en place ni
   p.7 : les 40 jetons sont une quantité de matériel jugée suffisante, pas une règle. La réserve est donc
@@ -109,6 +115,18 @@ aléatoires, toujours vertes).
   pile de 5 tuiles partagée pour toute la partie (valeur décroissante), maximum 1 par joueur —
   `isEpicEligible`.
 
+**Achat d'un Récit (p.6)** — "En dépensant, une seule fois pendant votre tour, 3 Faveurs d'Athéna" : à
+*n'importe quel moment* du tour, donc l'offre suit le joueur de règle en règle plutôt que de vivre dans
+l'une d'elles. `OdysseusPlayerTurnRule`, dont héritent toutes les règles du tour, porte le choix des
+jetons, le réapprovisionnement de l'emplacement libéré et le prix. Prendre le jeton *est* l'achat : les
+3 Faveurs partent en conséquence du coup (`beforeItemMove`), sans décision préalable ni `CustomMove`.
+Le seul Récit gratuit est celui d'une ligne de 4 complétée, et `ChooseTaleRule` — la seule règle où
+cela arrive — le signale en surchargeant `isTaleFree`.
+
+Comme le tour se termine tout seul une fois les gains résolus, un joueur qui voulait dépenser au tout
+dernier moment n'en aurait jamais l'occasion : `endTurn()` passe donc par `BuyTaleRule` quand il peut
+encore acheter, seule étape où il n'a que deux coups possibles, prendre un jeton ou passer.
+
 **Faveurs d'Athéna (p.7)**
 - Dépenser 3 une fois par tour pour un Récit (bug #1 ci-dessus, corrigé). Dépenser 1 Faveur pour
   rediriger un gain de compétence *fixe* vers un choix libre — correctement exclu pour les gains
@@ -130,9 +148,12 @@ déjà que les 16 faces de cartes Automa n'ont même pas été livrées comme as
 **rules-fr.pdf p.6** : "Si vous avez choisi un Récit visible, vous le remplacez par **le premier de
 l'une des deux pioches**" — sous-entend un choix du joueur entre les deux pioches face cachée.
 
-`ChooseTaleRule.dealTale()` réapprovisionne automatiquement depuis la première pioche non vide, sans
-interaction du joueur. Comme les deux pioches sont mélangées et cachées, laquelle est piochée n'a
-aucune incidence sur la partie — simplification volontaire pour supprimer un clic inutile.
+`OdysseusPlayerTurnRule.dealTale()` réapprovisionne automatiquement depuis la **plus grande** pioche
+(à égalité, la première), sans interaction du joueur. Comme les deux pioches sont mélangées et cachées,
+laquelle est piochée n'a aucune incidence sur la partie — simplification volontaire pour supprimer un
+clic inutile. Piocher dans la plus grande les maintient à niveau, ce qui fait durer le plus longtemps
+possible le vrai choix, lui bien offert au joueur : prendre le premier jeton de l'une **ou l'autre**
+des deux pioches (`getTaleMoves`).
 
 ## Conformité aux conventions GamePark
 
@@ -151,8 +172,9 @@ fin de projet (`step-by-step-example/checklist.md`).
   et les 2 dans `FinishTurnRule`, tous via `this.nextPlayer`), `startRule` sinon (bug #2 corrigé).
 - `HiddenMaterialRules` est le bon choix (pas de `SecretMaterialRules`) : aucune information n'est
   asymétrique entre joueurs.
-- `CustomMoveType` en enum, `customMove()`/`onCustomMove()`, boutons de header via `useLegalMove()` +
-  `isCustomMoveType()` + `PlayMoveButton` — correspond exactement au pattern documenté.
+- Un seul `CustomMove` (`CustomMoveType.Pass`), conformément à `features/custom-moves.md` qui réserve
+  les coups personnalisés aux décisions ne déplaçant aucun matériel : toutes les autres décisions du
+  joueur sont des déplacements, y compris l'achat d'un Récit, qui est le déplacement du jeton lui-même.
 - `locationsStrategies` organisé par `MaterialType` puis `LocationType` ; l'absence de stratégie sur
   `PlayerRestPile` est correcte (l'ordre des cartes défaussées face cachée n'a aucune importance).
 - `scoring` (nouveau `OdysseusScoringDescription`) suit le pattern `ScoringDescription` documenté

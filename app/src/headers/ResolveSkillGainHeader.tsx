@@ -9,8 +9,8 @@ export const ResolveSkillGainHeader = () => {
   const me = usePlayerId<number>()
   const activePlayer = rules.getActivePlayer()
   const player = usePlayerName(activePlayer)
-  if (activePlayer === me) {
-    return <>{t('header.resolveSkillGain.you')}</>
+  if (activePlayer !== me) {
+    return <>{t('header.resolveSkillGain.player', { player })}</>
   }
-  return <>{t('header.resolveSkillGain.player', { player })}</>
+  return <>{t('header.resolveSkillGain.you')}</>
 }

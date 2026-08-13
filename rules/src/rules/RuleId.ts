@@ -3,5 +3,7 @@ export enum RuleId {
   ChooseTrialCard = 1,
   ResolveSkillGain,
   ChooseTale,
-  FinishTurn
+  FinishTurn,
+  /** Comes just before FinishTurn, despite its rank here: the last chance to spend 3 Favors (see BuyTaleRule). */
+  BuyTale
 }

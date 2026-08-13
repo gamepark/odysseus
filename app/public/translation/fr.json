@@ -2,7 +2,6 @@
   "header": {
     "chooseTrialCard": {
       "you": "Choisissez une carte Épreuve",
-      "youWithFavor": "Choisissez une carte Épreuve, ou <spendFavor>dépensez 3 Faveurs d'Athéna pour un Récit</spendFavor>",
       "player": "{player} choisit une carte Épreuve"
     },
     "resolveSkillGain": {
@@ -13,12 +12,15 @@
       "you": "Choisissez un jeton Récit",
       "player": "{player} choisit un jeton Récit"
     },
+    "buyTale": {
+      "you": "Prenez un Récit pour 3 <favor/> ou <pass>passez</pass>",
+      "player": "{player} peut prendre un Récit pour 3 <favor/>"
+    },
     "finishTurn": "Fin du tour"
   },
   "action": {
     "adventure": "Partir à l'aventure",
-    "rest": "Se reposer",
-    "pay": "Payer"
+    "rest": "Se reposer"
   },
   "log": {
     "adventure": "{player} part à l'aventure avec <card/>",
@@ -73,14 +75,14 @@
       "matchValue": "Concerne les cartes Épreuve de valeur {value}.",
       "obtainTitle": "Comment l'obtenir",
       "obtainRow": "En formant une ligne de 4 cartes Épreuve sur votre plateau Récit : une carte dans chacune des 4 compétences, à la même rangée.",
-      "obtainFavor": "En dépensant 3 Faveurs d'Athéna, une seule fois par tour.",
+      "obtainFavor": "En dépensant 3 Faveurs d'Athéna, une seule fois par tour, à n'importe quel moment de votre tour.",
       "choice": "Lorsque vous remportez un Récit, choisissez-en un parmi les 4 jetons visibles ou prenez le premier de l'une des deux pioches face cachée. Un jeton visible choisi est immédiatement remplacé par le premier de l'une des deux pioches.",
       "max": "Vous pouvez remporter un maximum de 6 Récits durant la partie, jeton de départ compris. Il existe 14 Récits différents, chacun en 2 exemplaires."
     },
     "athenaFavorToken": {
       "title": "Faveur d'Athéna",
       "role": "Les Faveurs d'Athéna vous permettent d'acquérir de nouveaux Récits ou de rediriger les points de compétence que vous gagnez.",
-      "useTale": "Dépensez 3 Faveurs, une seule fois par tour, pour remporter immédiatement un Récit.",
+      "useTale": "Dépensez 3 Faveurs, une seule fois par tour et à n'importe quel moment de celui-ci, pour remporter immédiatement un Récit.",
       "useRedirect": "Chaque fois que vous augmentez une compétence d'un point de façon imposée, vous pouvez dépenser 1 Faveur pour l'augmenter dans une autre compétence à la place.",
       "gainTitle": "Comment en gagner",
       "gainReveal": "En choisissant une carte Épreuve adjacente à la paire de cartes face cachée d'un côté du Navire : les 2 cartes sont révélées et vous remportez la Faveur placée entre elles.",

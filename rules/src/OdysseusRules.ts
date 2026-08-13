@@ -15,6 +15,7 @@ import { MaterialType } from './material/MaterialType'
 import { getStoryTileScore, ScoredTrialCard, StoryTileType } from './material/StoryTile'
 import { getTrialCardSkill, isShipTrialSlotFaceDown, TrialCard } from './material/TrialCard'
 import { adventureTypeOf, trialCardStats } from './material/TrialCardStats'
+import { BuyTaleRule } from './rules/BuyTaleRule'
 import { ChooseTaleRule } from './rules/ChooseTaleRule'
 import { ChooseTrialCardRule } from './rules/ChooseTrialCardRule'
 import { FinishTurnRule } from './rules/FinishTurnRule'
@@ -43,6 +44,7 @@ export class OdysseusRules
     [RuleId.ChooseTrialCard]: ChooseTrialCardRule,
     [RuleId.ResolveSkillGain]: ResolveSkillGainRule,
     [RuleId.ChooseTale]: ChooseTaleRule,
+    [RuleId.BuyTale]: BuyTaleRule,
     [RuleId.FinishTurn]: FinishTurnRule
   }
 

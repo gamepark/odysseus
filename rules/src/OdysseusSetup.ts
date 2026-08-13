@@ -13,6 +13,7 @@ import { skills } from './Skill'
 
 const TRIAL_CARDS_PER_PLAYER = 12
 const SHIP_ROW_SLOTS = 6
+const TALE_DISPLAY_SLOTS = 4
 
 /**
  * This class creates a new Game based on the game options
@@ -59,17 +60,22 @@ export class OdysseusSetup extends MaterialGameSetup<number, MaterialType, Locat
   }
 
   /**
-   * 28 Tale tiles (14 types x 2 copies), split into 2 facedown stacks, then the top 4 of stack "First" are revealed.
+   * "Mélangez les 28 jetons Récit et formez deux pioches, faces cachées" (rules-fr.pdf p.2 §2): the 28
+   * tiles (14 types x 2 copies) are shuffled as one pile, then cut in half — shuffling two piles built
+   * by alternating the copies would instead guarantee one copy of every type in each. Then the top 4 of
+   * stack "First" are revealed ("Révélez 4 jetons Récit de l'une de ces pioches").
    */
   setupTaleTiles() {
     const ids: StoryTileType[] = storyTileTypes.flatMap((type) => [type, type])
-    this.material(MaterialType.StoryTile).createItems(
-      ids.map((id, index) => ({ id, location: { type: LocationType.TaleDeck, id: index % 2 === 0 ? TaleStack.First : TaleStack.Second } }))
-    )
-    this.material(MaterialType.StoryTile).location(LocationType.TaleDeck).locationId(TaleStack.First).shuffle()
-    this.material(MaterialType.StoryTile).location(LocationType.TaleDeck).locationId(TaleStack.Second).shuffle()
+    this.material(MaterialType.StoryTile).createItems(ids.map((id) => ({ id, location: { type: LocationType.TaleDeck, id: TaleStack.First } })))
+    this.material(MaterialType.StoryTile).location(LocationType.TaleDeck).shuffle()
+    this.material(MaterialType.StoryTile)
+      .location(LocationType.TaleDeck)
+      .locationId(TaleStack.First)
+      .deck()
+      .deal({ type: LocationType.TaleDeck, id: TaleStack.Second }, ids.length / 2)
     const stackFirst = this.material(MaterialType.StoryTile).location(LocationType.TaleDeck).locationId(TaleStack.First).deck()
-    for (let x = 0; x < 4; x++) {
+    for (let x = 0; x < TALE_DISPLAY_SLOTS; x++) {
       stackFirst.dealOne({ type: LocationType.TaleDisplay, x })
     }
   }

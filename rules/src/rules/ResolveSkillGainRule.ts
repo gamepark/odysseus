@@ -1,14 +1,14 @@
-import { isMoveItemType, ItemMove, MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
+import { isMoveItemType, ItemMove, MaterialMove } from '@gamepark/rules-api'
 import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
 import { TrialCard } from '../material/TrialCard'
 import { adventureTypeOf, PendingGain } from '../material/TrialCardStats'
 import { Skill, skills } from '../Skill'
 import { Memory } from './Memory'
+import { MAX_TALES, OdysseusPlayerTurnRule } from './OdysseusPlayerTurnRule'
 import { RuleId } from './RuleId'
 
 const MAX_SKILL_VALUE = 6
-const MAX_TALES = 6
 const ADVENTURE_TYPES_FOR_EPIC = 5
 
 /**
@@ -29,7 +29,7 @@ export const isFreeSkillGain = (pending: PendingGain[], skill: Skill) => pending
  * resolve, checks the Epic tile and completed-row Tale consequences of the card that was just played
  * on adventure (rest never triggers either).
  */
-export class ResolveSkillGainRule extends PlayerTurnRule {
+export class ResolveSkillGainRule extends OdysseusPlayerTurnRule {
   onRuleStart() {
     return this.dropUnresolvableGains()
   }
@@ -40,10 +40,6 @@ export class ResolveSkillGainRule extends PlayerTurnRule {
 
   get cubesUnderMax() {
     return this.material(MaterialType.SkillCube).player(this.player).location((l) => (l.x ?? 0) < MAX_SKILL_VALUE)
-  }
-
-  get favors() {
-    return this.material(MaterialType.AthenaFavorToken).location(LocationType.PlayerAthenaFavor).player(this.player)
   }
 
   /**
@@ -61,14 +57,20 @@ export class ResolveSkillGainRule extends PlayerTurnRule {
 
   /** One step forward per skill still under 6: free if a pending gain grants it, otherwise offered only if a Favor can pay for it. */
   getPlayerMoves() {
+    const moves: MaterialMove[] = []
     const pending = this.pending
-    if (!pending.length) return []
-    const canPayFavor = this.favors.getQuantity() > 0
-    const cubes = this.cubesUnderMax
-    return cubes
-      .getItems<Skill>()
-      .filter((item) => canPayFavor || isFreeSkillGain(pending, item.id!))
-      .map((item) => cubes.id(item.id).moveItem((cube) => ({ ...cube.location, x: cube.location.x! + 1 })))
+    if (pending.length) {
+      const canPayFavor = this.favors.getQuantity() > 0
+      const cubes = this.cubesUnderMax
+      moves.push(
+        ...cubes
+          .getItems<Skill>()
+          .filter((item) => canPayFavor || isFreeSkillGain(pending, item.id!))
+          .map((item) => cubes.id(item.id).moveItem((cube) => ({ ...cube.location, x: cube.location.x! + 1 })))
+      )
+    }
+    if (this.canBuyTale) moves.push(...this.getTaleMoves())
+    return moves
   }
 
   /**
@@ -77,8 +79,8 @@ export class ResolveSkillGainRule extends PlayerTurnRule {
    * the last gain triggers — a spend queued behind it would be read as the next player's (see
    * OdysseusLogDescription, which attributes it to the rule's current player).
    */
-  beforeItemMove(move: ItemMove) {
-    if (!isMoveItemType(MaterialType.SkillCube)(move)) return []
+  beforeItemMove(move: ItemMove): MaterialMove[] {
+    if (!isMoveItemType(MaterialType.SkillCube)(move)) return super.beforeItemMove(move)
     const skill = this.material(MaterialType.SkillCube).getItem<Skill>(move.itemIndex).id!
     const moves: MaterialMove[] = []
     const pending = [...this.pending]
@@ -96,8 +98,8 @@ export class ResolveSkillGainRule extends PlayerTurnRule {
     return moves
   }
 
-  afterItemMove(move: ItemMove) {
-    if (!isMoveItemType(MaterialType.SkillCube)(move)) return []
+  afterItemMove(move: ItemMove): MaterialMove[] {
+    if (!isMoveItemType(MaterialType.SkillCube)(move)) return super.afterItemMove(move)
     return this.dropUnresolvableGains()
   }
 
@@ -111,18 +113,13 @@ export class ResolveSkillGainRule extends PlayerTurnRule {
           this.material(MaterialType.EpicTile).location(LocationType.EpicDeck).deck().dealOne({ type: LocationType.PlayerEpic, player: this.player })
         )
       }
-      if (this.isRowComplete(row) && this.tales.length < MAX_TALES) {
-        this.memorize(Memory.TaleReturnsTo, RuleId.FinishTurn, this.player)
+      if (this.isRowComplete(row) && this.tales.length < MAX_TALES && this.canTakeTale) {
         moves.push(this.startRule(RuleId.ChooseTale))
         return moves
       }
     }
-    moves.push(this.startRule(RuleId.FinishTurn))
+    moves.push(this.endTurn())
     return moves
-  }
-
-  get tales() {
-    return this.material(MaterialType.StoryTile).location(LocationType.PlayerTale).player(this.player)
   }
 
   get isEpicEligible() {

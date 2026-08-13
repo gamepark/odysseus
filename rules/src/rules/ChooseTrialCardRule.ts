@@ -1,17 +1,15 @@
-import { CustomMove, getEnumValues, isMoveItemType, ItemMove, Material, MaterialMove, MoveItem, PlayerTurnRule, RuleStep } from '@gamepark/rules-api'
+import { getEnumValues, isMoveItemType, ItemMove, Material, MaterialMove, MoveItem } from '@gamepark/rules-api'
 import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
 import { ShipSide } from '../material/ShipSide'
 import { getTrialCardSkill, TrialCard } from '../material/TrialCard'
 import { PendingGain, trialCardStats } from '../material/TrialCardStats'
-import { CustomMoveType } from './CustomMoveType'
 import { Memory } from './Memory'
+import { OdysseusPlayerTurnRule } from './OdysseusPlayerTurnRule'
 import { RuleId } from './RuleId'
 
 /** Also used client-side to preview the "go on adventure" option before it's played (see TrialCardDescription). */
 export const MAX_CARDS_PER_SKILL = 4
-const MAX_TALES = 6
-const TALE_COST = 3
 
 /**
  * Steps 1 and 2 of the rulebook's turn structure in one rule: pick a Trial card at either end of
@@ -19,22 +17,13 @@ const TALE_COST = 3
  * (rules-fr.pdf p.5) — there's no player decision in between the two, so a single move takes the
  * card directly from the Ship to its final spot instead of visiting a staging location first.
  * Picking the slot next to the hidden central pair (x 1 or 4) reveals that pair and grants the
- * Athena Favor token sitting between them. Spending 3 Athena Favors for a Tale (rules-fr.pdf p.6,
- * "En dépensant, une seule fois pendant votre tour, 3 Faveurs d'Athéna") is also offered here, once
- * per turn, as it doesn't consume the mandatory card choice.
+ * Athena Favor token sitting between them. Buying a Tale with 3 Athena Favors is offered on top of
+ * the card choice, as everywhere else in the turn (see OdysseusPlayerTurnRule).
  */
-export class ChooseTrialCardRule extends PlayerTurnRule {
-  /**
-   * Resets the once-per-turn Tale purchase, but only when a genuinely new turn is starting. This rule
-   * is also re-entered mid-turn, when ChooseTaleRule.returnFromTale() sends the player back here right
-   * after they bought a Tale with 3 Favors (onRuleStart fires on every StartPlayerTurn/StartRule move,
-   * even one that returns to the very rule it came from) — resetting the flag there would let them buy
-   * another Tale in the same turn.
-   */
-  onRuleStart(_move: unknown, previousRule?: RuleStep) {
-    if (previousRule?.id !== RuleId.ChooseTale) {
-      this.memorize(Memory.TaleBoughtThisTurn, false, this.player)
-    }
+export class ChooseTrialCardRule extends OdysseusPlayerTurnRule {
+  /** The turn starts here, and only here, so this is where the once-per-turn Tale purchase is unlocked again. */
+  onRuleStart() {
+    this.memorize(Memory.TaleBoughtThisTurn, false, this.player)
     return []
   }
 
@@ -63,20 +52,11 @@ export class ChooseTrialCardRule extends PlayerTurnRule {
       }
     }
 
-    if (!this.remind<boolean>(Memory.TaleBoughtThisTurn, this.player) && this.tales.length < MAX_TALES) {
-      const favor = this.material(MaterialType.AthenaFavorToken).location(LocationType.PlayerAthenaFavor).player(this.player)
-      if (favor.getQuantity() >= TALE_COST) {
-        moves.push(this.customMove(CustomMoveType.SpendFavorForTale))
-      }
-    }
+    if (this.canBuyTale) moves.push(...this.getTaleMoves())
     return moves
   }
 
-  get tales() {
-    return this.material(MaterialType.StoryTile).location(LocationType.PlayerTale).player(this.player)
-  }
-
-  beforeItemMove(move: ItemMove) {
+  beforeItemMove(move: ItemMove): MaterialMove[] {
     if (isMoveItemType(MaterialType.TrialCard)(move)) {
       const origin = this.material(MaterialType.TrialCard).getItem(move.itemIndex).location
       if (origin.type === LocationType.ShipTrialSlot && (origin.x === 1 || origin.x === 4)) {
@@ -93,10 +73,10 @@ export class ChooseTrialCardRule extends PlayerTurnRule {
         return moves
       }
     }
-    return []
+    return super.beforeItemMove(move)
   }
 
-  afterItemMove(move: ItemMove) {
+  afterItemMove(move: ItemMove): MaterialMove[] {
     if (isMoveItemType(MaterialType.TrialCard)(move)) {
       if (move.location.type === LocationType.PlayerAdventureColumn) {
         return this.resolveAdventure(move)
@@ -104,7 +84,7 @@ export class ChooseTrialCardRule extends PlayerTurnRule {
         return this.resolveRest()
       }
     }
-    return []
+    return super.afterItemMove(move)
   }
 
   /** The reserve is an unlimited stock (see OdysseusSetup.setupAthenaFavor): a granted Favor is simply created. */
@@ -135,17 +115,5 @@ export class ChooseTrialCardRule extends PlayerTurnRule {
     this.forget(Memory.PlacedAdventureRow, this.player)
     moves.push(this.startRule(RuleId.ResolveSkillGain))
     return moves
-  }
-
-  onCustomMove(move: CustomMove) {
-    if (move.type === CustomMoveType.SpendFavorForTale) {
-      this.memorize(Memory.TaleBoughtThisTurn, true, this.player)
-      this.memorize(Memory.TaleReturnsTo, RuleId.ChooseTrialCard, this.player)
-      return [
-        this.material(MaterialType.AthenaFavorToken).location(LocationType.PlayerAthenaFavor).player(this.player).deleteItem(TALE_COST),
-        this.startRule(RuleId.ChooseTale)
-      ]
-    }
-    return []
   }
 }

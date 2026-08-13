@@ -1,9 +1,9 @@
 import { LocationType } from '@gamepark/odysseus/material/LocationType'
 import { MaterialType } from '@gamepark/odysseus/material/MaterialType'
-import { CustomMoveType } from '@gamepark/odysseus/rules/CustomMoveType'
+import { TALE_COST } from '@gamepark/odysseus/rules/OdysseusPlayerTurnRule'
 import { RuleId } from '@gamepark/odysseus/rules/RuleId'
 import { LogDescription, MoveComponentContext, MovePlayedLogDescription } from '@gamepark/react-game'
-import { isCreateItemType, isCustomMoveType, isDeleteItemType, isMoveItemType, MaterialGame, MaterialMove } from '@gamepark/rules-api'
+import { isCreateItemType, isDeleteItemType, isMoveItemType, MaterialGame, MaterialMove } from '@gamepark/rules-api'
 import { AdventureLog } from './AdventureLog'
 import { GainFavorLog } from './GainFavorLog'
 import { IncreaseSkillLog } from './IncreaseSkillLog'
@@ -17,6 +17,20 @@ import { WinTaleLog } from './WinTaleLog'
 export class OdysseusLogDescription implements LogDescription<MaterialMove, number, MaterialGame> {
   getMovePlayedLogDescription(move: MaterialMove, context: MoveComponentContext<MaterialMove, number, MaterialGame>): MovePlayedLogDescription | undefined {
     const ruleId = context.game.rule?.id
+
+    // Winning a Tale, and paying for it, can happen in any rule of the player's turn (see OdysseusPlayerTurnRule).
+    if (isMoveItemType(MaterialType.StoryTile)(move) && move.location.type === LocationType.PlayerTale) {
+      return { player: move.location.player, Component: WinTaleLog }
+    }
+    // The only two Favor spends of the game: 3 at once buy a Tale, 1 redirects a skill gain. Either
+    // way it is a consequence of the move that triggered it, logged right under it as its price.
+    if (isDeleteItemType(MaterialType.AthenaFavorToken)(move)) {
+      return {
+        player: context.game.rule?.player,
+        Component: move.quantity === TALE_COST ? SpendFavorForTaleLog : RedirectSkillLog,
+        depth: 1
+      }
+    }
 
     if (ruleId === RuleId.ChooseTrialCard) {
       if (isMoveItemType(MaterialType.TrialCard)(move) && move.location.type === LocationType.PlayerAdventureColumn) {
@@ -32,28 +46,14 @@ export class OdysseusLogDescription implements LogDescription<MaterialMove, numb
       if (isCreateItemType(MaterialType.AthenaFavorToken)(move) && move.item.location.type === LocationType.PlayerAthenaFavor) {
         return { player: move.item.location.player, Component: GainFavorLog, depth: 1 }
       }
-      if (isCustomMoveType(CustomMoveType.SpendFavorForTale)(move)) {
-        return { player: context.game.rule?.player, Component: SpendFavorForTaleLog }
-      }
     }
 
     if (ruleId === RuleId.ResolveSkillGain) {
       if (isMoveItemType(MaterialType.SkillCube)(move)) {
         return { player: move.location.player, Component: IncreaseSkillLog, depth: 1 }
       }
-      // The only Favor spent while gains are resolved: the one that redirects a point to another skill.
-      // A consequence of the cube move that triggered it, so it is logged right under it, as its price.
-      if (isDeleteItemType(MaterialType.AthenaFavorToken)(move)) {
-        return { player: context.game.rule?.player, Component: RedirectSkillLog, depth: 1 }
-      }
       if (isMoveItemType(MaterialType.EpicTile)(move) && move.location.type === LocationType.PlayerEpic) {
         return { player: move.location.player, Component: WinEpicLog, depth: 1 }
-      }
-    }
-
-    if (ruleId === RuleId.ChooseTale) {
-      if (isMoveItemType(MaterialType.StoryTile)(move) && move.location.type === LocationType.PlayerTale) {
-        return { player: move.location.player, Component: WinTaleLog }
       }
     }
 

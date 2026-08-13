@@ -1,5 +1,3 @@
-/** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react'
 import { faArrowUp } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { LocationType } from '@gamepark/odysseus/material/LocationType'
@@ -10,12 +8,11 @@ import { isFreeSkillGain } from '@gamepark/odysseus/rules/ResolveSkillGainRule'
 import { Skill } from '@gamepark/odysseus/Skill'
 import { ItemContext, TokenDescription } from '@gamepark/react-game'
 import { isMoveItemType, MaterialItem, MaterialMove } from '@gamepark/rules-api'
-import { Trans } from 'react-i18next'
 import CunningCube from '../images/cubes/CunningCube.png'
 import IntelligenceCube from '../images/cubes/IntelligenceCube.png'
 import LuckCube from '../images/cubes/LuckCube.png'
 import StrengthCube from '../images/cubes/StrengthCube.png'
-import AthenaFavor from '../images/tokens/AthenaFavor.png'
+import { FavorCost } from '../theme/FavorIcon'
 import { OdysseusMenuButton } from '../theme/OdysseusMenuButton'
 import { SkillCubeHelp } from './help/SkillCubeHelp'
 
@@ -51,7 +48,7 @@ class SkillCubeDescription extends TokenDescription<number, MaterialType, Locati
 
   /**
    * One button per skill still raisable, on the active player's own board. It carries no label when
-   * the Trial card offers that skill — the arrow says it all — and turns red, reading "Pay 🦉", when
+   * the Trial card offers that skill — the arrow says it all — and turns red, reading "-1 🦉", when
    * the point has to be redirected: ResolveSkillGainRule charges it as soon as the button is pressed.
    */
   getItemMenu(item: MaterialItem<number, LocationType, Skill>, context: ItemContext<number, MaterialType, LocationType>, legalMoves: MaterialMove[]) {
@@ -60,25 +57,11 @@ class SkillCubeDescription extends TokenDescription<number, MaterialType, Locati
     const pending = context.rules.remind<PendingGain[]>(Memory.PendingGains, item.location.player) ?? []
     const free = isFreeSkillGain(pending, item.id!)
     return (
-      <OdysseusMenuButton x={0} y={BUTTON_Y} move={move} cost={!free} label={free ? undefined : payLabel} labelPosition="right">
+      <OdysseusMenuButton x={0} y={BUTTON_Y} move={move} cost={!free} label={free ? undefined : <FavorCost cost={1} />} labelPosition="right">
         <FontAwesomeIcon icon={faArrowUp} />
       </OdysseusMenuButton>
     )
   }
 }
-
-const favorIconCss = css`
-  height: 1.2em;
-  width: auto;
-  vertical-align: -0.3em;
-  margin-left: 0.3em;
-`
-
-const payLabel = (
-  <>
-    <Trans i18nKey="action.pay" />
-    <img src={AthenaFavor} alt="" css={favorIconCss} />
-  </>
-)
 
 export const skillCubeDescription = new SkillCubeDescription()
