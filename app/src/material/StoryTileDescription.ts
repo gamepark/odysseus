@@ -20,6 +20,12 @@ import Value5 from '../images/tokens/story/Value5.png'
 import Value6 from '../images/tokens/story/Value6.png'
 import Back from '../images/tokens/story/StoryTokenBack.png'
 
+/** How much a Tale tile grows under the pointer: three times its size, small as it is printed, to read its icon and its value. */
+const HOVER_SCALE = 3
+
+/** How high it rises with it: enough to clear everything it now covers, in a table where nothing else stands above 20. */
+const HOVER_LIFT = 10
+
 class StoryTileDescription extends TokenDescription<number, MaterialType, LocationType, StoryTileType> {
   width = 4.67
   height = 2.98
@@ -47,6 +53,17 @@ class StoryTileDescription extends TokenDescription<number, MaterialType, Locati
 
   isFlipped(item: Partial<MaterialItem<number, LocationType>>): boolean {
     return item.location?.type === LocationType.TaleDeck
+  }
+
+  /**
+   * A Tale tile showing its face grows under the pointer. Nothing else is needed on top of the scale: the
+   * tiles are laid out square with the table, and even at three times their size none of them reaches an
+   * edge of it — the Ship's display sits mid-hull, and the six slots of a Story board leave enough margin
+   * on either side (see TableLayout). A tile face down in the deck is left alone: there is nothing to read.
+   */
+  getHoverTransform(item: MaterialItem<number, LocationType>): string[] {
+    if (this.isFlipped(item)) return []
+    return [`translateZ(${HOVER_LIFT}em)`, `scale(${HOVER_SCALE})`]
   }
 
   /**
