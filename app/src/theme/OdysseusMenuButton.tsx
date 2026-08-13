@@ -5,10 +5,12 @@ import { HTMLAttributes, ReactNode } from 'react'
 import { colors } from './colors'
 import { fontDisplay } from './typography'
 
-type Props = ItemButtonProps & HTMLAttributes<HTMLButtonElement> & { children?: ReactNode }
+type Props = ItemButtonProps & HTMLAttributes<HTMLButtonElement> & { children?: ReactNode, cost?: boolean }
 
-export const OdysseusMenuButton = (props: Props) =>
-  <ItemMenuButton css={menuButtonCss} {...props} />
+/** `cost` marks an action that is paid for: the disc turns to the palette's alert red, and its label
+ * to black on white so the price it spells out — an Athena Favor owl — reads at a glance. */
+export const OdysseusMenuButton = ({ cost, ...props }: Props) =>
+  <ItemMenuButton css={[menuButtonCss, cost && costButtonCss]} {...props} />
 
 const menuButtonCss = css`
   width: 2.2em;
@@ -47,5 +49,21 @@ const menuButtonCss = css`
     box-shadow: 0 0.12em 0.35em rgba(0, 0, 0, 0.6);
     white-space: nowrap;
     letter-spacing: 0.02em;
+  }
+`
+
+const costButtonCss = css`
+  background: ${colors.terracotta};
+
+  /* terracottaLight is the sun-bleached tan of the rope lattice, not a brighter red: hovering on it
+   * would read as a different button altogether, so the red is lifted towards white instead. */
+  &:hover:not(:disabled) {
+    background: color-mix(in srgb, ${colors.terracotta} 78%, white);
+    border-color: ${colors.goldLight};
+  }
+
+  > span {
+    color: #000;
+    background: #fff;
   }
 `

@@ -1,4 +1,3 @@
 export enum CustomMoveType {
-  SpendFavorForTale = 1,
-  SpendFavorForSkillChange
+  SpendFavorForTale = 1
 }

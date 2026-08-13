@@ -6,10 +6,8 @@
       "player": "{player} choisit une carte Épreuve"
     },
     "resolveSkillGain": {
-      "you": "Augmentez une compétence",
-      "fixed": "<increase>Augmentez {skill}</increase>",
-      "fixedWithFavor": "<increase>Augmentez {skill}</increase> ou <spendFavor>utilisez 1 Faveur d'Athéna</spendFavor> pour choisir une autre compétence",
-      "player": "{player} augmente une compétence"
+      "you": "Augmentez vos compétences",
+      "player": "{player} augmente ses compétences"
     },
     "chooseTale": {
       "you": "Choisissez un jeton Récit",
@@ -19,7 +17,8 @@
   },
   "action": {
     "adventure": "Partir à l'aventure",
-    "rest": "Se reposer"
+    "rest": "Se reposer",
+    "pay": "Payer"
   },
   "log": {
     "adventure": "{player} part à l'aventure avec <card/>",

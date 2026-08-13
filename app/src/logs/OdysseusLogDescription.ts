@@ -41,7 +41,9 @@ export class OdysseusLogDescription implements LogDescription<MaterialMove, numb
       if (isMoveItemType(MaterialType.SkillCube)(move)) {
         return { player: move.location.player, Component: IncreaseSkillLog, depth: 1 }
       }
-      if (isCustomMoveType(CustomMoveType.SpendFavorForSkillChange)(move)) {
+      // The only Favor spent while gains are resolved: the one that redirects a point to another skill.
+      // A consequence of the cube move that triggered it, so it is logged right under it, as its price.
+      if (isDeleteItemType(MaterialType.AthenaFavorToken)(move)) {
         return { player: context.game.rule?.player, Component: RedirectSkillLog, depth: 1 }
       }
       if (isMoveItemType(MaterialType.EpicTile)(move) && move.location.type === LocationType.PlayerEpic) {
