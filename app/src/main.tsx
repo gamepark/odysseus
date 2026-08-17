@@ -12,6 +12,7 @@ import { Material } from './material/Material'
 import { RulesHelp } from './material/help/RulesHelp'
 import { OdysseusScoringDescription } from './scoring/OdysseusScoringDescription'
 import { theme } from './theme'
+import { ai } from './tutorial/TutorialAi'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -27,6 +28,7 @@ createRoot(document.getElementById('root')!).render(
       rulesHelp={RulesHelp}
       logs={new OdysseusLogDescription()}
       theme={theme}
+      ai={ai}
     >
       <App />
     </GameProvider>
