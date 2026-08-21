@@ -11,8 +11,9 @@ import { trialCards } from './material/TrialCard'
 import { RuleId } from './rules/RuleId'
 import { skills } from './Skill'
 
-const TRIAL_CARDS_PER_PLAYER = 12
-const SHIP_ROW_SLOTS = 6
+/** Also used by TutorialSetup to size its own fixed deck (see app/src/tutorial/TutorialSetup.ts). */
+export const TRIAL_CARDS_PER_PLAYER = 12
+export const SHIP_ROW_SLOTS = 6
 const TALE_DISPLAY_SLOTS = 4
 
 /**

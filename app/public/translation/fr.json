@@ -132,5 +132,38 @@
       "endTitle": "Fin de partie",
       "endDesc": "La partie prend fin lorsqu'il ne reste plus qu'une carte Épreuve sur le Navire et que la pioche est vide. Chaque joueur compte alors ses points de victoire : compétences réussies, Récits et tuile Épopée."
     }
+  },
+  "tuto": {
+    "welcome": "Bienvenue dans le <bold>tutoriel d'Odysseus</bold> !",
+    "goal": "Dans ce jeu, vous accompagnez Ulysse dans son périple et l'aidez à surmonter les épreuves qu'il rencontre.",
+    "cards": "Voici les cartes Épreuve. À chaque tour, vous devez choisir une carte Épreuve située à l'une des extrémités de l'un des deux côtés du Navire d'Ulysse.",
+    "board": "Voici votre plateau Récit <emblem/>. Vous y disposez de <bold>4 compétences</bold> : <strength/>, <intelligence/>, <cunning/>, <luck/>.",
+    "pick": "Chaque Épreuve est associée à une compétence. Par exemple, celle-ci demande de la <strength/>. Prenez-la et partez à l'aventure en la plaçant au-dessus de sa piste, sur votre plateau Récit.",
+    "value": "Cette Épreuve rapporte <bold>6 points de victoire</bold> en fin de partie, mais seulement si votre <strength/> atteint au moins <bold>4</bold> à ce moment-là !",
+    "gains": "Cette Épreuve rapporte immédiatement <favor/> une Faveur d'Athéna, ainsi qu'un point en <intelligence/>.",
+    "favorStart": "Chaque joueur commence la partie avec une Faveur d'Athéna <favor/> : vous en avez maintenant <bold>2</bold>. Nous verrons un peu plus tard à quoi elles servent.",
+    "raiseIntelligence": "Augmentez votre <intelligence/>.",
+    "turnEnd": "Votre tour est terminé : c'est maintenant au tour de votre adversaire, <bold>Poséidon</bold>, de jouer.",
+    "hidden": "Comme vous l'avez peut-être remarqué, <bold>4 Épreuves</bold> sont cachées sur le plateau.",
+    "hiddenReveal": "Dès qu'une carte adjacente à une paire cachée est prise par un joueur, les 2 Épreuves cachées sont révélées, et ce joueur remporte la Faveur d'Athéna <favor/> placée entre elles.",
+    "opponentPicked": "Poséidon a pris cette Épreuve : il remporte donc cette Faveur d'Athéna <favor/>, et les 2 Épreuves voisines sont révélées.",
+    "yourTurn": "À vous de jouer ! Chaque joueur commence la partie avec un jeton Récit.",
+    "taleScoring": "Votre jeton Récit vous rapportera en fin de partie <bold>2 points</bold> pour chacune de vos Épreuves de <strength/> — qu'elle soit réussie ou non. Vous avez bien choisi votre première Épreuve !",
+    "taleMax": "Attention : vous ne pouvez pas avoir plus de <bold>4 cartes Épreuve</bold> par compétence, votre Récit ne pourra donc jamais rapporter plus de <bold>8 points</bold>.",
+    "taleGainIntro": "Vous pourrez gagner d'autres jetons Récit au cours de la partie.",
+    "taleGainRow": "Vous en remportez un nouveau chaque fois que vous complétez une ligne : une carte de chaque compétence (<strength/>, <intelligence/>, <cunning/>, <luck/>) à la même hauteur sur votre plateau.",
+    "taleFavorBuy": "Vous pouvez aussi prendre un Récit en dépensant <bold>3 Faveurs d'Athéna</bold> <favor/> — une seule fois par tour.",
+    "rest1": "Si aucune Épreuve ne vous convient, vous pouvez vous reposer en plaçant la carte ici, face cachée.",
+    "rest2": "Dans ce cas, l'Épreuve est perdue, mais vous augmentez tout de même de 1 la compétence de votre choix, et vous remportez une Faveur d'Athéna <favor/>.",
+    "redirect1": "Vous pouvez aussi dépenser 1 Faveur d'Athéna <favor/> pour augmenter la compétence de votre choix <bold>à la place</bold> de celle imposée.",
+    "redirectExample": "<italic>Exemple : une carte vous impose 1 point de <cunning/>, mais vous préférez progresser en <strength/>. En dépensant 1 <favor/>, vous augmentez la Force plutôt que la Ruse.</italic>",
+    "epic": "Enfin, voici les tuiles Épopée. Le premier joueur à réunir les 5 types d'épreuve <types/> remporte la tuile du dessus, qui vaut <bold>10 points de Victoire</bold> ; la suivante en vaut <bold>8</bold>, et ainsi de suite.",
+    "finalCall": "À vous de jouer maintenant ! Prenez l'Épreuve de votre choix, complétez votre Épopée, améliorez votre Récit, et obtenez plus de points de Victoire que votre adversaire pour remporter la partie. Que les dieux soient avec vous, aventurier !",
+    "skillName": {
+      "strength": "Force",
+      "intelligence": "Intelligence",
+      "cunning": "Ruse",
+      "luck": "Chance"
+    }
   }
 }
