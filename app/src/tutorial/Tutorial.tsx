@@ -58,7 +58,8 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
       popup: { text: () => <Trans defaults="tuto.pick" components={{ ...BaseComponents, strength: skillComponents.strength }} />, position: { y: 20 } },
       focus: (game) => ({
         materials: [this.material(game, MaterialType.TrialCard).id(TrialCard.Trial4Strength)],
-        margin: cardMargin
+        margin: cardMargin,
+        scale: 0.1
       }),
       move: {
         filter: (move, game) => this.isPlayCard(TrialCard.Trial4Strength, LocationType.PlayerAdventureColumn, move, game),
@@ -73,7 +74,7 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
       })
     },
     {
-      popup: { text: () => <Trans defaults="tuto.gains" components={{ ...BaseComponents, favor: <FavorIcon />, intelligence: skillComponents.intelligence }} />, position: { y: 20 } },
+      popup: { text: () => <Trans defaults="tuto.gains" components={{ ...BaseComponents, favor: <FavorIcon />, intelligence: skillComponents.intelligence }} />, position: { y: -25 } },
       focus: (game) => ({
         materials: [this.material(game, MaterialType.TrialCard).id(TrialCard.Trial4Strength)],
         margin: cardMargin
