@@ -54,6 +54,8 @@
       "value": "Valeur à atteindre : {value}. En fin de partie, l'épreuve est réussie si votre score dans cette compétence est au moins égal à cette valeur.",
       "points": "Rapporte {points} points de victoire si l'épreuve est réussie.",
       "adventureType": "Type d'épreuve : {type}.",
+      "columnCount": "Cartes déjà présentes dans cette colonne, sur votre plateau : {count} / {max}.",
+      "columnFull": "Votre colonne de cette compétence est déjà pleine ({max} cartes) : vous devrez vous reposer avec cette carte, sans pouvoir partir à l'aventure.",
       "gainsTitle": "Gains obtenus en partant à l'aventure",
       "gainsNone": "Cette carte n'offre aucun gain immédiat.",
       "gainFixed": "Augmente {skill} d'un point.",
@@ -73,6 +75,7 @@
       "matchSkill": "Concerne les cartes Épreuve associées à {skill}.",
       "matchAdventureType": "Concerne les cartes Épreuve de type {type}.",
       "matchValue": "Concerne les cartes Épreuve de valeur {value}.",
+      "currentCount": "Cartes Épreuve correspondantes sur votre plateau, en ce moment : {count}.",
       "obtainTitle": "Comment l'obtenir",
       "obtainRow": "En formant une ligne de 4 cartes Épreuve sur votre plateau Récit : une carte dans chacune des 4 compétences, à la même rangée.",
       "obtainFavor": "En dépensant 3 Faveurs d'Athéna, une seule fois par tour, à n'importe quel moment de votre tour.",
@@ -82,8 +85,10 @@
     "athenaFavorToken": {
       "title": "Faveur d'Athéna",
       "role": "Les Faveurs d'Athéna vous permettent d'acquérir de nouveaux Récits ou de rediriger les points de compétence que vous gagnez.",
+      "currentCount": "Faveurs d'Athéna en votre possession, en ce moment : {count}.",
       "useTale": "Dépensez 3 Faveurs, une seule fois par tour et à n'importe quel moment de celui-ci, pour remporter immédiatement un Récit.",
       "useRedirect": "Chaque fois que vous augmentez une compétence d'un point de façon imposée, vous pouvez dépenser 1 Faveur pour l'augmenter dans une autre compétence à la place.",
+      "canBuyTale": "Vous avez de quoi remporter un Récit dès maintenant, si vous ne l'avez pas déjà fait ce tour-ci.",
       "gainTitle": "Comment en gagner",
       "gainReveal": "En choisissant une carte Épreuve adjacente à la paire de cartes face cachée d'un côté du Navire : les 2 cartes sont révélées et vous remportez la Faveur placée entre elles.",
       "gainRest": "En vous reposant : vous remportez toujours 1 Faveur de la réserve.",
@@ -93,6 +98,8 @@
     "epicTile": {
       "title": "Tuile Épopée",
       "role": "Vous ne pouvez réaliser qu'une seule Épopée durant la partie. Pour cela, votre plateau Récit doit compter au moins une carte Épreuve de chacun des 5 types d'épreuve (navigation, rencontres, dieux, créatures, Ithaque), qu'elle soit réussie ou non.",
+      "alreadyEarned": "Vous avez déjà réalisé votre Épopée pour cette partie : vous ne pouvez pas en remporter une seconde.",
+      "progress": "Types d'épreuve différents sur votre plateau, en ce moment : {count} / 5.",
       "value": "Cette tuile vaut {value} points de victoire.",
       "reward": "Dès que cette condition est remplie, vous remportez immédiatement la première tuile Épopée de la pioche et la placez à droite de votre plateau Récit.",
       "decreasing": "Les tuiles sont empilées par valeur décroissante, la plus grande valeur au-dessus de la pile : plus vous réalisez votre Épopée tôt, plus elle rapporte de points.",
@@ -102,6 +109,7 @@
       "title": "Cube de compétence",
       "role": "Chaque joueur possède 4 cubes, un par compétence (Force, Intelligence, Ruse, Chance), qui progressent sur les pistes de 0 à 6 de son plateau Récit.",
       "current": "Valeur actuelle de {skill} : {value} / 6.",
+      "maxed": "Votre {skill} a atteint le maximum : impossible de l'augmenter davantage. Redirigez plutôt les gains imposés dans cette compétence vers une autre, en dépensant une Faveur d'Athéna.",
       "increase": "Vous augmentez une compétence lorsque vous partez à l'aventure ou que vous vous reposez, selon les gains indiqués sur la carte Épreuve jouée.",
       "redirect": "Vous pouvez dépenser 1 Faveur d'Athéna pour rediriger un gain de compétence imposé vers la compétence de votre choix.",
       "scoring": "En fin de partie, votre score dans une compétence détermine quelles cartes Épreuve de sa colonne sont réussies : toute carte dont la valeur à atteindre est inférieure ou égale à ce score rapporte ses points de victoire."
@@ -111,11 +119,14 @@
       "role": "Le Navire d'Ulysse est le plateau central. Sur chacun de ses deux côtés, une rangée de 6 cartes Épreuve est disposée : les 4 cartes aux extrémités sont face visible, la paire centrale est face cachée.",
       "choose": "Vous ne pouvez choisir qu'une carte à l'une des extrémités d'un côté, jamais une carte coincée entre deux autres. Choisir la carte adjacente à la paire cachée la révèle et vous octroie la Faveur d'Athéna placée entre les 2 cartes.",
       "refill": "Lorsqu'il ne reste plus qu'une carte sur le Navire à la fin d'un tour, elle est défaussée et la pioche redistribue 4 cartes cachées et 8 cartes visibles sur les emplacements du Navire ; une Faveur d'Athéna est ajoutée de chaque côté.",
-      "end": "La partie se termine lorsqu'il ne reste plus qu'une carte sur le Navire et que la pioche est vide."
+      "end": "La partie se termine lorsqu'il ne reste plus qu'une carte sur le Navire et que la pioche est vide.",
+      "deckRemaining": "Cartes Épreuve restantes dans la pioche : {count}.",
+      "deckEmpty": "La pioche est vide : dès qu'il ne restera qu'une seule carte sur le Navire, la partie se terminera."
     },
     "storyBoard": {
       "title": "Plateau Récit",
       "role": "Votre plateau personnel regroupe vos 4 pistes de compétence (de 0 à 6), vos colonnes de cartes Épreuve parties à l'aventure (4 maximum par compétence), votre pile de cartes mises au repos, vos jetons Récit (6 maximum) et votre tuile Épopée.",
+      "currentScore": "Score actuel de {name} : {score} points de victoire (calcul provisoire, sujet à évoluer jusqu'à la fin de la partie).",
       "scoring": "En fin de partie, comptez pour chaque compétence les points de victoire des cartes Épreuve dont la valeur est inférieure ou égale à votre score, ajoutez les points de vos Récits (toujours comptés, même si la carte associée n'est pas réussie), puis ceux de votre tuile Épopée.",
       "tieBreak": "Le joueur avec le plus de points de victoire remporte la partie. En cas d'égalité, le joueur avec le plus grand score en Récits l'emporte. Si l'égalité persiste, la victoire est partagée."
     },

@@ -1,7 +1,8 @@
-import { StoryTileType } from '@gamepark/odysseus/material/StoryTile'
+import { getStoryTileScore, StoryTileType } from '@gamepark/odysseus/material/StoryTile'
 import { AdventureType } from '@gamepark/odysseus/material/TrialCardStats'
+import { OdysseusRules } from '@gamepark/odysseus/OdysseusRules'
 import { Skill } from '@gamepark/odysseus/Skill'
-import { MaterialHelpProps } from '@gamepark/react-game'
+import { MaterialHelpProps, usePlayerId, useRules } from '@gamepark/react-game'
 import { Trans, useTranslation } from 'react-i18next'
 
 const skillTypes: Partial<Record<StoryTileType, Skill>> = {
@@ -37,10 +38,13 @@ const valueLabels: Partial<Record<StoryTileType, string>> = {
 
 export const StoryTileHelp = ({ item }: MaterialHelpProps) => {
   const { t } = useTranslation()
+  const rules = useRules<OdysseusRules>()!
+  const player = usePlayerId<number>()
   const id = item.id as StoryTileType | undefined
   const skill = id !== undefined ? skillTypes[id] : undefined
   const adventureType = id !== undefined ? adventureTypes[id] : undefined
   const value = id !== undefined ? valueLabels[id] : undefined
+  const currentCount = id !== undefined && player !== undefined ? getStoryTileScore(id, rules.getScoredCards(player)) / 2 : undefined
 
   return (
     <>
@@ -66,6 +70,11 @@ export const StoryTileHelp = ({ item }: MaterialHelpProps) => {
       {value !== undefined && (
         <p>
           <Trans i18nKey="help.storyTile.matchValue" values={{ value }} />
+        </p>
+      )}
+      {currentCount !== undefined && (
+        <p>
+          <Trans i18nKey="help.storyTile.currentCount" values={{ count: currentCount }} />
         </p>
       )}
 

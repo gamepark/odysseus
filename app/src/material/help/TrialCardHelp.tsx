@@ -1,8 +1,11 @@
 import { css } from '@emotion/react'
+import { LocationType } from '@gamepark/odysseus/material/LocationType'
+import { MaterialType } from '@gamepark/odysseus/material/MaterialType'
 import { getTrialCardSkill, TrialCard } from '@gamepark/odysseus/material/TrialCard'
 import { AdventureType, adventureTypeOf, Gain, trialCardStats } from '@gamepark/odysseus/material/TrialCardStats'
+import { MAX_CARDS_PER_SKILL } from '@gamepark/odysseus/rules/ChooseTrialCardRule'
 import { Skill } from '@gamepark/odysseus/Skill'
-import { MaterialHelpProps } from '@gamepark/react-game'
+import { MaterialHelpProps, useMaterialContext, usePlayerId } from '@gamepark/react-game'
 import { Trans, useTranslation } from 'react-i18next'
 import { adventureTypeIcons, skillIcons } from '../../images/Icons'
 
@@ -34,10 +37,16 @@ const GainLine = ({ gain }: { gain: Gain }) => {
 
 export const TrialCardHelp = ({ item }: MaterialHelpProps) => {
   const { t } = useTranslation()
+  const { rules } = useMaterialContext()
+  const player = usePlayerId<number>()
   const id = item.id as TrialCard | undefined
   const stats = id !== undefined ? trialCardStats[id] : undefined
   const skill = id !== undefined ? getTrialCardSkill(id) : undefined
   const adventureType = id !== undefined ? adventureTypeOf(id) : undefined
+  const columnCount =
+    skill !== undefined && player !== undefined
+      ? rules.material(MaterialType.TrialCard).location(LocationType.PlayerAdventureColumn).player(player).locationId(skill).length
+      : undefined
 
   return (
     <>
@@ -66,6 +75,14 @@ export const TrialCardHelp = ({ item }: MaterialHelpProps) => {
         <p>
           <img css={inlineIcon} src={adventureTypeIcons[adventureType]} alt="" />
           <Trans i18nKey="help.trialCard.adventureType" values={{ type: t(`adventureType.${adventureTypeKeys[adventureType]}`) }} />
+        </p>
+      )}
+      {columnCount !== undefined && (
+        <p>
+          <Trans
+            i18nKey={columnCount >= MAX_CARDS_PER_SKILL ? 'help.trialCard.columnFull' : 'help.trialCard.columnCount'}
+            values={{ count: columnCount, max: MAX_CARDS_PER_SKILL }}
+          />
         </p>
       )}
       {stats !== undefined && (
