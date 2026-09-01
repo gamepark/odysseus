@@ -29,7 +29,7 @@ const adventureTypeKeys: Record<AdventureType, string> = {
 }
 
 const valueLabels: Partial<Record<StoryTileType, string>> = {
-  [StoryTileType.Value1Or2]: '1-2',
+  [StoryTileType.Value1Or2]: 'help.storyTile.value1Or2',
   [StoryTileType.Value3]: '3',
   [StoryTileType.Value4]: '4',
   [StoryTileType.Value5]: '5',
@@ -43,7 +43,8 @@ export const StoryTileHelp = ({ item }: MaterialHelpProps) => {
   const id = item.id as StoryTileType | undefined
   const skill = id !== undefined ? skillTypes[id] : undefined
   const adventureType = id !== undefined ? adventureTypes[id] : undefined
-  const value = id !== undefined ? valueLabels[id] : undefined
+  const valueLabel = id !== undefined ? valueLabels[id] : undefined
+  const value = valueLabel?.startsWith('help.') ? t(valueLabel) : valueLabel
   const currentCount = id !== undefined && player !== undefined ? getStoryTileScore(id, rules.getScoredCards(player)) / 2 : undefined
 
   return (
@@ -54,9 +55,11 @@ export const StoryTileHelp = ({ item }: MaterialHelpProps) => {
       <p>
         <Trans i18nKey="help.storyTile.role" />
       </p>
-      <p>
-        <Trans i18nKey="help.storyTile.scoring" />
-      </p>
+      {skill === undefined && adventureType === undefined && value === undefined && (
+        <p>
+          <Trans i18nKey="help.storyTile.scoring" />
+        </p>
+      )}
       {skill !== undefined && (
         <p>
           <Trans i18nKey="help.storyTile.matchSkill" values={{ skill: t(`skill.${Skill[skill].toLowerCase()}`) }} />

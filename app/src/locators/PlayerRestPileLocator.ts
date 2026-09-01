@@ -1,7 +1,26 @@
+import { css } from '@emotion/react'
 import { DeckLocator, DropAreaDescription, MaterialContext } from '@gamepark/react-game'
 import { Location } from '@gamepark/rules-api'
 import { trialCardDescription } from '../material/TrialCardDescription'
 import { storyBoardPlaceLocator } from './StoryBoardPlaceLocator'
+
+/**
+ * A plain white card-shaped area, so the spot reads as a slot when it is empty: nothing is printed on the
+ * table there (the pile sits *beside* the Story board), and the tutorial step explaining the Rest ("place
+ * the card here") would otherwise zoom onto a blank patch of table.
+ *
+ * Never rendered by default though — no `getLocations`, so react-game only mounts it when something asks
+ * for it: the tutorial focusing on it, or a Trial being dragged, which is exactly when it is wanted.
+ */
+class RestPileDescription extends DropAreaDescription {
+  getExtraCss() {
+    return restSlotCss
+  }
+}
+
+const restSlotCss = css`
+  background-color: rgba(255, 255, 255, 0.7);
+`
 
 /**
  * Trial cards played face down via "Rest", to the left of the Story board.
@@ -19,7 +38,7 @@ import { storyBoardPlaceLocator } from './StoryBoardPlaceLocator'
  * target that never mounts.
  */
 class PlayerRestPileLocator extends DeckLocator {
-  locationDescription = new DropAreaDescription(trialCardDescription)
+  locationDescription = new RestPileDescription(trialCardDescription)
 
   getCoordinates(location: Location, context: MaterialContext) {
     const { x = 0, y = 0, z = 0 } = storyBoardPlaceLocator.getCoordinates(location, context)

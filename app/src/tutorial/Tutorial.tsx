@@ -34,13 +34,13 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
 
   steps: TutorialStep<number, MaterialType, LocationType>[] = [
     {
-      popup: { text: () => <Trans defaults="tuto.welcome" components={BaseComponents} /> }
+      popup: { text: () => <Trans defaults="tuto.welcome" components={BaseComponents}/> }
     },
     {
-      popup: { text: () => <Trans defaults="tuto.goal" components={BaseComponents} /> }
+      popup: { text: () => <Trans defaults="tuto.goal" components={BaseComponents}/> }
     },
     {
-      popup: { text: () => <Trans defaults="tuto.cards" components={BaseComponents} />, position: { y: 20 } },
+      popup: { text: () => <Trans defaults="tuto.cards" components={BaseComponents}/>, position: { y: 20 } },
       focus: (game) => ({
         materials: [this.material(game, MaterialType.TrialCard).location(LocationType.ShipTrialSlot)],
         margin: { top: 2, bottom: 2, left: 1, right: 1 }
@@ -48,7 +48,7 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.board" components={{ ...BaseComponents, ...skillComponents, emblem: <Picture src={Skills} css={skillIconCss} /> }} />,
+        text: () => <Trans defaults="tuto.board" components={{ ...BaseComponents, ...skillComponents, emblem: <Picture src={Skills} css={skillIconCss}/> }}/>,
         position: { y: -25 }
       },
       focus: (game) => ({
@@ -57,7 +57,7 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
       })
     },
     {
-      popup: { text: () => <Trans defaults="tuto.pick" components={{ ...BaseComponents, strength: skillComponents.strength }} />, position: { y: 20 } },
+      popup: { text: () => <Trans defaults="tuto.pick" components={{ ...BaseComponents, strength: skillComponents.strength }}/>, position: { y: 20 } },
       focus: (game) => ({
         materials: [this.material(game, MaterialType.TrialCard).id(TrialCard.Trial4Strength)],
         margin: cardMargin,
@@ -69,7 +69,7 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
       }
     },
     {
-      popup: { text: () => <Trans defaults="tuto.value" components={{ ...BaseComponents, strength: skillComponents.strength }} />, position: { y: 20 } },
+      popup: { text: () => <Trans defaults="tuto.value" components={{ ...BaseComponents, strength: skillComponents.strength }}/>, position: { y: 20 } },
       focus: (game) => {
         const card = this.material(game, MaterialType.TrialCard).id(TrialCard.Trial4Strength)
         return {
@@ -80,7 +80,10 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
       }
     },
     {
-      popup: { text: () => <Trans defaults="tuto.gains" components={{ ...BaseComponents, favor: <FavorIcon />, intelligence: skillComponents.intelligence }} />, position: { y: -25 } },
+      popup: {
+        text: () => <Trans defaults="tuto.gains" components={{ ...BaseComponents, favor: <FavorIcon/>, intelligence: skillComponents.intelligence }}/>,
+        position: { y: -25 }
+      },
       focus: (game) => {
         const card = this.material(game, MaterialType.TrialCard).id(TrialCard.Trial4Strength)
         return {
@@ -92,14 +95,17 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
       move: {}
     },
     {
-      popup: { text: () => <Trans defaults="tuto.favorStart" components={{ ...BaseComponents, favor: <FavorIcon /> }} />, position: { y: 25} },
+      popup: { text: () => <Trans defaults="tuto.favorStart" components={{ ...BaseComponents, favor: <FavorIcon/> }}/>, position: { y: 25 } },
       focus: (game) => ({
         materials: [this.material(game, MaterialType.AthenaFavorToken).location(LocationType.PlayerAthenaFavor).player(me)],
         margin: { top: 2, bottom: 2, left: 2, right: 2 }
       })
     },
     {
-      popup: { text: () => <Trans defaults="tuto.raiseIntelligence" components={{ ...BaseComponents, intelligence: skillComponents.intelligence }} />, position: { y: 25} },
+      popup: {
+        text: () => <Trans defaults="tuto.raiseIntelligence" components={{ ...BaseComponents, intelligence: skillComponents.intelligence }}/>,
+        position: { y: 25 }
+      },
       focus: (game) => ({
         materials: [this.material(game, MaterialType.SkillCube).player(me).id(Skill.Intelligence)],
         margin: { top: 3, bottom: 3, left: 3, right: 3 }
@@ -109,17 +115,17 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
       }
     },
     {
-      popup: { text: () => <Trans defaults="tuto.turnEnd" components={BaseComponents} /> }
+      popup: { text: () => <Trans defaults="tuto.turnEnd" components={BaseComponents}/> }
     },
     {
-      popup: { text: () => <Trans defaults="tuto.hidden" components={BaseComponents} />, position: { y: 20, x: 50 } },
+      popup: { text: () => <Trans defaults="tuto.hidden" components={BaseComponents}/>, position: { y: 20, x: 50 } },
       focus: (game) => ({
         materials: [this.material(game, MaterialType.TrialCard).location(LocationType.ShipTrialSlot).location((l) => l.x === 2 || l.x === 3)],
         margin: { top: 2, bottom: 2, left: 2, right: 2 }
       })
     },
     {
-      popup: { text: () => <Trans defaults="tuto.hiddenReveal" components={{ ...BaseComponents, favor: <FavorIcon /> }} />, position: { y: 20 } },
+      popup: { text: () => <Trans defaults="tuto.hiddenReveal" components={{ ...BaseComponents, favor: <FavorIcon/> }}/>, position: { y: 20 } },
       focus: (game) => ({
         materials: [this.material(game, MaterialType.TrialCard).location(LocationType.ShipTrialSlot).location((l) => l.x === 1 || l.x === 4)],
         margin: { top: 2, bottom: 2, left: 2, right: 2 }
@@ -139,7 +145,7 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
       }
     },
     {
-      popup: { text: () => <Trans defaults="tuto.opponentPicked" components={{ ...BaseComponents, favor: <FavorIcon /> }} />, position: { y: 20 } },
+      popup: { text: () => <Trans defaults="tuto.opponentPicked" components={{ ...BaseComponents, favor: <FavorIcon/> }}/>, position: { y: 20 } },
       focus: (game) => ({
         materials: [
           this.material(game, MaterialType.AthenaFavorToken).location(LocationType.PlayerAthenaFavor).player(opponent),
@@ -149,14 +155,14 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
       })
     },
     {
-      popup: { text: () => <Trans defaults="tuto.yourTurn" components={BaseComponents} /> },
+      popup: { text: () => <Trans defaults="tuto.yourTurn" components={BaseComponents}/> },
       focus: (game) => ({
         materials: [this.material(game, MaterialType.StoryTile).location(LocationType.PlayerTale)],
         margin: { top: 1, bottom: 1, left: 1, right: 1 }
       })
     },
     {
-      popup: { text: () => <Trans defaults="tuto.taleScoring" components={{ ...BaseComponents, strength: skillComponents.strength }} /> },
+      popup: { text: () => <Trans defaults="tuto.taleScoring" components={{ ...BaseComponents, strength: skillComponents.strength }}/> },
       focus: (game) => ({
         materials: [
           this.material(game, MaterialType.StoryTile).location(LocationType.PlayerTale).player(me),
@@ -166,7 +172,7 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
       })
     },
     {
-      popup: { text: () => <Trans defaults="tuto.taleMax" components={BaseComponents} /> },
+      popup: { text: () => <Trans defaults="tuto.taleMax" components={BaseComponents}/> },
       focus: (game) => ({
         materials: [this.material(game, MaterialType.TrialCard).location(LocationType.PlayerAdventureColumn).player(me)],
         locations: getEnumValues(Skill).map((skill) => ({ type: LocationType.PlayerAdventureColumn, player: me, id: skill, y: 0 })),
@@ -174,7 +180,7 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
       })
     },
     {
-      popup: { text: () => <Trans defaults="tuto.taleGainIntro" components={BaseComponents} /> },
+      popup: { text: () => <Trans defaults="tuto.taleGainIntro" components={BaseComponents}/> },
       focus: (game) => ({
         materials: [
           this.material(game, MaterialType.StoryTile).location(LocationType.TaleDisplay),
@@ -188,7 +194,13 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
         text: () => (
           <Trans
             defaults="tuto.taleGainRow"
-            components={{ ...BaseComponents, strength: skillComponents.strength, intelligence: skillComponents.intelligence, cunning: skillComponents.cunning, luck: skillComponents.luck }}
+            components={{
+              ...BaseComponents,
+              strength: skillComponents.strength,
+              intelligence: skillComponents.intelligence,
+              cunning: skillComponents.cunning,
+              luck: skillComponents.luck
+            }}
           />
         )
       },
@@ -199,7 +211,7 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
       })
     },
     {
-      popup: { text: () => <Trans defaults="tuto.taleFavorBuy" components={{ ...BaseComponents, favor: <FavorIcon /> }} />, position: { y: 25} },
+      popup: { text: () => <Trans defaults="tuto.taleFavorBuy" components={{ ...BaseComponents, favor: <FavorIcon/> }}/>, position: { y: 25 } },
       focus: (game) => ({
         materials: [this.material(game, MaterialType.AthenaFavorToken).location(LocationType.PlayerAthenaFavor).player(me)],
         margin: { top: 2, bottom: 2, left: 2, right: 2 }
@@ -209,21 +221,21 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
       // The pile sits at the story board's far left edge (see PlayerRestPileLocator), so a tight,
       // default-centered popup would land right on top of it — pushed right (position.x) to leave it
       // uncovered.
-      popup: { text: () => <Trans defaults="tuto.rest1" components={BaseComponents} />, position: { x: 25 } },
+      popup: { text: () => <Trans defaults="tuto.rest1" components={BaseComponents}/>, position: { y: 20 } },
       focus: () => ({
         locations: [{ type: LocationType.PlayerRestPile, player: me }],
-        margin: { top: 2, bottom: 2, left: 2, right: 2 }
+        margin: { top: 2, bottom: 10, left: 2, right: 2 }
       })
     },
     {
-      popup: { text: () => <Trans defaults="tuto.rest2" components={{ ...BaseComponents, favor: <FavorIcon /> }} />, position: { x: 25 } },
+      popup: { text: () => <Trans defaults="tuto.rest2" components={{ ...BaseComponents, favor: <FavorIcon/> }}/>, position: { y: 20 } },
       focus: () => ({
         locations: [{ type: LocationType.PlayerRestPile, player: me }],
-        margin: { top: 2, bottom: 2, left: 2, right: 2 }
+        margin: { top: 2, bottom: 10, left: 2, right: 2 }
       })
     },
     {
-      popup: { text: () => <Trans defaults="tuto.redirect1" components={{ ...BaseComponents, favor: <FavorIcon /> }} /> },
+      popup: { text: () => <Trans defaults="tuto.redirect1" components={{ ...BaseComponents, favor: <FavorIcon/> }}/>, position: { y: -20 } },
       focus: (game) => ({
         materials: [
           this.material(game, MaterialType.AthenaFavorToken).location(LocationType.PlayerAthenaFavor).player(me),
@@ -237,9 +249,9 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
         text: () => (
           <Trans
             defaults="tuto.redirectExample"
-            components={{ ...BaseComponents, favor: <FavorIcon />, cunning: skillComponents.cunning, strength: skillComponents.strength }}
+            components={{ ...BaseComponents, favor: <FavorIcon/>, cunning: skillComponents.cunning, strength: skillComponents.strength }}
           />
-        )
+        ), position: { y: -20 }
       },
       focus: (game) => ({
         materials: [
@@ -250,7 +262,7 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
       })
     },
     {
-      popup: { text: () => <Trans defaults="tuto.epic" components={{ ...BaseComponents, types: <AdventureTypeIcons /> }} />, position: { x: 20} },
+      popup: { text: () => <Trans defaults="tuto.epic" components={{ ...BaseComponents, types: <AdventureTypeIcons/> }}/>, position: { x: 20 } },
       focus: (game) => ({
         materials: [this.material(game, MaterialType.EpicTile).location(LocationType.EpicDeck)],
         margin: { top: 2, bottom: 2, left: 2, right: 2 }
@@ -263,7 +275,7 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
       // after a real move here would instead keep every player's moves gated behind that step's own `move`
       // filter, and since a plain narration step has none, it would silently block Poséidon's next full turn —
       // exactly the freeze this used to cause when "pickAny" sat earlier, still followed by rest/redirect/epic.
-      popup: { text: () => <Trans defaults="tuto.finalCall" components={BaseComponents} />, position: { y: 20 } },
+      popup: { text: () => <Trans defaults="tuto.finalCall" components={BaseComponents}/>, position: { y: 20 } },
       focus: (game) => ({
         materials: [this.material(game, MaterialType.TrialCard).location(LocationType.ShipTrialSlot)],
         margin: { top: 2, bottom: 2, left: 1, right: 1 }
