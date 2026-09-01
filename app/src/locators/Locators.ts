@@ -17,6 +17,8 @@ import { storyBoardPlaceLocator } from './StoryBoardPlaceLocator'
 import { taleDeckLocator } from './TaleDeckLocator'
 import { taleDisplayLocator } from './TaleDisplayLocator'
 import { trialDeckLocator } from './TrialDeckLocator'
+import { trialGainsZoneLocator } from './TrialGainsZoneLocator'
+import { trialValueZoneLocator } from './TrialValueZoneLocator'
 
 export const Locators: Partial<Record<LocationType, Locator<number, MaterialType, LocationType>>> = {
   [LocationType.ShipBoardPlace]: shipBoardPlaceLocator,
@@ -34,5 +36,7 @@ export const Locators: Partial<Record<LocationType, Locator<number, MaterialType
   [LocationType.PlayerTale]: playerTaleLocator,
   [LocationType.PlayerEpic]: playerEpicLocator,
   [LocationType.PlayerAthenaFavor]: playerAthenaFavorLocator,
-  [LocationType.PlayerPanel]: playerPanelLocator
+  [LocationType.PlayerPanel]: playerPanelLocator,
+  [LocationType.TrialValueZone]: trialValueZoneLocator,
+  [LocationType.TrialGainsZone]: trialGainsZoneLocator
 }

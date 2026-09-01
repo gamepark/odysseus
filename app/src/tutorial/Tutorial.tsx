@@ -18,6 +18,8 @@ const opponent = 2
 const cardMargin = { top: 1, bottom: 1, right: 1, left: 1 }
 /** Crops a 6x6cm Trial card down to its top-left corner, where the threshold value and VP are printed. */
 const cardTopLeftMargin = { right: -3, bottom: -3.3 }
+/** Crops a 6x6cm Trial card down to its bottom band, where the immediate gains are printed. */
+const cardBottomMargin = { top: -3.5, bottom: 0.3, left: 0.5, right: 0.5 }
 
 export class Tutorial extends MaterialTutorial<number, MaterialType, LocationType> {
   version = 1
@@ -68,17 +70,25 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
     },
     {
       popup: { text: () => <Trans defaults="tuto.value" components={{ ...BaseComponents, strength: skillComponents.strength }} />, position: { y: 20 } },
-      focus: (game) => ({
-        materials: [this.material(game, MaterialType.TrialCard).id(TrialCard.Trial4Strength)],
-        margin: cardTopLeftMargin
-      })
+      focus: (game) => {
+        const card = this.material(game, MaterialType.TrialCard).id(TrialCard.Trial4Strength)
+        return {
+          materials: [card],
+          locations: [this.location(LocationType.TrialValueZone).parent(card.getIndex()).location],
+          margin: cardTopLeftMargin
+        }
+      }
     },
     {
       popup: { text: () => <Trans defaults="tuto.gains" components={{ ...BaseComponents, favor: <FavorIcon />, intelligence: skillComponents.intelligence }} />, position: { y: -25 } },
-      focus: (game) => ({
-        materials: [this.material(game, MaterialType.TrialCard).id(TrialCard.Trial4Strength)],
-        margin: cardMargin
-      }),
+      focus: (game) => {
+        const card = this.material(game, MaterialType.TrialCard).id(TrialCard.Trial4Strength)
+        return {
+          materials: [card],
+          locations: [this.location(LocationType.TrialGainsZone).parent(card.getIndex()).location],
+          margin: cardBottomMargin
+        }
+      },
       move: {}
     },
     {

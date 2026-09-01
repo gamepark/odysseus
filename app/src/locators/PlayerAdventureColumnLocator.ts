@@ -2,8 +2,13 @@ import { Skill } from '@gamepark/odysseus/Skill'
 import { ListLocator, MaterialContext } from '@gamepark/react-game'
 import { Location } from '@gamepark/rules-api'
 import { isDisplayedPlayer } from '../DisplayedPlayer'
+import { storyBoardDescription } from '../material/StoryBoardDescription'
+import { trialCardDescription } from '../material/TrialCardDescription'
 import { getFirstTrialOffset, getTrialStep, showsAllTrials } from './PlayerRowLayout'
 import { storyBoardPlaceLocator } from './StoryBoardPlaceLocator'
+
+/** Board's top edge exactly meeting the Trial's bottom edge: no tuck at all, see {@link isTutorialCloseUp}. */
+const FULLY_CLEAR_OFFSET = storyBoardDescription.height / 2 + trialCardDescription.width / 2
 
 const columnOffsets: Record<Skill, number> = {
   [Skill.Strength]: -14,
@@ -15,6 +20,16 @@ const columnOffsets: Record<Skill, number> = {
 /** Whether this column is one of those the height affords to lay out (see PlayerRowLayout). */
 const isLaidOut = (location: Location, context: MaterialContext) =>
   showsAllTrials(context) || isDisplayedPlayer(location.player, context)
+
+/**
+ * The tutorial steps ("tuto.value" and "tuto.gains" in Tutorial.tsx) that zoom in on the very first Trial
+ * card right after it's played, before anything else has touched the board — the only moments worth
+ * clearing the tuck below for. Keep in sync with Tutorial.tsx's `steps` order if it ever changes: locators
+ * can't import the tutorial (it imports them), so the index has to be duplicated here instead.
+ */
+const CLOSE_UP_TUTORIAL_STEPS = [5, 6]
+
+const isTutorialCloseUp = (context: MaterialContext) => CLOSE_UP_TUTORIAL_STEPS.includes(context.rules.game.tutorial?.step ?? -1)
 
 /**
  * The 4 skill columns of Trial cards played "on adventure", climbing above their owner's Story board.
@@ -41,8 +56,16 @@ class PlayerAdventureColumnLocator extends ListLocator {
     const columnX = x + columnOffsets[location.id as Skill]
     if (!isLaidOut(location, context)) return { x: columnX, y, z: z - 0.05 }
     // The bottom card of the column rests on the board's top edge, or slid under it when the height calls
-    // for it (see PlayerRowLayout) — never far enough under to take its victory point laurel with it.
-    return { x: columnX, y: y - getFirstTrialOffset(context), z: z - 0.05 }
+    // for it (see PlayerRowLayout) — never far enough under to take its victory point laurel with it. The
+    // tutorial's two close-up steps skip the tuck for this one card so its full face reads on screen; every
+    // other moment — including later in that same tutorial, once the lesson has moved on — tucks it exactly
+    // like a real game would.
+    const offset = isTutorialCloseUp(context) ? FULLY_CLEAR_OFFSET : getFirstTrialOffset(context)
+    return { x: columnX, y: y - offset, z: z - 0.05 }
+  }
+
+  getPositionDependencies(_location: Location, context: MaterialContext) {
+    return { tutorialStep: context.rules.game.tutorial?.step }
   }
 }
 

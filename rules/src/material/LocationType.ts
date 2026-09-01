@@ -15,5 +15,9 @@ export enum LocationType {
   PlayerEpic, // player — earned epic tile (0 or 1)
   PlayerAthenaFavor, // player
   /** UI-only: a player's info panel (avatar, name, score), displayed as part of the table so it scales with it (location.player = its owner), no item ever goes there */
-  PlayerPanel
+  PlayerPanel,
+  /** UI-only: highlights a Trial card's threshold/VP badges (top-left corner) for the tutorial, no item ever goes there */
+  TrialValueZone,
+  /** UI-only: highlights a Trial card's immediate-gain icons (bottom band) for the tutorial, no item ever goes there */
+  TrialGainsZone
 }
