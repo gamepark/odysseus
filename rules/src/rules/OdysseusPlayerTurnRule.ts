@@ -62,11 +62,14 @@ export abstract class OdysseusPlayerTurnRule extends PlayerTurnRule {
   }
 
   /**
-   * Hands the turn over — through BuyTaleRule when the player can still buy a Tale, since nothing
-   * would ask them again once FinishTurnRule has moved on to the next player.
+   * Hands the turn over, always through BuyTaleRule (see {@link BuyTaleRule.onRuleStart}, which skips
+   * straight to FinishTurn when the player can't buy). Deciding that here instead would be unsafe: this
+   * is called from afterItemMove, in the same synchronous pass as a Favor spend that beforeItemMove may
+   * have queued as a consequence of the very same move — that spend is only actually applied once the
+   * caller plays it, later, so canBuyTale would still see the pre-spend count.
    */
   endTurn(): MaterialMove {
-    return this.startRule(this.canBuyTale ? RuleId.BuyTale : RuleId.FinishTurn)
+    return this.startRule(RuleId.BuyTale)
   }
 
   /** Any of the 4 visible tiles, or the top of either facedown stack — both are shuffled and hidden, so which one has no bearing on gameplay. */
