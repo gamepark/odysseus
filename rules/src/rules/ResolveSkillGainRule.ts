@@ -1,9 +1,10 @@
-import { isMoveItemType, ItemMove, MaterialMove } from '@gamepark/rules-api'
+import { CustomMove, isCustomMoveType, isMoveItemType, ItemMove, MaterialMove } from '@gamepark/rules-api'
 import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
 import { TrialCard } from '../material/TrialCard'
 import { adventureTypeOf, PendingGains } from '../material/TrialCardStats'
 import { Skill, skills } from '../Skill'
+import { CustomMoveType } from './CustomMoveType'
 import { Memory } from './Memory'
 import { MAX_TALES, OdysseusPlayerTurnRule } from './OdysseusPlayerTurnRule'
 import { RuleId } from './RuleId'
@@ -46,15 +47,21 @@ export class ResolveSkillGainRule extends OdysseusPlayerTurnRule {
   }
 
   /**
-   * Drops the gains that have nowhere left to go — a fixed-skill gain whose track is already full (no
-   * Favor redirects a point that cannot be gained in the first place), and every gain at all once all
-   * 4 tracks are full — then resolves this turn's consequences if that empties the queue. Called again
-   * after each increase, as that is when a track can fill up.
+   * Drops the gains that have nowhere left to go — every gain once all 4 tracks are full, and a
+   * fixed-skill gain whose own track is full once no Athena Favor is left to redirect it either — then
+   * resolves this turn's consequences if that empties the queue. A fixed-skill gain on a full track is
+   * kept while a Favor could still redirect it to another skill: the player is then offered that
+   * redirect, or a {@link CustomMoveType.ForfeitGain} to let it go and keep the Favor (rules-fr.pdf
+   * p.7, "vous pouvez dépenser une Faveur d'Athéna pour la changer en une autre compétence"). Called
+   * again after each increase, as that is when a track fills up or the last Favor leaves.
    */
   dropUnresolvableGains(): MaterialMove[] {
     const cubes = this.cubesUnderMax
+    const canRedirect = this.favors.getQuantity() > 0
     const { gains, left } = this.pending
-    const raisable = cubes.length ? gains.filter((gain) => gain === 'Choice' || cubes.id(gain).length > 0) : []
+    const raisable = cubes.length
+      ? gains.filter((gain) => gain === 'Choice' || canRedirect || cubes.id(gain).length > 0)
+      : []
     // A dropped gain also costs an increase: it is that very gain that has nowhere left to go.
     const increases = Math.min(left, raisable.length)
     this.memorize<PendingGains>(Memory.PendingGains, { gains: increases ? raisable : [], left: increases }, this.player)
@@ -68,15 +75,24 @@ export class ResolveSkillGainRule extends OdysseusPlayerTurnRule {
     if (pending.left) {
       const canPayFavor = this.favors.getQuantity() > 0
       const cubes = this.cubesUnderMax
-      moves.push(
-        ...cubes
-          .getItems<Skill>()
-          .filter((item) => canPayFavor || isFreeSkillGain(pending, item.id!))
-          .map((item) => cubes.id(item.id).moveItem((cube) => ({ ...cube.location, x: cube.location.x! + 1 })))
-      )
+      const raisable = cubes.getItems<Skill>().filter((item) => canPayFavor || isFreeSkillGain(pending, item.id!))
+      moves.push(...raisable.map((item) => cubes.id(item.id).moveItem((cube) => ({ ...cube.location, x: cube.location.x! + 1 }))))
+      // Every pending gain is a fixed skill whose track is full: the point cannot be gained, and
+      // redirecting it for a Favor is optional — so let the player forfeit it and keep the Favor.
+      if (!cubes.getItems<Skill>().some((item) => isFreeSkillGain(pending, item.id!))) {
+        moves.push(this.customMove(CustomMoveType.ForfeitGain))
+      }
     }
     if (this.canBuyTale) moves.push(...this.getTaleMoves())
     return moves
+  }
+
+  /** Forfeits one stuck gain: only full-track fixed skills are left when this move is offered, so which one goes makes no difference. */
+  onCustomMove(move: CustomMove): MaterialMove[] {
+    if (!isCustomMoveType(CustomMoveType.ForfeitGain)(move)) return []
+    const { gains, left } = this.pending
+    this.memorize<PendingGains>(Memory.PendingGains, { gains: gains.slice(1), left: left - 1 }, this.player)
+    return this.dropUnresolvableGains()
   }
 
   /**

@@ -1,10 +1,12 @@
 import { LocationType } from '@gamepark/odysseus/material/LocationType'
 import { MaterialType } from '@gamepark/odysseus/material/MaterialType'
+import { CustomMoveType } from '@gamepark/odysseus/rules/CustomMoveType'
 import { TALE_COST } from '@gamepark/odysseus/rules/OdysseusPlayerTurnRule'
 import { RuleId } from '@gamepark/odysseus/rules/RuleId'
 import { LogDescription, MoveComponentContext, MovePlayedLogDescription } from '@gamepark/react-game'
-import { isCreateItemType, isDeleteItemType, isMoveItemType, MaterialGame, MaterialMove } from '@gamepark/rules-api'
+import { isCreateItemType, isCustomMoveType, isDeleteItemType, isMoveItemType, MaterialGame, MaterialMove } from '@gamepark/rules-api'
 import { AdventureLog } from './AdventureLog'
+import { ForfeitGainLog } from './ForfeitGainLog'
 import { GainFavorLog } from './GainFavorLog'
 import { IncreaseSkillLog } from './IncreaseSkillLog'
 import { RedirectSkillLog } from './RedirectSkillLog'
@@ -49,6 +51,9 @@ export class OdysseusLogDescription implements LogDescription<MaterialMove, numb
     }
 
     if (ruleId === RuleId.ResolveSkillGain) {
+      if (isCustomMoveType(CustomMoveType.ForfeitGain)(move)) {
+        return { player: context.game.rule?.player, Component: ForfeitGainLog, depth: 1 }
+      }
       if (isMoveItemType(MaterialType.SkillCube)(move)) {
         return { player: move.location.player, Component: IncreaseSkillLog, depth: 1 }
       }
