@@ -1,1 +1,183 @@
-{}
+{
+  "header": {
+    "chooseTrialCard": {
+      "you": "Scegli una carta Prova",
+      "player": "{player} sceglie una carta Prova"
+    },
+    "resolveSkillGain": {
+      "you": "Aumenta le tue abilità",
+      "player": "{player} aumenta le sue abilità",
+      "forfeit": "Reindirizza questo guadagno per 1 <favor/> oppure <forfeit>rinunciaci</forfeit>"
+    },
+    "chooseTale": {
+      "you": "Scegli un segnalino Racconto",
+      "player": "{player} sceglie un segnalino Racconto"
+    },
+    "buyTale": {
+      "you": "Prendi un Racconto per 3 <favor/> oppure <pass>passa</pass>",
+      "player": "{player} può prendere un Racconto per 3 <favor/>"
+    },
+    "finishTurn": "Fine del turno"
+  },
+  "action": {
+    "adventure": "Partire all'avventura",
+    "rest": "Riposare"
+  },
+  "log": {
+    "adventure": "{player} parte all'avventura con <card/>",
+    "rest": "{player} si riposa",
+    "gainFavor": "{player} ottiene un Favore di Atena",
+    "increaseSkill": "{player} aumenta l'abilità {skill}",
+    "redirectSkill": "{player} spende 1 Favore di Atena per reindirizzare il suo guadagno",
+    "forfeitGain": "{player} rinuncia a un guadagno di abilità impossibile da aumentare",
+    "winTale": "{player} ottiene il Racconto <tile/>",
+    "winEpic": "{player} completa la sua Epopea e ottiene <tile/>",
+    "spendFavorForTale": "{player} spende 3 Favori di Atena per un Racconto",
+    "restockShip": "La Nave viene rifornita"
+  },
+  "skill": {
+    "strength": "Forza",
+    "intelligence": "Intelligenza",
+    "cunning": "Astuzia",
+    "luck": "Fortuna"
+  },
+  "adventureType": {
+    "navigation": "Navigazione",
+    "gods": "Dei",
+    "creatures": "Creature",
+    "encounters": "Incontri",
+    "ithaca": "Itaca"
+  },
+  "help": {
+    "trialCard": {
+      "title": "Carta Prova",
+      "role": "Le carte Prova rappresentano le 15 grandi tappe del viaggio di Ulisse attraverso il Mediterraneo. Superale per segnare i loro punti vittoria alla fine della partita.",
+      "skill": "Questa prova è associata all'abilità {skill}.",
+      "value": "Valore richiesto: {value}. A fine partita la prova è superata se il tuo punteggio in quell'abilità è almeno pari a questo valore.",
+      "points": "Fa guadagnare {points} punti vittoria se la prova è superata.",
+      "adventureType": "Tipo di prova: {type}.",
+      "columnCount": "Carte già presenti in questa colonna, sulla tua plancia Racconto: {count} / {max}.",
+      "columnFull": "La tua colonna di questa abilità è già piena ({max} carte): dovrai riposarti con questa carta, senza poter partire all'avventura.",
+      "gainsTitle": "Guadagni ottenuti partendo all'avventura",
+      "gainsNone": "Questa carta non offre alcun guadagno immediato.",
+      "gainFixed": "Aumenta di 1 punto l'abilità {skill}.",
+      "gainChoice": "Aumenta di 1 punto l'abilità che preferisci.",
+      "gainFavor": "Ottieni 1 segnalino Favore di Atena.",
+      "chooseTitle": "Scegliere questa carta",
+      "chooseDesc": "Puoi scegliere soltanto una carta Prova situata a una delle estremità delle due file ai lati della Nave di Ulisse, mai una carta incastrata fra altre due. Se la carta scelta è adiacente a una carta coperta, le 2 carte coperte di quel lato della Nave vengono rivelate e ottieni il segnalino Favore di Atena posto fra di esse.",
+      "adventureDesc": "Ottieni i guadagni indicati in fondo alla carta, poi la aggiungi alla tua plancia Racconto, nella colonna della sua abilità. Non puoi collocare più di 4 carte Prova per abilità: se non hai altra scelta che prendere una 5ª carta della stessa abilità, devi riposarti.",
+      "restDesc": "Collochi la carta coperta a sinistra della tua plancia Racconto, senza ottenere i suoi guadagni. In cambio aumenti di 1 punto l'abilità che preferisci e ottieni 1 segnalino Favore di Atena dalla riserva.",
+      "scoringTitle": "Conteggio finale",
+      "scoringDesc": "A fine partita, una carta Prova collocata in una colonna d'avventura fa guadagnare i suoi punti vittoria se il valore richiesto è inferiore o pari al tuo punteggio in quell'abilità. Le carte collocate coperte riposandosi non fanno mai guadagnare punti."
+    },
+    "storyTile": {
+      "title": "Segnalino Racconto",
+      "role": "I segnalini Racconto ti permettono di segnare punti vittoria supplementari a fine partita, in base alle carte Prova che possiedi sulla tua plancia, superate o meno.",
+      "scoring": "Ogni Racconto fa guadagnare 2 punti vittoria per ogni carta Prova corrispondente che possiedi.",
+      "matchSkill": "2 punti per ogni carta Prova dell'abilità {skill}.",
+      "matchAdventureType": "2 punti per ogni carta Prova di tipo {type}.",
+      "matchValue": "2 punti per ogni carta Prova il cui valore di abilità è {value}.",
+      "value1Or2": "1 o 2",
+      "currentCount": "Carte Prova corrispondenti sulla tua plancia, in questo momento: {count}.",
+      "obtainTitle": "Come ottenerlo",
+      "obtainRow": "Formando una fila di 4 carte Prova sulla tua plancia Racconto: una carta in ciascuna delle 4 abilità, sulla stessa riga.",
+      "obtainFavor": "Spendendo 3 segnalini Favore di Atena, una sola volta per turno, in qualsiasi momento del tuo turno.",
+      "choice": "Quando ottieni un Racconto, scegli uno dei 4 segnalini visibili oppure pesca il primo da una delle due pile coperte. Un segnalino visibile scelto viene immediatamente sostituito dal primo di una delle due pile.",
+      "max": "Puoi ottenere al massimo 6 Racconti durante la partita, segnalino iniziale compreso. Esistono 14 Racconti diversi, ciascuno in 2 copie."
+    },
+    "athenaFavorToken": {
+      "title": "Favore di Atena",
+      "role": "I Favori di Atena ti permettono di ottenere nuovi Racconti o di reindirizzare i punti abilità che guadagni.",
+      "currentCount": "Favori di Atena in tuo possesso, in questo momento: {count}.",
+      "useTale": "Spendi 3 Favori, una sola volta per turno e in qualsiasi momento dello stesso, per ottenere immediatamente un Racconto.",
+      "useRedirect": "Ogni volta che devi aumentare di 1 punto un'abilità imposta, puoi spendere 1 Favore per aumentarne un'altra al suo posto.",
+      "canBuyTale": "Puoi ottenere un Racconto fin da subito, se non l'hai già fatto in questo turno.",
+      "gainTitle": "Come guadagnarli",
+      "gainReveal": "Scegliendo una carta Prova adiacente alla coppia di carte coperte di un lato della Nave: le 2 carte vengono rivelate e ottieni il Favore posto fra di esse.",
+      "gainRest": "Riposandoti: ottieni sempre 1 Favore dalla riserva.",
+      "gainCard": "Alcune carte Prova offrono uno o più Favori quando parti all'avventura con esse.",
+      "gainRefill": "Ogni volta che la Nave viene rifornita a fine turno, 1 Favore viene aggiunto su ciascun lato."
+    },
+    "epicTile": {
+      "title": "Tessera Epopea",
+      "role": "Puoi realizzare una sola Epopea durante la partita. Per farlo, la tua plancia Racconto deve contenere almeno una carta Prova di ciascuno dei 5 tipi di prova (Navigazione, Incontri, Dei, Creature, Itaca), superata o meno.",
+      "alreadyEarned": "Hai già realizzato la tua Epopea in questa partita: non puoi ottenerne una seconda.",
+      "progress": "Tipi di prova diversi sulla tua plancia, in questo momento: {count} / 5.",
+      "value": "Questa tessera vale {value} punti vittoria.",
+      "reward": "Non appena questa condizione è soddisfatta, ottieni immediatamente la prima tessera Epopea della pila e la collochi a destra della tua plancia Racconto.",
+      "decreasing": "Le tessere sono impilate in ordine di valore decrescente, con il valore più alto in cima alla pila: prima realizzi la tua Epopea, più punti ti fa guadagnare.",
+      "max": "Un'unica pila di 5 tessere è condivisa da tutti i giocatori: ciascuno può ottenerne una sola."
+    },
+    "skillCube": {
+      "title": "Cubo abilità",
+      "role": "Ogni giocatore possiede 4 cubi, uno per abilità (Forza, Intelligenza, Astuzia, Fortuna), che avanzano sui tracciati da 0 a 6 della sua plancia Racconto.",
+      "current": "Valore attuale dell'abilità {skill}: {value} / 6.",
+      "maxed": "La tua abilità {skill} ha raggiunto il massimo: non puoi aumentarla ulteriormente. Reindirizza piuttosto i guadagni imposti in questa abilità verso un'altra, spendendo un Favore di Atena.",
+      "increase": "Aumenti un'abilità quando parti all'avventura o quando ti riposi, secondo i guadagni indicati sulla carta Prova giocata.",
+      "redirect": "Puoi spendere 1 Favore di Atena per reindirizzare un guadagno di abilità imposto verso l'abilità che preferisci.",
+      "scoring": "A fine partita, il tuo punteggio in un'abilità determina quali carte Prova della sua colonna sono superate: ogni carta il cui valore richiesto è inferiore o pari a quel punteggio fa guadagnare i suoi punti vittoria."
+    },
+    "shipBoard": {
+      "title": "Nave di Ulisse",
+      "role": "La Nave di Ulisse è la plancia centrale. Su ciascuno dei suoi due lati viene disposta una fila di 6 carte Prova: le 4 carte alle estremità sono scoperte, la coppia centrale è coperta.",
+      "choose": "Puoi scegliere soltanto una carta a una delle estremità di un lato, mai una carta incastrata fra altre due. Scegliere la carta adiacente alla coppia coperta la rivela e ti fa ottenere il segnalino Favore di Atena posto fra le 2 carte.",
+      "refill": "Quando resta una sola carta sulla Nave alla fine di un turno, viene scartata e il mazzo rifornisce gli spazi della Nave con 4 carte coperte e 8 carte scoperte; 1 segnalino Favore di Atena viene aggiunto su ciascun lato.",
+      "end": "La partita termina quando resta una sola carta sulla Nave e il mazzo è esaurito.",
+      "deckRemaining": "Carte Prova rimaste nel mazzo: {count}.",
+      "deckEmpty": "Il mazzo è esaurito: non appena resterà una sola carta sulla Nave, la partita terminerà."
+    },
+    "storyBoard": {
+      "title": "Plancia Racconto",
+      "role": "La tua plancia personale riunisce i tuoi 4 tracciati di abilità (da 0 a 6), le tue colonne di carte Prova con cui sei partito all'avventura (4 al massimo per abilità), la tua pila di carte messe a riposo, i tuoi segnalini Racconto (6 al massimo) e la tua tessera Epopea.",
+      "currentScore": "Punteggio attuale di {name}: {score} punti vittoria (conteggio provvisorio, che può cambiare fino alla fine della partita).",
+      "scoring": "A fine partita, conta per ogni abilità i punti vittoria delle carte Prova il cui valore è inferiore o pari al tuo punteggio, aggiungi i punti dei tuoi Racconti (sempre conteggiati, anche se la carta associata non è superata), poi quelli della tua tessera Epopea.",
+      "tieBreak": "Vince la partita il giocatore con più punti vittoria. In caso di parità, vince il giocatore con il punteggio più alto nei Racconti. Se la parità persiste, i giocatori condividono la vittoria."
+    },
+    "turn": {
+      "title": "Svolgimento di un turno",
+      "intro": "Si gioca in senso orario. Ogni turno si svolge in 3 fasi, in quest'ordine.",
+      "step1Title": "1. Scegliere una carta Prova",
+      "step1Desc": "Scegli una carta Prova situata a una delle estremità delle due file ai lati della Nave di Ulisse. Se è adiacente a una carta coperta, rivela le 2 carte coperte di quel lato della Nave e ottieni il segnalino Favore di Atena posto fra di esse.",
+      "step2Title": "2. Partire all'avventura o riposare",
+      "step2AdventureDesc": "Partendo all'avventura, ottieni i guadagni indicati in fondo alla carta e la aggiungi alla colonna della sua abilità sulla tua plancia Racconto (4 carte al massimo per abilità).",
+      "step2RestDesc": "Riposandoti, collochi la carta coperta senza ottenere i suoi guadagni, in cambio di 1 punto nell'abilità che preferisci e di 1 segnalino Favore di Atena dalla riserva.",
+      "step3Title": "3. Terminare il turno",
+      "step3Desc": "Se resta una sola carta Prova sulla Nave, viene scartata e la Nave viene rifornita (4 carte coperte e 8 carte scoperte), con 1 segnalino Favore di Atena aggiunto su ciascun lato. Poi è il turno del giocatore successivo.",
+      "endTitle": "Fine della partita",
+      "endDesc": "La partita termina quando resta una sola carta Prova sulla Nave e il mazzo è esaurito. Ogni giocatore conta allora i suoi punti vittoria: abilità superate, Racconti e tessera Epopea."
+    }
+  },
+  "tuto": {
+    "welcome": "Benvenuto nel <bold>tutorial di Odysseus</bold>!",
+    "goal": "In questo gioco accompagni Ulisse nel suo viaggio e lo aiuti a superare le prove che incontra.",
+    "cards": "Ecco le carte Prova. A ogni turno devi scegliere una carta Prova situata a una delle estremità di uno dei due lati della Nave di Ulisse.",
+    "board": "Ecco la tua plancia Racconto <emblem/>. Vi disponi di <bold>4 abilità</bold>: <strength/>, <intelligence/>, <cunning/>, <luck/>.",
+    "pick": "Ogni Prova è associata a un'abilità. Questa, per esempio, richiede <strength/>. Prendila e parti all'avventura collocandola sopra il suo tracciato, sulla tua plancia Racconto.",
+    "value": "Questa Prova fa guadagnare <bold>6 punti vittoria</bold> a fine partita, ma solo se la tua <strength/> raggiunge almeno <bold>4</bold> in quel momento!",
+    "gains": "Questa Prova ti fa ottenere subito <favor/> un Favore di Atena, oltre a 1 punto in <intelligence/>.",
+    "favorStart": "Ogni giocatore inizia la partita con un Favore di Atena <favor/>: adesso ne hai <bold>2</bold>. Vedremo un po' più avanti a cosa servono.",
+    "raiseIntelligence": "Aumenta la tua <intelligence/>.",
+    "turnEnd": "Il tuo turno è finito: adesso tocca al tuo avversario, <bold>Poseidone</bold>.",
+    "hidden": "Come avrai forse notato, <bold>4 Prove</bold> sono nascoste sulla plancia.",
+    "hiddenReveal": "Non appena un giocatore prende una carta adiacente a una coppia coperta, le 2 Prove nascoste vengono rivelate e quel giocatore ottiene il Favore di Atena <favor/> posto fra di esse.",
+    "opponentPicked": "Poseidone ha preso questa Prova: ottiene quindi questo Favore di Atena <favor/>, e le 2 Prove vicine vengono rivelate.",
+    "yourTurn": "Tocca a te! Ogni giocatore inizia la partita con un segnalino Racconto.",
+    "taleScoring": "Il tuo segnalino Racconto ti farà guadagnare a fine partita <bold>2 punti</bold> per ciascuna delle tue Prove di <strength/>, superata o meno. Hai scelto bene la tua prima Prova!",
+    "taleMax": "Attenzione: non puoi avere più di <bold>4 carte Prova</bold> per abilità, quindi il tuo Racconto non potrà mai farti guadagnare più di <bold>8 punti</bold>.",
+    "taleGainIntro": "Potrai guadagnare altri segnalini Racconto nel corso della partita. Clicca su un segnalino per sapere a quali Prove si applica.",
+    "taleGainRow": "Ne ottieni uno nuovo ogni volta che completi una fila: una carta di ciascuna abilità (<strength/>, <intelligence/>, <cunning/>, <luck/>) alla stessa altezza sulla tua plancia.",
+    "taleFavorBuy": "Puoi anche prendere un Racconto spendendo <bold>3 Favori di Atena</bold> <favor/>, una sola volta per turno.",
+    "rest1": "Se nessuna Prova ti soddisfa, puoi riposarti collocando la carta qui, coperta.",
+    "rest2": "In tal caso la Prova è perduta, ma aumenti comunque di 1 l'abilità che preferisci e ottieni un Favore di Atena <favor/>.",
+    "redirect1": "Puoi anche spendere 1 Favore di Atena <favor/> per aumentare l'abilità che preferisci <bold>al posto</bold> di quella imposta.",
+    "redirectExample": "<italic>Esempio: una carta ti impone 1 punto di <cunning/>, ma preferisci progredire in <strength/>. Spendendo 1 <favor/>, aumenti la Forza anziché l'Astuzia.</italic>",
+    "epic": "Infine, ecco le tessere Epopea. Il primo giocatore che riunisce i 5 tipi di prova <types/> ottiene la tessera in cima, che vale <bold>10 punti vittoria</bold>; la successiva ne vale <bold>8</bold>, e così via.",
+    "finalCall": "Adesso tocca a te! Prendi la Prova che preferisci, completa la tua Epopea, migliora il tuo Racconto e ottieni più punti vittoria del tuo avversario per vincere la partita. Che gli dei siano con te, avventuriero!",
+    "skillName": {
+      "strength": "Forza",
+      "intelligence": "Intelligenza",
+      "cunning": "Astuzia",
+      "luck": "Fortuna"
+    }
+  }
+}

@@ -1,1 +1,183 @@
-{}
+{
+  "header": {
+    "chooseTrialCard": {
+      "you": "Choose a Trial card",
+      "player": "{player} chooses a Trial card"
+    },
+    "resolveSkillGain": {
+      "you": "Increase your skills",
+      "player": "{player} increases their skills",
+      "forfeit": "Redirect this gain for 1 <favor/> or <forfeit>give it up</forfeit>"
+    },
+    "chooseTale": {
+      "you": "Choose a Tale tile",
+      "player": "{player} chooses a Tale tile"
+    },
+    "buyTale": {
+      "you": "Gather a Tale for 3 <favor/> or <pass>pass</pass>",
+      "player": "{player} may gather a Tale for 3 <favor/>"
+    },
+    "finishTurn": "End of turn"
+  },
+  "action": {
+    "adventure": "Depart on an Adventure",
+    "rest": "Rest"
+  },
+  "log": {
+    "adventure": "{player} departs on an adventure with <card/>",
+    "rest": "{player} rests",
+    "gainFavor": "{player} gains an Athena's Favor token",
+    "increaseSkill": "{player} increases {skill}",
+    "redirectSkill": "{player} spends 1 Athena's Favor token to redirect their gain",
+    "forfeitGain": "{player} gives up a skill gain that cannot be increased",
+    "winTale": "{player} gathers the Tale <tile/>",
+    "winEpic": "{player} completes their Epic and gains <tile/>",
+    "spendFavorForTale": "{player} spends 3 Athena's Favor tokens for a Tale",
+    "restockShip": "The Ship is refilled"
+  },
+  "skill": {
+    "strength": "Strength",
+    "intelligence": "Intelligence",
+    "cunning": "Cunning",
+    "luck": "Luck"
+  },
+  "adventureType": {
+    "navigation": "Navigation",
+    "gods": "Gods",
+    "creatures": "Creatures",
+    "encounters": "Encounters",
+    "ithaca": "Ithaca"
+  },
+  "help": {
+    "trialCard": {
+      "title": "Trial card",
+      "role": "The Trial cards represent the 15 major stages of Ulysses' voyage across the Mediterranean. Pass them to score their victory points at the end of the game.",
+      "skill": "This Trial is linked to {skill}.",
+      "value": "Value required: {value}. At the end of the game, the Trial is passed if your value in that skill is at least equal to it.",
+      "points": "Scores {points} victory points if the Trial is passed.",
+      "adventureType": "Type of trial: {type}.",
+      "columnCount": "Cards already in this column, on your Tales board: {count} / {max}.",
+      "columnFull": "Your column for this skill is already full ({max} cards): you will have to Rest with this card, without being able to depart on an adventure.",
+      "gainsTitle": "Gains for departing on an adventure",
+      "gainsNone": "This card offers no immediate gain.",
+      "gainFixed": "Adds 1 to {skill}.",
+      "gainChoice": "Adds 1 to a skill of your choice.",
+      "gainFavor": "You receive 1 Athena's Favor token.",
+      "chooseTitle": "Choosing this card",
+      "chooseDesc": "You may only choose a Trial card at one of the ends of the two lines either side of Ulysses' Ship, never a card that is between 2 others. If the chosen card is next to a facedown card, the 2 facedown cards on that side of the Ship are flipped up and you take the Athena's Favor token placed between them.",
+      "adventureDesc": "You apply the gains shown at the bottom of the card, then place it on your Tales board, in the column of its skill. You cannot have more than 4 Trial cards per skill: if you have no option other than to take a 5th card of the same skill, you must Rest instead.",
+      "restDesc": "You place the card face down to the left of your Tales board, without applying its gains. In exchange, you add 1 to a skill of your choice and you gain 1 Athena's Favor token from the supply.",
+      "scoringTitle": "Final scoring",
+      "scoringDesc": "At the end of the game, a Trial card placed in an adventure column scores its victory points if the value required is equal to or below your value in that skill. Cards placed face down by Resting never score points."
+    },
+    "storyTile": {
+      "title": "Tale tile",
+      "role": "Tale tiles give you extra victory points at the end of the game, depending on the Trial cards you hold on your board, whether you pass them or not.",
+      "scoring": "Each Tale scores 2 victory points for each matching Trial card you hold.",
+      "matchSkill": "2 points for each {skill} Trial card.",
+      "matchAdventureType": "2 points for each Trial card of the {type} type.",
+      "matchValue": "2 points for each Trial card whose skill value is {value}.",
+      "value1Or2": "1 or 2",
+      "currentCount": "Matching Trial cards on your board right now: {count}.",
+      "obtainTitle": "How to gather one",
+      "obtainRow": "By building a row of 4 Trial cards on your Tales board: one card in each of the 4 skills, on the same row.",
+      "obtainFavor": "By spending 3 Athena's Favor tokens, only once per turn, at any moment of your turn.",
+      "choice": "When you gather a Tale, choose 1 of the 4 faceup tiles or draw the top tile of one of the two facedown stacks. A faceup tile you choose is immediately replaced by the top tile of one of the two stacks.",
+      "max": "You cannot gather more than 6 Tales during the game, including your starting tile. There are 14 different Tales, each in 2 copies."
+    },
+    "athenaFavorToken": {
+      "title": "Athena's Favor",
+      "role": "Athena's Favor tokens let you gather new Tales or redirect the skill points you gain.",
+      "currentCount": "Athena's Favor tokens you hold right now: {count}.",
+      "useTale": "Spend 3 Favors, only once per turn and at any moment of it, to immediately gather a Tale.",
+      "useRedirect": "Each time you have to add 1 to a given skill, you may spend 1 Favor to add it to a different skill instead.",
+      "canBuyTale": "You can gather a Tale right now, if you have not already done so this turn.",
+      "gainTitle": "How to gain them",
+      "gainReveal": "By choosing a Trial card next to the pair of facedown cards on one side of the Ship: the 2 cards are flipped up and you take the Favor placed between them.",
+      "gainRest": "By Resting: you always gain 1 Favor from the supply.",
+      "gainCard": "Some Trial cards give one or more Favors when you depart on an adventure with them.",
+      "gainRefill": "Each time the Ship is refilled at the end of a turn, 1 Favor is added on each side."
+    },
+    "epicTile": {
+      "title": "Epic tile",
+      "role": "You can only complete one Epic during the game. To do so, your Tales board must hold at least one Trial card of each of the 5 trial types (Navigation, Encounters, Gods, Creatures, Ithaca), whether you pass it or not.",
+      "alreadyEarned": "You have already completed your Epic for this game: you cannot gain a second one.",
+      "progress": "Different trial types on your board right now: {count} / 5.",
+      "value": "This tile is worth {value} victory points.",
+      "reward": "As soon as this condition is met, you immediately take the top Epic tile of the stack and place it to the right of your Tales board.",
+      "decreasing": "The tiles are stacked in decreasing value order, with the largest value on top of the stack: the sooner you complete your Epic, the more points it scores.",
+      "max": "A single stack of 5 tiles is shared by all the players: each of them can only gain one."
+    },
+    "skillCube": {
+      "title": "Skill cube",
+      "role": "Each player has 4 cubes, one per skill (Strength, Intelligence, Cunning, Luck), which move along the 0 to 6 tracks of their Tales board.",
+      "current": "Current value of {skill}: {value} / 6.",
+      "maxed": "Your {skill} has reached the maximum: it cannot be increased any further. Instead, redirect the gains imposed in this skill towards another one, by spending an Athena's Favor token.",
+      "increase": "You increase a skill when you depart on an adventure or when you Rest, according to the gains shown on the Trial card played.",
+      "redirect": "You may spend 1 Athena's Favor token to redirect an imposed skill gain towards the skill of your choice.",
+      "scoring": "At the end of the game, your value in a skill determines which Trial cards of its column are passed: every card whose required value is equal to or below that value scores its victory points."
+    },
+    "shipBoard": {
+      "title": "Ulysses' Ship",
+      "role": "Ulysses' Ship is the central gameboard. On each of its two sides, a line of 6 Trial cards is laid out: the 4 cards at the ends are face up, the central pair is face down.",
+      "choose": "You may only choose a card at one of the ends of a side, never a card that is between 2 others. Choosing the card next to the facedown pair flips it up and grants you the Athena's Favor token placed between the 2 cards.",
+      "refill": "When only 1 card is left on the Ship at the end of a turn, it is discarded and the draw pile refills the spaces of the Ship with 4 facedown cards and 8 faceup cards; 1 Athena's Favor token is added on each side.",
+      "end": "The game ends when only 1 card is left on the Ship and the draw pile is empty.",
+      "deckRemaining": "Trial cards left in the draw pile: {count}.",
+      "deckEmpty": "The draw pile is empty: as soon as only 1 card is left on the Ship, the game will end."
+    },
+    "storyBoard": {
+      "title": "Tales board",
+      "role": "Your player board gathers your 4 skill tracks (from 0 to 6), your columns of Trial cards departed on adventure (4 maximum per skill), your pile of cards used to Rest, your Tale tiles (6 maximum) and your Epic tile.",
+      "currentScore": "Current score of {name}: {score} victory points (provisional count, which may change until the end of the game).",
+      "scoring": "At the end of the game, for each skill count the victory points of the Trial cards whose value is equal to or below your value, add the points of your Tales (always counted, even if the matching card is not passed), then those of your Epic tile.",
+      "tieBreak": "The player with the most victory points wins the game. In case of a tie, the player who scored the most points for their Tales wins. If there is still a tie, the players share the victory."
+    },
+    "turn": {
+      "title": "How a turn works",
+      "intro": "The game is played clockwise. Each turn plays through 3 steps, in this order.",
+      "step1Title": "1. Choose a Trial card",
+      "step1Desc": "Choose a Trial card at one of the ends of the two lines either side of Ulysses' Ship. If it is next to a facedown card, flip up the 2 facedown cards on that side of the Ship and take the Athena's Favor token placed between them.",
+      "step2Title": "2. Depart on an Adventure, or Rest",
+      "step2AdventureDesc": "By departing on an adventure, you apply the gains shown at the bottom of the card and place it in the column of its skill on your Tales board (4 cards maximum per skill).",
+      "step2RestDesc": "By Resting, you place the card face down without applying its gains, in exchange for 1 point in the skill of your choice and 1 Athena's Favor token from the supply.",
+      "step3Title": "3. End your turn",
+      "step3Desc": "If only 1 Trial card is left on the Ship, it is discarded and the Ship is refilled (4 facedown cards and 8 faceup cards), with 1 Athena's Favor token added on each side. Play then passes to the next player.",
+      "endTitle": "End of the game",
+      "endDesc": "The game ends when only 1 Trial card is left on the Ship and the draw pile is empty. Each player then counts their victory points: passed skills, Tales and Epic tile."
+    }
+  },
+  "tuto": {
+    "welcome": "Welcome to the <bold>Odysseus tutorial</bold>!",
+    "goal": "In this game, you accompany Ulysses on his journey and help him overcome the trials he faces.",
+    "cards": "Here are the Trial cards. Each turn, you must choose a Trial card at one of the ends of one of the two sides of Ulysses' Ship.",
+    "board": "Here is your Tales board <emblem/>. It holds your <bold>4 skills</bold>: <strength/>, <intelligence/>, <cunning/>, <luck/>.",
+    "pick": "Each Trial is linked to a skill. This one, for instance, calls for <strength/>. Take it and depart on an adventure by placing it above its track, on your Tales board.",
+    "value": "This Trial scores <bold>6 victory points</bold> at the end of the game, but only if your <strength/> reaches at least <bold>4</bold> by then!",
+    "gains": "This Trial immediately gives you <favor/> an Athena's Favor token, as well as 1 point in <intelligence/>.",
+    "favorStart": "Each player starts the game with 1 Athena's Favor token <favor/>: you now have <bold>2</bold>. We will see a little later what they are for.",
+    "raiseIntelligence": "Increase your <intelligence/>.",
+    "turnEnd": "Your turn is over: it is now your opponent <bold>Poseidon</bold>'s turn to play.",
+    "hidden": "As you may have noticed, <bold>4 Trials</bold> are hidden on the board.",
+    "hiddenReveal": "As soon as a card next to a hidden pair is taken by a player, the 2 hidden Trials are flipped up, and that player takes the Athena's Favor token <favor/> placed between them.",
+    "opponentPicked": "Poseidon has taken this Trial: he therefore gains this Athena's Favor token <favor/>, and the 2 neighbouring Trials are revealed.",
+    "yourTurn": "Your turn! Each player starts the game with 1 Tale tile.",
+    "taleScoring": "At the end of the game, your Tale tile will score you <bold>2 points</bold> for each of your <strength/> Trials — whether you pass it or not. You chose your first Trial well!",
+    "taleMax": "Careful: you cannot have more than <bold>4 Trial cards</bold> per skill, so your Tale will never be able to score more than <bold>8 points</bold>.",
+    "taleGainIntro": "You will be able to gather more Tale tiles during the game. Click on a tile to see which Trials it applies to.",
+    "taleGainRow": "You gather a new one each time you complete a row: one card of each skill (<strength/>, <intelligence/>, <cunning/>, <luck/>) at the same height on your board.",
+    "taleFavorBuy": "You can also gather a Tale by spending <bold>3 Athena's Favor tokens</bold> <favor/> — only once per turn.",
+    "rest1": "If no Trial suits you, you can Rest by placing the card here, face down.",
+    "rest2": "In that case, the Trial is lost, but you still add 1 to the skill of your choice, and you gain an Athena's Favor token <favor/>.",
+    "redirect1": "You can also spend 1 Athena's Favor token <favor/> to increase the skill of your choice <bold>instead</bold> of the one imposed.",
+    "redirectExample": "<italic>Example: a card imposes 1 point of <cunning/> on you, but you would rather progress in <strength/>. By spending 1 <favor/>, you increase Strength rather than Cunning.</italic>",
+    "epic": "Finally, here are the Epic tiles. The first player to gather the 5 trial types <types/> gains the top tile, worth <bold>10 victory points</bold>; the next one is worth <bold>8</bold>, and so on.",
+    "finalCall": "Now it is up to you! Take the Trial of your choice, complete your Epic, improve your Tales, and score more victory points than your opponent to win the game. May the gods be with you, adventurer!",
+    "skillName": {
+      "strength": "Strength",
+      "intelligence": "Intelligence",
+      "cunning": "Cunning",
+      "luck": "Luck"
+    }
+  }
+}

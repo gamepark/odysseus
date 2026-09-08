@@ -1,1 +1,183 @@
-{}
+{
+  "header": {
+    "chooseTrialCard": {
+      "you": "Elige una carta Prueba",
+      "player": "{player} elige una carta Prueba"
+    },
+    "resolveSkillGain": {
+      "you": "Aumenta tus habilidades",
+      "player": "{player} aumenta sus habilidades",
+      "forfeit": "Redirige esta ganancia por 1 <favor/> o <forfeit>renuncia a ella</forfeit>"
+    },
+    "chooseTale": {
+      "you": "Elige una ficha Relato",
+      "player": "{player} elige una ficha Relato"
+    },
+    "buyTale": {
+      "you": "Consigue un Relato por 3 <favor/> o <pass>pasa</pass>",
+      "player": "{player} puede conseguir un Relato por 3 <favor/>"
+    },
+    "finishTurn": "Fin del turno"
+  },
+  "action": {
+    "adventure": "Partir a la aventura",
+    "rest": "Descansar"
+  },
+  "log": {
+    "adventure": "{player} parte a la aventura con <card/>",
+    "rest": "{player} descansa",
+    "gainFavor": "{player} consigue un Favor de Atenea",
+    "increaseSkill": "{player} aumenta {skill}",
+    "redirectSkill": "{player} gasta 1 Favor de Atenea para redirigir su ganancia",
+    "forfeitGain": "{player} renuncia a una ganancia de habilidad que no puede aumentar",
+    "winTale": "{player} consigue el Relato <tile/>",
+    "winEpic": "{player} completa su Epopeya y consigue <tile/>",
+    "spendFavorForTale": "{player} gasta 3 Favores de Atenea por un Relato",
+    "restockShip": "La Nave se repone"
+  },
+  "skill": {
+    "strength": "la Fuerza",
+    "intelligence": "la Inteligencia",
+    "cunning": "la Astucia",
+    "luck": "la Suerte"
+  },
+  "adventureType": {
+    "navigation": "Navegación",
+    "gods": "Dioses",
+    "creatures": "Criaturas",
+    "encounters": "Encuentros",
+    "ithaca": "Ítaca"
+  },
+  "help": {
+    "trialCard": {
+      "title": "Carta Prueba",
+      "role": "Las cartas Prueba representan las 15 grandes etapas del viaje de Ulises por el Mediterráneo. Supéralas para anotar sus puntos de victoria al final de la partida.",
+      "skill": "Esta prueba está asociada a {skill}.",
+      "value": "Valor requerido: {value}. Al final de la partida, la prueba se supera si tu valor en esa habilidad es al menos igual a este.",
+      "points": "Otorga {points} puntos de victoria si se supera la prueba.",
+      "adventureType": "Tipo de prueba: {type}.",
+      "columnCount": "Cartas que ya hay en esta columna, en tu tablero Relato: {count} / {max}.",
+      "columnFull": "Tu columna de esta habilidad ya está llena ({max} cartas): tendrás que descansar con esta carta, sin poder partir a la aventura.",
+      "gainsTitle": "Ganancias al partir a la aventura",
+      "gainsNone": "Esta carta no ofrece ninguna ganancia inmediata.",
+      "gainFixed": "Aumenta {skill} en 1 punto.",
+      "gainChoice": "Aumenta en 1 punto la habilidad que elijas.",
+      "gainFavor": "Consigues 1 ficha de Favor de Atenea.",
+      "chooseTitle": "Elegir esta carta",
+      "chooseDesc": "Solo puedes elegir una carta Prueba situada en uno de los extremos de las dos hileras a ambos lados de la Nave de Ulises, nunca una carta encajada entre otras dos. Si la carta elegida está junto a una carta boca abajo, se revelan las 2 cartas ocultas de ese lado de la Nave y consigues la ficha de Favor de Atenea colocada entre ellas.",
+      "adventureDesc": "Consigues las ganancias indicadas en la parte inferior de la carta y después la añades a tu tablero Relato, en la columna de su habilidad. No puedes colocar más de 4 cartas Prueba por habilidad: si no te queda más remedio que tomar una 5.ª carta de la misma habilidad, debes descansar.",
+      "restDesc": "Colocas la carta boca abajo a la izquierda de tu tablero Relato, sin conseguir sus ganancias. A cambio, aumentas en 1 punto la habilidad que elijas y consigues 1 ficha de Favor de Atenea de la reserva.",
+      "scoringTitle": "Recuento final",
+      "scoringDesc": "Al final de la partida, una carta Prueba colocada en una columna de aventura otorga sus puntos de victoria si el valor requerido es menor o igual que tu valor en esa habilidad. Las cartas colocadas boca abajo al descansar nunca otorgan puntos."
+    },
+    "storyTile": {
+      "title": "Ficha Relato",
+      "role": "Las fichas Relato te permiten anotar puntos de victoria adicionales al final de la partida, según las cartas Prueba que tengas en tu tablero, las hayas superado o no.",
+      "scoring": "Cada Relato otorga 2 puntos de victoria por cada carta Prueba correspondiente que poseas.",
+      "matchSkill": "2 puntos por cada carta Prueba de {skill}.",
+      "matchAdventureType": "2 puntos por cada carta Prueba de tipo {type}.",
+      "matchValue": "2 puntos por cada carta Prueba cuyo valor de habilidad sea {value}.",
+      "value1Or2": "1 o 2",
+      "currentCount": "Cartas Prueba correspondientes en tu tablero, en este momento: {count}.",
+      "obtainTitle": "Cómo conseguirlo",
+      "obtainRow": "Formando una hilera de 4 cartas Prueba en tu tablero Relato: una carta de cada una de las 4 habilidades, en la misma fila.",
+      "obtainFavor": "Gastando 3 fichas de Favor de Atenea, una sola vez por turno, en cualquier momento de tu turno.",
+      "choice": "Cuando consigues un Relato, elige una de las 4 fichas visibles o roba la primera de una de las dos pilas boca abajo. Una ficha visible elegida se sustituye de inmediato por la primera de una de las dos pilas.",
+      "max": "Puedes conseguir un máximo de 6 Relatos durante la partida, incluida la ficha inicial. Hay 14 Relatos distintos, cada uno por duplicado."
+    },
+    "athenaFavorToken": {
+      "title": "Favor de Atenea",
+      "role": "Los Favores de Atenea te permiten conseguir nuevos Relatos o redirigir los puntos de habilidad que ganas.",
+      "currentCount": "Favores de Atenea en tu poder, en este momento: {count}.",
+      "useTale": "Gasta 3 Favores, una sola vez por turno y en cualquier momento de este, para conseguir de inmediato un Relato.",
+      "useRedirect": "Cada vez que debas aumentar en 1 punto una habilidad concreta, puedes gastar 1 Favor para aumentar otra habilidad en su lugar.",
+      "canBuyTale": "Puedes conseguir un Relato ahora mismo, si aún no lo has hecho este turno.",
+      "gainTitle": "Cómo conseguirlos",
+      "gainReveal": "Eligiendo una carta Prueba adyacente a la pareja de cartas boca abajo de un lado de la Nave: las 2 cartas se revelan y consigues el Favor colocado entre ellas.",
+      "gainRest": "Al descansar: siempre consigues 1 Favor de la reserva.",
+      "gainCard": "Algunas cartas Prueba otorgan uno o varios Favores cuando partes a la aventura con ellas.",
+      "gainRefill": "Cada vez que la Nave se repone al final de un turno, se añade 1 Favor a cada lado."
+    },
+    "epicTile": {
+      "title": "Loseta Epopeya",
+      "role": "Solo puedes completar una Epopeya durante la partida. Para ello, tu tablero Relato debe contener al menos una carta Prueba de cada uno de los 5 tipos de prueba (Navegación, Encuentros, Dioses, Criaturas, Ítaca), la hayas superado o no.",
+      "alreadyEarned": "Ya has completado tu Epopeya en esta partida: no puedes conseguir una segunda.",
+      "progress": "Tipos de prueba distintos en tu tablero, en este momento: {count} / 5.",
+      "value": "Esta loseta vale {value} puntos de victoria.",
+      "reward": "En cuanto se cumple esta condición, consigues de inmediato la primera loseta Epopeya de la pila y la colocas a la derecha de tu tablero Relato.",
+      "decreasing": "Las losetas se apilan en orden de valor decreciente, con el valor más alto encima de la pila: cuanto antes completes tu Epopeya, más puntos te dará.",
+      "max": "Todos los jugadores comparten una única pila de 5 losetas: cada uno solo puede conseguir una."
+    },
+    "skillCube": {
+      "title": "Cubo de habilidad",
+      "role": "Cada jugador posee 4 cubos, uno por habilidad (Fuerza, Inteligencia, Astucia, Suerte), que avanzan por los tracks de 0 a 6 de su tablero Relato.",
+      "current": "Valor actual de {skill}: {value} / 6.",
+      "maxed": "Tu valor en {skill} ha alcanzado el máximo: no puedes aumentarlo más. Redirige las ganancias impuestas en esta habilidad hacia otra gastando un Favor de Atenea.",
+      "increase": "Aumentas una habilidad cuando partes a la aventura o cuando descansas, según las ganancias indicadas en la carta Prueba jugada.",
+      "redirect": "Puedes gastar 1 Favor de Atenea para redirigir una ganancia de habilidad impuesta hacia la habilidad que elijas.",
+      "scoring": "Al final de la partida, tu valor en una habilidad determina qué cartas Prueba de su columna se superan: toda carta cuyo valor requerido sea menor o igual que ese valor otorga sus puntos de victoria."
+    },
+    "shipBoard": {
+      "title": "Nave de Ulises",
+      "role": "La Nave de Ulises es el tablero central. A cada uno de sus dos lados se dispone una hilera de 6 cartas Prueba: las 4 cartas de los extremos están boca arriba y la pareja central, boca abajo.",
+      "choose": "Solo puedes elegir una carta situada en uno de los extremos de un lado, nunca una carta encajada entre otras dos. Elegir la carta adyacente a la pareja oculta la revela y te otorga la ficha de Favor de Atenea colocada entre las 2 cartas.",
+      "refill": "Cuando solo queda 1 carta en la Nave al final de un turno, se descarta y el mazo repone los espacios de la Nave con 4 cartas boca abajo y 8 cartas boca arriba; se añade 1 ficha de Favor de Atenea a cada lado.",
+      "end": "La partida termina cuando solo queda 1 carta en la Nave y el mazo está vacío.",
+      "deckRemaining": "Cartas Prueba que quedan en el mazo: {count}.",
+      "deckEmpty": "El mazo está vacío: en cuanto solo quede 1 carta en la Nave, la partida terminará."
+    },
+    "storyBoard": {
+      "title": "Tablero Relato",
+      "role": "Tu tablero personal reúne tus 4 tracks de habilidad (de 0 a 6), tus columnas de cartas Prueba con las que has partido a la aventura (4 como máximo por habilidad), tu pila de cartas colocadas al descansar, tus fichas Relato (6 como máximo) y tu loseta Epopeya.",
+      "currentScore": "Puntuación actual de {name}: {score} puntos de victoria (recuento provisional, que puede cambiar hasta el final de la partida).",
+      "scoring": "Al final de la partida, cuenta para cada habilidad los puntos de victoria de las cartas Prueba cuyo valor sea menor o igual que tu valor, añade los puntos de tus Relatos (que siempre cuentan, aunque la carta correspondiente no se haya superado) y después los de tu loseta Epopeya.",
+      "tieBreak": "Gana la partida el jugador con más puntos de victoria. En caso de empate, gana el jugador con más puntos en Relatos. Si el empate persiste, los jugadores comparten la victoria."
+    },
+    "turn": {
+      "title": "Desarrollo de un turno",
+      "intro": "Se juega en el sentido de las agujas del reloj. Cada turno se desarrolla en 3 pasos, en este orden.",
+      "step1Title": "1. Elegir una carta Prueba",
+      "step1Desc": "Elige una carta Prueba situada en uno de los extremos de las dos hileras a ambos lados de la Nave de Ulises. Si es adyacente a una carta boca abajo, revela las 2 cartas ocultas de ese lado de la Nave y consigue la ficha de Favor de Atenea colocada entre ellas.",
+      "step2Title": "2. Partir a la aventura o descansar",
+      "step2AdventureDesc": "Al partir a la aventura, consigues las ganancias indicadas en la parte inferior de la carta y la añades a la columna de su habilidad en tu tablero Relato (4 cartas como máximo por habilidad).",
+      "step2RestDesc": "Al descansar, colocas la carta boca abajo sin conseguir sus ganancias, a cambio de 1 punto en la habilidad que elijas y de 1 ficha de Favor de Atenea de la reserva.",
+      "step3Title": "3. Terminar el turno",
+      "step3Desc": "Si solo queda 1 carta Prueba en la Nave, se descarta y la Nave se repone (4 cartas boca abajo y 8 cartas boca arriba), añadiendo 1 ficha de Favor de Atenea a cada lado. Después es el turno del siguiente jugador.",
+      "endTitle": "Fin de la partida",
+      "endDesc": "La partida termina cuando solo queda 1 carta Prueba en la Nave y el mazo está vacío. Cada jugador cuenta entonces sus puntos de victoria: habilidades superadas, Relatos y loseta Epopeya."
+    }
+  },
+  "tuto": {
+    "welcome": "¡Bienvenido al <bold>tutorial de Odysseus</bold>!",
+    "goal": "En este juego, acompañas a Ulises en su periplo y le ayudas a superar las pruebas que encuentra.",
+    "cards": "Estas son las cartas Prueba. En cada turno debes elegir una carta Prueba situada en uno de los extremos de uno de los dos lados de la Nave de Ulises.",
+    "board": "Este es tu tablero Relato <emblem/>. En él dispones de <bold>4 habilidades</bold>: <strength/>, <intelligence/>, <cunning/>, <luck/>.",
+    "pick": "Cada Prueba está asociada a una habilidad. Esta, por ejemplo, requiere <strength/>. Tómala y parte a la aventura colocándola encima de su track, en tu tablero Relato.",
+    "value": "Esta Prueba otorga <bold>6 puntos de victoria</bold> al final de la partida, ¡pero solo si tu <strength/> alcanza al menos <bold>4</bold> en ese momento!",
+    "gains": "Esta Prueba te otorga de inmediato <favor/> un Favor de Atenea, así como 1 punto en <intelligence/>.",
+    "favorStart": "Cada jugador empieza la partida con un Favor de Atenea <favor/>: ahora tienes <bold>2</bold>. Un poco más adelante veremos para qué sirven.",
+    "raiseIntelligence": "Aumenta tu <intelligence/>.",
+    "turnEnd": "Tu turno ha terminado: ahora le toca jugar a tu adversario, <bold>Poseidón</bold>.",
+    "hidden": "Como quizá hayas notado, hay <bold>4 Pruebas</bold> ocultas en el tablero.",
+    "hiddenReveal": "En cuanto un jugador toma una carta adyacente a una pareja oculta, las 2 Pruebas ocultas se revelan y ese jugador consigue el Favor de Atenea <favor/> colocado entre ellas.",
+    "opponentPicked": "Poseidón ha tomado esta Prueba: por tanto consigue este Favor de Atenea <favor/>, y las 2 Pruebas vecinas se revelan.",
+    "yourTurn": "¡Te toca! Cada jugador empieza la partida con una ficha Relato.",
+    "taleScoring": "Tu ficha Relato te otorgará al final de la partida <bold>2 puntos</bold> por cada una de tus Pruebas de <strength/>, la hayas superado o no. ¡Has elegido bien tu primera Prueba!",
+    "taleMax": "Atención: no puedes tener más de <bold>4 cartas Prueba</bold> por habilidad, así que tu Relato nunca podrá otorgarte más de <bold>8 puntos</bold>.",
+    "taleGainIntro": "Podrás ganar más fichas Relato durante la partida. Haz clic en una ficha para saber a qué Pruebas se aplica.",
+    "taleGainRow": "Consigues una nueva cada vez que completas una hilera: una carta de cada habilidad (<strength/>, <intelligence/>, <cunning/>, <luck/>) a la misma altura en tu tablero.",
+    "taleFavorBuy": "También puedes conseguir un Relato gastando <bold>3 Favores de Atenea</bold> <favor/>, una sola vez por turno.",
+    "rest1": "Si ninguna Prueba te conviene, puedes descansar colocando la carta aquí, boca abajo.",
+    "rest2": "En ese caso pierdes la Prueba, pero aun así aumentas en 1 la habilidad que elijas y consigues un Favor de Atenea <favor/>.",
+    "redirect1": "También puedes gastar 1 Favor de Atenea <favor/> para aumentar la habilidad que elijas <bold>en lugar</bold> de la impuesta.",
+    "redirectExample": "<italic>Ejemplo: una carta te impone 1 punto de <cunning/>, pero prefieres progresar en <strength/>. Gastando 1 <favor/>, aumentas la Fuerza en vez de la Astucia.</italic>",
+    "epic": "Por último, estas son las losetas Epopeya. El primer jugador que reúna los 5 tipos de prueba <types/> consigue la loseta superior, que vale <bold>10 puntos de victoria</bold>; la siguiente vale <bold>8</bold>, y así sucesivamente.",
+    "finalCall": "¡Ahora te toca a ti! Toma la Prueba que quieras, completa tu Epopeya, mejora tu Relato y consigue más puntos de victoria que tu adversario para ganar la partida. ¡Que los dioses te acompañen, aventurero!",
+    "skillName": {
+      "strength": "Fuerza",
+      "intelligence": "Inteligencia",
+      "cunning": "Astucia",
+      "luck": "Suerte"
+    }
+  }
+}

@@ -1,1 +1,183 @@
-{}
+{
+  "header": {
+    "chooseTrialCard": {
+      "you": "Wähle eine Prüfungskarte",
+      "player": "{player} wählt eine Prüfungskarte"
+    },
+    "resolveSkillGain": {
+      "you": "Steigere deine Fähigkeiten",
+      "player": "{player} steigert seine Fähigkeiten",
+      "forfeit": "Lenke diesen Gewinn für 1 <favor/> um oder <forfeit>verzichte darauf</forfeit>"
+    },
+    "chooseTale": {
+      "you": "Wähle einen Erzählungsmarker",
+      "player": "{player} wählt einen Erzählungsmarker"
+    },
+    "buyTale": {
+      "you": "Nimm eine Erzählung für 3 <favor/> oder <pass>passe</pass>",
+      "player": "{player} kann eine Erzählung für 3 <favor/> nehmen"
+    },
+    "finishTurn": "Zugende"
+  },
+  "action": {
+    "adventure": "Auf Abenteuer ausziehen",
+    "rest": "Ausruhen"
+  },
+  "log": {
+    "adventure": "{player} zieht mit <card/> auf Abenteuer aus",
+    "rest": "{player} ruht sich aus",
+    "gainFavor": "{player} erhält eine Gunst der Athene",
+    "increaseSkill": "{player} steigert die Fähigkeit «{skill}»",
+    "redirectSkill": "{player} gibt 1 Gunst der Athene aus, um den Gewinn umzulenken",
+    "forfeitGain": "{player} verzichtet auf einen Fähigkeitsgewinn, der nicht gesteigert werden kann",
+    "winTale": "{player} erhält die Erzählung <tile/>",
+    "winEpic": "{player} vollendet sein Epos und erhält <tile/>",
+    "spendFavorForTale": "{player} gibt 3 Gunst-der-Athene-Marker für eine Erzählung aus",
+    "restockShip": "Das Schiff wird neu aufgefüllt"
+  },
+  "skill": {
+    "strength": "Stärke",
+    "intelligence": "Intelligenz",
+    "cunning": "List",
+    "luck": "Glück"
+  },
+  "adventureType": {
+    "navigation": "Navigation",
+    "gods": "Götter",
+    "creatures": "Kreaturen",
+    "encounters": "Begegnungen",
+    "ithaca": "Ithaka"
+  },
+  "help": {
+    "trialCard": {
+      "title": "Prüfungskarte",
+      "role": "Die Prüfungskarten stellen die 15 großen Etappen der Reise des Odysseus durch das Mittelmeer dar. Bestehe sie, um am Spielende ihre Siegpunkte zu erhalten.",
+      "skill": "Diese Prüfung gehört zur Fähigkeit «{skill}».",
+      "value": "Erforderlicher Wert: {value}. Am Spielende gilt die Prüfung als bestanden, wenn dein Wert in dieser Fähigkeit mindestens so hoch ist.",
+      "points": "Bringt {points} Siegpunkte, wenn die Prüfung bestanden ist.",
+      "adventureType": "Art der Prüfung: {type}.",
+      "columnCount": "Karten, die bereits in dieser Spalte deines Erzählungstableaus liegen: {count} / {max}.",
+      "columnFull": "Deine Spalte für diese Fähigkeit ist bereits voll ({max} Karten): Du musst dich mit dieser Karte ausruhen und kannst nicht auf Abenteuer ausziehen.",
+      "gainsTitle": "Gewinne beim Ausziehen auf Abenteuer",
+      "gainsNone": "Diese Karte bringt keinen sofortigen Gewinn.",
+      "gainFixed": "Steigert die Fähigkeit «{skill}» um 1.",
+      "gainChoice": "Steigert eine Fähigkeit deiner Wahl um 1.",
+      "gainFavor": "Du erhältst 1 Gunst-der-Athene-Marker.",
+      "chooseTitle": "Diese Karte wählen",
+      "chooseDesc": "Du darfst nur eine Prüfungskarte an einem der Enden der beiden Reihen zu beiden Seiten des Schiffes des Odysseus wählen, niemals eine Karte, die zwischen zwei anderen liegt. Liegt die gewählte Karte neben einer verdeckten Karte, werden die 2 verdeckten Karten auf dieser Seite des Schiffes aufgedeckt und du erhältst den Gunst-der-Athene-Marker, der dazwischen liegt.",
+      "adventureDesc": "Du erhältst die unten auf der Karte angegebenen Gewinne und legst sie dann auf dein Erzählungstableau, in die Spalte ihrer Fähigkeit. Du darfst nicht mehr als 4 Prüfungskarten pro Fähigkeit haben: Bleibt dir keine andere Wahl, als eine 5. Karte derselben Fähigkeit zu nehmen, musst du dich stattdessen ausruhen.",
+      "restDesc": "Du legst die Karte verdeckt links neben dein Erzählungstableau, ohne ihre Gewinne zu erhalten. Im Gegenzug steigerst du eine Fähigkeit deiner Wahl um 1 und erhältst 1 Gunst-der-Athene-Marker aus dem Vorrat.",
+      "scoringTitle": "Schlusswertung",
+      "scoringDesc": "Am Spielende bringt eine Prüfungskarte in einer Abenteuerspalte ihre Siegpunkte, wenn der erforderliche Wert kleiner oder gleich deinem Wert in dieser Fähigkeit ist. Verdeckt abgelegte Karten vom Ausruhen bringen niemals Punkte."
+    },
+    "storyTile": {
+      "title": "Erzählungsmarker",
+      "role": "Die Erzählungsmarker bringen dir am Spielende zusätzliche Siegpunkte, abhängig von den Prüfungskarten auf deinem Tableau – ganz gleich, ob sie bestanden sind oder nicht.",
+      "scoring": "Jede Erzählung bringt 2 Siegpunkte für jede passende Prüfungskarte in deinem Besitz.",
+      "matchSkill": "2 Punkte pro Prüfungskarte der Fähigkeit «{skill}».",
+      "matchAdventureType": "2 Punkte pro Prüfungskarte der Art {type}.",
+      "matchValue": "2 Punkte pro Prüfungskarte, deren Fähigkeitswert {value} beträgt.",
+      "value1Or2": "1 oder 2",
+      "currentCount": "Passende Prüfungskarten auf deinem Tableau, im Moment: {count}.",
+      "obtainTitle": "So erhältst du eine",
+      "obtainRow": "Indem du auf deinem Erzählungstableau eine Reihe aus 4 Prüfungskarten bildest: eine Karte in jeder der 4 Fähigkeiten, auf derselben Höhe.",
+      "obtainFavor": "Indem du 3 Gunst-der-Athene-Marker ausgibst – nur einmal pro Zug, zu einem beliebigen Zeitpunkt deines Zuges.",
+      "choice": "Wenn du eine Erzählung erhältst, wähle einen der 4 offen ausliegenden Marker oder ziehe den obersten Marker von einem der beiden verdeckten Stapel. Ein gewählter offener Marker wird sofort durch den obersten Marker eines der beiden Stapel ersetzt.",
+      "max": "Du kannst im Laufe des Spiels höchstens 6 Erzählungen erhalten, den Startmarker eingeschlossen. Es gibt 14 verschiedene Erzählungen, jede davon 2-mal."
+    },
+    "athenaFavorToken": {
+      "title": "Gunst der Athene",
+      "role": "Mit den Gunst-der-Athene-Markern kannst du neue Erzählungen erwerben oder die Fähigkeitspunkte umlenken, die du gewinnst.",
+      "currentCount": "Gunst-der-Athene-Marker in deinem Besitz, im Moment: {count}.",
+      "useTale": "Gib 3 Marker aus – nur einmal pro Zug und zu einem beliebigen Zeitpunkt deines Zuges –, um sofort eine Erzählung zu erhalten.",
+      "useRedirect": "Jedes Mal, wenn du eine vorgegebene Fähigkeit um 1 steigern musst, darfst du 1 Marker ausgeben, um stattdessen eine andere Fähigkeit zu steigern.",
+      "canBuyTale": "Du kannst sofort eine Erzählung erhalten, sofern du das in diesem Zug noch nicht getan hast.",
+      "gainTitle": "So gewinnst du sie",
+      "gainReveal": "Indem du eine Prüfungskarte wählst, die neben dem verdeckten Kartenpaar einer Schiffsseite liegt: Die 2 Karten werden aufgedeckt und du erhältst den Marker, der dazwischen liegt.",
+      "gainRest": "Beim Ausruhen: Du erhältst immer 1 Marker aus dem Vorrat.",
+      "gainCard": "Manche Prüfungskarten bringen einen oder mehrere Marker, wenn du mit ihnen auf Abenteuer ausziehst.",
+      "gainRefill": "Jedes Mal, wenn das Schiff am Ende eines Zuges neu aufgefüllt wird, wird auf jeder Seite 1 Marker hinzugefügt."
+    },
+    "epicTile": {
+      "title": "Epos-Plättchen",
+      "role": "Du kannst im Laufe des Spiels nur ein einziges Epos vollenden. Dazu muss dein Erzählungstableau mindestens eine Prüfungskarte jeder der 5 Prüfungsarten enthalten (Navigation, Begegnungen, Götter, Kreaturen, Ithaka) – ganz gleich, ob sie bestanden ist oder nicht.",
+      "alreadyEarned": "Du hast dein Epos für diese Partie bereits vollendet: Du kannst kein zweites erhalten.",
+      "progress": "Verschiedene Prüfungsarten auf deinem Tableau, im Moment: {count} / 5.",
+      "value": "Dieses Plättchen ist {value} Siegpunkte wert.",
+      "reward": "Sobald diese Bedingung erfüllt ist, erhältst du sofort das oberste Epos-Plättchen des Stapels und legst es rechts neben dein Erzählungstableau.",
+      "decreasing": "Die Plättchen sind nach absteigendem Wert gestapelt, der höchste Wert oben: Je früher du dein Epos vollendest, desto mehr Punkte bringt es.",
+      "max": "Alle Spieler teilen sich einen einzigen Stapel aus 5 Plättchen: Jeder kann nur ein einziges erhalten."
+    },
+    "skillCube": {
+      "title": "Fähigkeitswürfel",
+      "role": "Jeder Spieler besitzt 4 Würfel, einen pro Fähigkeit (Stärke, Intelligenz, List, Glück), die auf den Leisten von 0 bis 6 seines Erzählungstableaus voranschreiten.",
+      "current": "Aktueller Wert der Fähigkeit «{skill}»: {value} / 6.",
+      "maxed": "Deine Fähigkeit «{skill}» hat das Maximum erreicht: Sie kann nicht weiter gesteigert werden. Lenke die für diese Fähigkeit vorgegebenen Gewinne stattdessen auf eine andere um, indem du einen Gunst-der-Athene-Marker ausgibst.",
+      "increase": "Du steigerst eine Fähigkeit, wenn du auf Abenteuer ausziehst oder dich ausruhst, entsprechend den Gewinnen auf der gespielten Prüfungskarte.",
+      "redirect": "Du darfst 1 Gunst-der-Athene-Marker ausgeben, um einen vorgegebenen Fähigkeitsgewinn auf die Fähigkeit deiner Wahl umzulenken.",
+      "scoring": "Am Spielende bestimmt dein Wert in einer Fähigkeit, welche Prüfungskarten ihrer Spalte bestanden sind: Jede Karte, deren erforderlicher Wert kleiner oder gleich diesem Wert ist, bringt ihre Siegpunkte."
+    },
+    "shipBoard": {
+      "title": "Schiff des Odysseus",
+      "role": "Das Schiff des Odysseus ist der zentrale Spielplan. Auf jeder seiner beiden Seiten liegt eine Reihe von 6 Prüfungskarten aus: Die 4 Karten an den Enden liegen offen, das mittlere Paar liegt verdeckt.",
+      "choose": "Du darfst nur eine Karte an einem der Enden einer Seite wählen, niemals eine Karte, die zwischen zwei anderen liegt. Wählst du die Karte neben dem verdeckten Paar, wird dieses aufgedeckt und du erhältst den Gunst-der-Athene-Marker, der zwischen den 2 Karten liegt.",
+      "refill": "Bleibt am Ende eines Zuges nur noch 1 Karte auf dem Schiff, wird sie abgeworfen und der Nachziehstapel füllt die Felder des Schiffes mit 4 verdeckten und 8 offenen Karten wieder auf; auf jeder Seite wird 1 Gunst-der-Athene-Marker hinzugefügt.",
+      "end": "Das Spiel endet, wenn nur noch 1 Karte auf dem Schiff liegt und der Nachziehstapel leer ist.",
+      "deckRemaining": "Verbleibende Prüfungskarten im Nachziehstapel: {count}.",
+      "deckEmpty": "Der Nachziehstapel ist leer: Sobald nur noch 1 Karte auf dem Schiff liegt, endet das Spiel."
+    },
+    "storyBoard": {
+      "title": "Erzählungstableau",
+      "role": "Dein persönliches Tableau vereint deine 4 Fähigkeitsleisten (von 0 bis 6), deine Spalten mit Prüfungskarten, mit denen du auf Abenteuer ausgezogen bist (höchstens 4 pro Fähigkeit), deinen Stapel abgelegter Karten vom Ausruhen, deine Erzählungsmarker (höchstens 6) und dein Epos-Plättchen.",
+      "currentScore": "Aktueller Punktestand von {name}: {score} Siegpunkte (vorläufige Zählung, die sich bis zum Spielende noch ändern kann).",
+      "scoring": "Zähle am Spielende für jede Fähigkeit die Siegpunkte der Prüfungskarten, deren Wert kleiner oder gleich deinem Wert ist, addiere die Punkte deiner Erzählungen (die immer zählen, auch wenn die zugehörige Karte nicht bestanden ist) und schließlich die deines Epos-Plättchens.",
+      "tieBreak": "Der Spieler mit den meisten Siegpunkten gewinnt das Spiel. Bei Gleichstand gewinnt der Spieler mit der höheren Punktzahl aus Erzählungen. Besteht der Gleichstand weiterhin, teilen sich die Spieler den Sieg."
+    },
+    "turn": {
+      "title": "Ablauf eines Zuges",
+      "intro": "Es wird im Uhrzeigersinn gespielt. Jeder Zug läuft in 3 Schritten ab, in dieser Reihenfolge.",
+      "step1Title": "1. Eine Prüfungskarte wählen",
+      "step1Desc": "Wähle eine Prüfungskarte an einem der Enden der beiden Reihen zu beiden Seiten des Schiffes des Odysseus. Liegt sie neben einer verdeckten Karte, decke die 2 verdeckten Karten auf dieser Seite des Schiffes auf und nimm den Gunst-der-Athene-Marker, der dazwischen liegt.",
+      "step2Title": "2. Auf Abenteuer ausziehen oder ausruhen",
+      "step2AdventureDesc": "Ziehst du auf Abenteuer aus, erhältst du die unten auf der Karte angegebenen Gewinne und legst sie in die Spalte ihrer Fähigkeit auf deinem Erzählungstableau (höchstens 4 Karten pro Fähigkeit).",
+      "step2RestDesc": "Ruhst du dich aus, legst du die Karte verdeckt ab, ohne ihre Gewinne zu erhalten, und bekommst dafür 1 Punkt in der Fähigkeit deiner Wahl sowie 1 Gunst-der-Athene-Marker aus dem Vorrat.",
+      "step3Title": "3. Seinen Zug beenden",
+      "step3Desc": "Bleibt nur noch 1 Prüfungskarte auf dem Schiff, wird sie abgeworfen und das Schiff neu aufgefüllt (4 verdeckte und 8 offene Karten), wobei auf jeder Seite 1 Gunst-der-Athene-Marker hinzugefügt wird. Anschließend ist der nächste Spieler an der Reihe.",
+      "endTitle": "Spielende",
+      "endDesc": "Das Spiel endet, wenn nur noch 1 Prüfungskarte auf dem Schiff liegt und der Nachziehstapel leer ist. Jeder Spieler zählt dann seine Siegpunkte: bestandene Fähigkeiten, Erzählungen und Epos-Plättchen."
+    }
+  },
+  "tuto": {
+    "welcome": "Willkommen beim <bold>Odysseus-Tutorial</bold>!",
+    "goal": "In diesem Spiel begleitest du Odysseus auf seiner Irrfahrt und hilfst ihm, die Prüfungen zu bestehen, denen er begegnet.",
+    "cards": "Das sind die Prüfungskarten. In jedem Zug musst du eine Prüfungskarte an einem der Enden einer der beiden Seiten des Schiffes des Odysseus wählen.",
+    "board": "Das ist dein Erzählungstableau <emblem/>. Darauf verfügst du über <bold>4 Fähigkeiten</bold>: <strength/>, <intelligence/>, <cunning/>, <luck/>.",
+    "pick": "Jede Prüfung gehört zu einer Fähigkeit. Diese hier verlangt zum Beispiel <strength/>. Nimm sie und ziehe auf Abenteuer aus, indem du sie über ihre Leiste auf dein Erzählungstableau legst.",
+    "value": "Diese Prüfung bringt am Spielende <bold>6 Siegpunkte</bold>, aber nur, wenn deine <strength/> zu diesem Zeitpunkt mindestens <bold>4</bold> beträgt!",
+    "gains": "Diese Prüfung bringt dir sofort <favor/> eine Gunst der Athene sowie 1 Punkt in <intelligence/>.",
+    "favorStart": "Jeder Spieler beginnt das Spiel mit einer Gunst der Athene <favor/>: Du hast jetzt <bold>2</bold>. Wozu sie dienen, sehen wir gleich.",
+    "raiseIntelligence": "Steigere deine <intelligence/>.",
+    "turnEnd": "Dein Zug ist beendet: Jetzt ist dein Gegner <bold>Poseidon</bold> an der Reihe.",
+    "hidden": "Wie dir vielleicht aufgefallen ist, sind <bold>4 Prüfungen</bold> auf dem Spielplan verdeckt.",
+    "hiddenReveal": "Sobald ein Spieler eine Karte nimmt, die neben einem verdeckten Paar liegt, werden die 2 verdeckten Prüfungen aufgedeckt, und dieser Spieler erhält die Gunst der Athene <favor/>, die dazwischen liegt.",
+    "opponentPicked": "Poseidon hat diese Prüfung genommen: Er erhält also diese Gunst der Athene <favor/>, und die 2 benachbarten Prüfungen werden aufgedeckt.",
+    "yourTurn": "Du bist dran! Jeder Spieler beginnt das Spiel mit einem Erzählungsmarker.",
+    "taleScoring": "Dein Erzählungsmarker bringt dir am Spielende <bold>2 Punkte</bold> für jede deiner <strength/>-Prüfungen – ganz gleich, ob sie bestanden ist oder nicht. Du hast deine erste Prüfung gut gewählt!",
+    "taleMax": "Achtung: Du darfst nicht mehr als <bold>4 Prüfungskarten</bold> pro Fähigkeit haben, deine Erzählung kann dir also niemals mehr als <bold>8 Punkte</bold> bringen.",
+    "taleGainIntro": "Im Laufe des Spiels kannst du weitere Erzählungsmarker gewinnen. Klicke auf einen Marker, um zu sehen, für welche Prüfungen er gilt.",
+    "taleGainRow": "Du erhältst jedes Mal einen neuen, wenn du eine Reihe vervollständigst: eine Karte jeder Fähigkeit (<strength/>, <intelligence/>, <cunning/>, <luck/>) auf derselben Höhe deines Tableaus.",
+    "taleFavorBuy": "Du kannst eine Erzählung auch nehmen, indem du <bold>3 Gunst-der-Athene-Marker</bold> <favor/> ausgibst – nur einmal pro Zug.",
+    "rest1": "Sagt dir keine Prüfung zu, kannst du dich ausruhen, indem du die Karte hier verdeckt ablegst.",
+    "rest2": "In diesem Fall ist die Prüfung verloren, aber du steigerst trotzdem eine Fähigkeit deiner Wahl um 1 und erhältst eine Gunst der Athene <favor/>.",
+    "redirect1": "Du kannst auch 1 Gunst der Athene <favor/> ausgeben, um <bold>anstelle</bold> der vorgegebenen Fähigkeit eine Fähigkeit deiner Wahl zu steigern.",
+    "redirectExample": "<italic>Beispiel: Eine Karte gibt dir 1 Punkt in <cunning/> vor, du möchtest aber lieber in <strength/> vorankommen. Indem du 1 <favor/> ausgibst, steigerst du Stärke statt List.</italic>",
+    "epic": "Und schließlich die Epos-Plättchen. Der erste Spieler, der die 5 Prüfungsarten <types/> zusammenträgt, erhält das oberste Plättchen im Wert von <bold>10 Siegpunkten</bold>; das nächste ist <bold>8</bold> wert, und so weiter.",
+    "finalCall": "Jetzt bist du dran! Nimm die Prüfung deiner Wahl, vollende dein Epos, verbessere deine Erzählungen und sammle mehr Siegpunkte als dein Gegner, um das Spiel zu gewinnen. Mögen die Götter mit dir sein, Abenteurer!",
+    "skillName": {
+      "strength": "Stärke",
+      "intelligence": "Intelligenz",
+      "cunning": "List",
+      "luck": "Glück"
+    }
+  }
+}
