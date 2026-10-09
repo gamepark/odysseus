@@ -91,7 +91,7 @@ export const trialCardStats: Record<TrialCard, TrialCardStats> = {
   [TrialCard.Trial9Strength]: { value: 4, victoryPoints: 8, gains: [] },
   [TrialCard.Trial9Intelligence]: { value: 3, victoryPoints: 3, gains: [Skill.Cunning, Skill.Luck] },
 
-  [TrialCard.Trial10Cunning]: { value: 0, victoryPoints: 0, gains: ['Choice', 'Choice'] },
+  [TrialCard.Trial10Cunning]: { value: 1, victoryPoints: 1, gains: ['Choice', 'Choice'] },
   [TrialCard.Trial10Luck]: { value: 3, victoryPoints: 3, gains: [Skill.Strength, Skill.Strength] },
   [TrialCard.Trial10Strength]: { value: 3, victoryPoints: 5, gains: [Skill.Cunning] },
   [TrialCard.Trial10Intelligence]: { value: 2, victoryPoints: 2, gains: [Skill.Strength, Skill.Luck] },
@@ -103,16 +103,16 @@ export const trialCardStats: Record<TrialCard, TrialCardStats> = {
 
   [TrialCard.Trial12Cunning]: { value: 4, victoryPoints: 5, gains: [Skill.Intelligence] },
   [TrialCard.Trial12Luck]: { value: 5, victoryPoints: 5, gains: [Skill.Intelligence, Skill.Strength] },
-  [TrialCard.Trial12Strength]: { value: 0, victoryPoints: 2, gains: ['AthenaFavor', Skill.Luck, Skill.Luck] },
+  [TrialCard.Trial12Strength]: { value: 1, victoryPoints: 2, gains: ['AthenaFavor', Skill.Luck, Skill.Luck] },
   [TrialCard.Trial12Intelligence]: { value: 3, victoryPoints: 2, gains: [Skill.Strength, Skill.Cunning, Skill.Luck] },
 
   [TrialCard.Trial13Cunning]: { value: 3, victoryPoints: 2, gains: ['Choice', 'Choice'] },
   [TrialCard.Trial13Luck]: { value: 4, victoryPoints: 6, gains: [Skill.Strength] },
   [TrialCard.Trial13Strength]: { value: 2, victoryPoints: 3, gains: [Skill.Cunning, Skill.Cunning] },
-  [TrialCard.Trial13Intelligence]: { value: 0, victoryPoints: 1, gains: [Skill.Strength, Skill.Cunning, Skill.Luck] },
+  [TrialCard.Trial13Intelligence]: { value: 1, victoryPoints: 1, gains: [Skill.Strength, Skill.Cunning, Skill.Luck] },
 
   [TrialCard.Trial14Cunning]: { value: 6, victoryPoints: 9, gains: ['AthenaFavor'] },
-  [TrialCard.Trial14Luck]: { value: 0, victoryPoints: 0, gains: ['AthenaFavor', 'AthenaFavor', Skill.Intelligence, Skill.Intelligence] },
+  [TrialCard.Trial14Luck]: { value: 1, victoryPoints: 1, gains: ['AthenaFavor', 'AthenaFavor', Skill.Intelligence, Skill.Intelligence] },
   [TrialCard.Trial14Strength]: { value: 4, victoryPoints: 7, gains: [Skill.Luck] },
   [TrialCard.Trial14Intelligence]: { value: 3, victoryPoints: 4, gains: ['AthenaFavor', Skill.Strength] },
 

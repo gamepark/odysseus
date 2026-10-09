@@ -27,6 +27,10 @@ revérifiés à chaque fois (compilation + `__verify.test.ts`, 100 parties aléa
    suite à un signalement joueur, confirmé en comparant les 60 images de cartes une par une aux données
    de `TrialCardStats.ts`. Corrigé.
 4. **Répartition des jetons Récit entre les 2 pioches pas aléatoire** — voir "Mise en place" ci-dessous.
+5. **Valeur 1 relevée comme 0** — le « 1 » de la police des cartes est un « I » détouré qui ressemble à
+   un 0 : `Trial10Cunning`, `Trial12Strength`, `Trial13Intelligence` et `Trial14Luck` avaient
+   `value: 0` (et 0 PV au lieu de 1 pour `Trial10Cunning` et `Trial14Luck`). Le Récit « 1-2 » ne les
+   comptait donc pas, et elles étaient réussies d'office. Aucune carte ne vaut 0. Corrigé.
 
 ## Vérification détaillée face au livret
 
