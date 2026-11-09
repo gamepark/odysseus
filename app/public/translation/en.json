@@ -145,6 +145,13 @@
       "step3Desc": "If only 1 Trial card is left on the Ship, it is discarded and the Ship is refilled (4 facedown cards and 8 faceup cards), with 1 Athena's Favor token added on each side. Play then passes to the next player.",
       "endTitle": "End of the game",
       "endDesc": "The game ends when only 1 Trial card is left on the Ship and the draw pile is empty. Each player then counts their victory points: passed skills, Tales and Epic tile."
+    },
+    "turnCounter": {
+      "title": "Turn {turn} of {total}",
+      "rounds": "Each player plays exactly {total} turns. This counter shows the current turn from each player's point of view: everyone plays their turn {turn} before anyone plays their next turn.",
+      "why": "The draw pile holds 12 Trial cards per player, and the Ship receives 12 of them each time it is refilled. Each turn takes one; when only one is left, it is discarded and the Ship is refilled. A Ship therefore lasts 11 turns, and there are as many refills as players.",
+      "ship": "Current Ship: {ship} of {ships}.",
+      "end": "The game ends when only 1 card is left on the Ship and the draw pile is empty, that is after each player's turn {total}."
     }
   },
   "tuto": {

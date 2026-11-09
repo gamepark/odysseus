@@ -19,5 +19,7 @@ export enum LocationType {
   /** UI-only: highlights a Trial card's threshold/VP badges (top-left corner) for the tutorial, no item ever goes there */
   TrialValueZone,
   /** UI-only: highlights a Trial card's immediate-gain icons (bottom band) for the tutorial, no item ever goes there */
-  TrialGainsZone
+  TrialGainsZone,
+  /** UI-only: the turn counter laid on the ship's bow (see TurnCounterLocator), no item ever goes there */
+  TurnCounter
 }

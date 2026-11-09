@@ -145,6 +145,13 @@
       "step3Desc": "Si solo queda 1 carta Prueba en la Nave, se descarta y la Nave se repone (4 cartas boca abajo y 8 cartas boca arriba), añadiendo 1 ficha de Favor de Atenea a cada lado. Después es el turno del siguiente jugador.",
       "endTitle": "Fin de la partida",
       "endDesc": "La partida termina cuando solo queda 1 carta Prueba en la Nave y el mazo está vacío. Cada jugador cuenta entonces sus puntos de victoria: habilidades superadas, Relatos y loseta Epopeya."
+    },
+    "turnCounter": {
+      "title": "Turno {turn} de {total}",
+      "rounds": "Cada jugador juega exactamente {total} turnos. Este contador indica el turno en curso desde el punto de vista de cada jugador: todos juegan su turno {turn} antes de que nadie juegue su turno siguiente.",
+      "why": "El mazo contiene 12 cartas Prueba por jugador, y la Nave recibe 12 cada vez que se repone. Cada turno se lleva una; cuando solo queda una, se descarta y la Nave se repone. Una Nave dura así 11 turnos, y hay tantas reposiciones como jugadores.",
+      "ship": "Nave en curso: {ship} de {ships}.",
+      "end": "La partida termina cuando solo queda 1 carta en la Nave y el mazo está vacío, es decir, tras el turno {total} de cada jugador."
     }
   },
   "tuto": {

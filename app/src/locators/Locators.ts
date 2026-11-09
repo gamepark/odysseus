@@ -19,6 +19,7 @@ import { taleDisplayLocator } from './TaleDisplayLocator'
 import { trialDeckLocator } from './TrialDeckLocator'
 import { trialGainsZoneLocator } from './TrialGainsZoneLocator'
 import { trialValueZoneLocator } from './TrialValueZoneLocator'
+import { turnCounterLocator } from './TurnCounterLocator'
 
 export const Locators: Partial<Record<LocationType, Locator<number, MaterialType, LocationType>>> = {
   [LocationType.ShipBoardPlace]: shipBoardPlaceLocator,
@@ -38,5 +39,6 @@ export const Locators: Partial<Record<LocationType, Locator<number, MaterialType
   [LocationType.PlayerAthenaFavor]: playerAthenaFavorLocator,
   [LocationType.PlayerPanel]: playerPanelLocator,
   [LocationType.TrialValueZone]: trialValueZoneLocator,
-  [LocationType.TrialGainsZone]: trialGainsZoneLocator
+  [LocationType.TrialGainsZone]: trialGainsZoneLocator,
+  [LocationType.TurnCounter]: turnCounterLocator
 }

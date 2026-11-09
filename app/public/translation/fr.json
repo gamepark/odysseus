@@ -145,6 +145,13 @@
       "step3Desc": "S'il ne reste plus qu'une carte Épreuve sur le Navire, elle est défaussée et le Navire est redistribué (4 cartes cachées et 8 cartes visibles), avec une Faveur d'Athéna ajoutée de chaque côté. C'est ensuite au tour du joueur suivant.",
       "endTitle": "Fin de partie",
       "endDesc": "La partie prend fin lorsqu'il ne reste plus qu'une carte Épreuve sur le Navire et que la pioche est vide. Chaque joueur compte alors ses points de victoire : compétences réussies, Récits et tuile Épopée."
+    },
+    "turnCounter": {
+      "title": "Tour {turn} sur {total}",
+      "rounds": "Chaque joueur joue exactement {total} tours. Ce compteur indique le tour en cours du point de vue de chaque joueur : tout le monde joue son tour {turn} avant que quiconque ne joue son tour suivant.",
+      "why": "La pioche contient 12 cartes Épreuve par joueur, et le Navire en reçoit 12 à chaque distribution. Chaque tour en prend une ; quand il n'en reste plus qu'une, elle est défaussée et le Navire est redistribué. Une distribution dure donc 11 tours, et il y a autant de distributions que de joueurs.",
+      "ship": "Distribution du Navire en cours : {ship} sur {ships}.",
+      "end": "La partie prend fin lorsqu'il ne reste plus qu'une carte sur le Navire et que la pioche est vide, c'est-à-dire après le tour {total} de chaque joueur."
     }
   },
   "tuto": {

@@ -145,6 +145,13 @@
       "step3Desc": "Bleibt nur noch 1 Prüfungskarte auf dem Schiff, wird sie abgeworfen und das Schiff neu aufgefüllt (4 verdeckte und 8 offene Karten), wobei auf jeder Seite 1 Gunst-der-Athene-Marker hinzugefügt wird. Anschließend ist der nächste Spieler an der Reihe.",
       "endTitle": "Spielende",
       "endDesc": "Das Spiel endet, wenn nur noch 1 Prüfungskarte auf dem Schiff liegt und der Nachziehstapel leer ist. Jeder Spieler zählt dann seine Siegpunkte: bestandene Fähigkeiten, Erzählungen und Epos-Plättchen."
+    },
+    "turnCounter": {
+      "title": "Zug {turn} von {total}",
+      "rounds": "Jeder Spieler spielt genau {total} Züge. Dieser Zähler zeigt den laufenden Zug aus Sicht jedes Spielers: Alle spielen ihren Zug {turn}, bevor jemand seinen nächsten Zug spielt.",
+      "why": "Der Nachziehstapel enthält 12 Prüfungskarten pro Spieler, und das Schiff erhält bei jedem Auffüllen 12 davon. Jeder Zug nimmt eine Karte; bleibt nur noch eine übrig, wird sie abgeworfen und das Schiff neu aufgefüllt. Eine Schiffsladung reicht also für 11 Züge, und es gibt so viele Auffüllungen wie Spieler.",
+      "ship": "Aktuelle Schiffsladung: {ship} von {ships}.",
+      "end": "Das Spiel endet, wenn nur noch 1 Karte auf dem Schiff liegt und der Nachziehstapel leer ist, also nach dem Zug {total} jedes Spielers."
     }
   },
   "tuto": {

@@ -145,6 +145,13 @@
       "step3Desc": "Se resta una sola carta Prova sulla Nave, viene scartata e la Nave viene rifornita (4 carte coperte e 8 carte scoperte), con 1 segnalino Favore di Atena aggiunto su ciascun lato. Poi è il turno del giocatore successivo.",
       "endTitle": "Fine della partita",
       "endDesc": "La partita termina quando resta una sola carta Prova sulla Nave e il mazzo è esaurito. Ogni giocatore conta allora i suoi punti vittoria: abilità superate, Racconti e tessera Epopea."
+    },
+    "turnCounter": {
+      "title": "Turno {turn} di {total}",
+      "rounds": "Ogni giocatore gioca esattamente {total} turni. Questo contatore indica il turno in corso dal punto di vista di ciascun giocatore: tutti giocano il loro turno {turn} prima che qualcuno giochi il turno successivo.",
+      "why": "Il mazzo contiene 12 carte Prova per giocatore, e la Nave ne riceve 12 ogni volta che viene rifornita. Ogni turno ne prende una; quando ne resta una sola, viene scartata e la Nave viene rifornita. Una Nave dura quindi 11 turni, e ci sono tanti rifornimenti quanti giocatori.",
+      "ship": "Nave in corso: {ship} di {ships}.",
+      "end": "La partita termina quando resta una sola carta sulla Nave e il mazzo è esaurito, cioè dopo il turno {total} di ogni giocatore."
     }
   },
   "tuto": {
