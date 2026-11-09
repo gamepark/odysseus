@@ -1,3 +1,5 @@
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react'
 import { faHandBackFist } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { LocationType } from '@gamepark/odysseus/material/LocationType'
@@ -34,6 +36,16 @@ const HOVER_LIFT = 10
 
 /** How far right of a tile its "take" button stands: past the tile's own half-width (4.67 / 2), before the next one. */
 const BUTTON_X = 3
+
+/**
+ * The price label only shows while the button itself is hovered: the starboard Trial cards begin barely
+ * 0.6 past the tile's edge, so a label standing next to every takeable tile would spill over them.
+ */
+const labelOnHoverCss = css`
+  &:not(:hover) > span {
+    display: none;
+  }
+`
 
 class StoryTileDescription extends TokenDescription<number, MaterialType, LocationType, StoryTileType> {
   width = 4.67
@@ -85,9 +97,9 @@ class StoryTileDescription extends TokenDescription<number, MaterialType, Locati
   menuAlwaysVisible = true
 
   /**
-   * The button sits just right of the tile, clear of the one next to it in the display. It spells out
-   * its price, "-3 🦉", whenever the Tale is bought with Athena Favors — which is everywhere except
-   * ChooseTaleRule, where a completed row of 4 Trial cards has already paid for it.
+   * The button sits just right of the tile, clear of the one next to it in the display. Under the pointer
+   * (see labelOnHoverCss) it spells out its price, "-3 🦉", whenever the Tale is bought with Athena Favors —
+   * which is everywhere except ChooseTaleRule, where a completed row of 4 Trial cards has already paid for it.
    */
   getItemMenu(_item: MaterialItem<number, LocationType>, context: ItemContext<number, MaterialType, LocationType>, legalMoves: MaterialMove[]) {
     const move = legalMoves.find(
@@ -96,7 +108,7 @@ class StoryTileDescription extends TokenDescription<number, MaterialType, Locati
     if (!move) return null
     const free = context.rules.game.rule?.id === RuleId.ChooseTale
     return (
-      <OdysseusMenuButton x={BUTTON_X} y={0} move={move} cost={!free} label={free ? undefined : <FavorCost cost={TALE_COST} />} labelPosition="right">
+      <OdysseusMenuButton css={labelOnHoverCss} x={BUTTON_X} y={0} move={move} cost={!free} label={free ? undefined : <FavorCost cost={TALE_COST} />} labelPosition="right">
         <FontAwesomeIcon icon={faHandBackFist} />
       </OdysseusMenuButton>
     )
