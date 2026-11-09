@@ -3,13 +3,25 @@ import { MaterialType } from '@gamepark/odysseus/material/MaterialType'
 import { ShipSide } from '@gamepark/odysseus/material/ShipSide'
 import { TrialCard } from '@gamepark/odysseus/material/TrialCard'
 import { Skill } from '@gamepark/odysseus/Skill'
-import { MaterialTutorial, Picture, TutorialStep } from '@gamepark/react-game'
+import { MaterialTutorial, TutorialStep } from '@gamepark/react-game'
 import { getEnumValues, isCreateItemType, isMoveItemType, MaterialGame, MaterialMove, MoveItem } from '@gamepark/rules-api'
 import { Trans } from 'react-i18next'
-import Skills from '../images/icons/Skills.png'
 import { FavorIcon } from '../theme/FavorIcon'
-import { AdventureTypeIcons, BaseComponents, skillComponents, skillIconCss } from './TutorialIcons'
+import { AdventureTypeIcons, SkillChip, SkillsEmblem } from './TutorialIcons'
 import { TutorialSetup } from './TutorialSetup'
+
+const BaseComponents = {
+  bold: <strong />,
+  italic: <em />
+}
+
+/** One colored, iconed chip per skill, ready to drop as a `<strength/>`-style tag in a Trans string. */
+const skillComponents = {
+  strength: <SkillChip skill={Skill.Strength} />,
+  intelligence: <SkillChip skill={Skill.Intelligence} />,
+  cunning: <SkillChip skill={Skill.Cunning} />,
+  luck: <SkillChip skill={Skill.Luck} />
+}
 
 const me = 1
 const opponent = 2
@@ -48,7 +60,7 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.board" components={{ ...BaseComponents, ...skillComponents, emblem: <Picture src={Skills} css={skillIconCss}/> }}/>,
+        text: () => <Trans defaults="tuto.board" components={{ ...BaseComponents, ...skillComponents, emblem: <SkillsEmblem/> }}/>,
         position: { y: -25 }
       },
       focus: (game) => ({

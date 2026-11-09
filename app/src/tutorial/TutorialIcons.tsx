@@ -5,12 +5,8 @@ import { Picture } from '@gamepark/react-game'
 import { getEnumValues } from '@gamepark/rules-api'
 import { FC } from 'react'
 import { Trans } from 'react-i18next'
+import Skills from '../images/icons/Skills.png'
 import { adventureTypeIcons, skillIcons } from '../images/Icons'
-
-export const BaseComponents = {
-  bold: <strong />,
-  italic: <em />
-}
 
 const skillColors: Record<Skill, string> = {
   [Skill.Strength]: '#C01020',
@@ -34,27 +30,23 @@ const skillChipCss = (skill: Skill) => css`
   color: ${skillColors[skill]};
 `
 
-export const skillIconCss = css`
+const skillIconCss = css`
   display: inline-block;
   height: 1.1em;
   width: auto;
   vertical-align: -0.2em;
 `
 
-const SkillChip: FC<{ skill: Skill }> = ({ skill }) => (
+/** A skill name in its color, preceded by its cube icon. */
+export const SkillChip: FC<{ skill: Skill }> = ({ skill }) => (
   <span css={skillChipCss(skill)}>
     <Picture src={skillIcons[skill]} css={skillIconCss} />
     <Trans defaults={`tuto.skillName.${skillNameKeys[skill]}`} />
   </span>
 )
 
-/** One colored, iconed chip per skill, ready to drop as a `<strength/>`-style tag in a Trans string. */
-export const skillComponents = {
-  strength: <SkillChip skill={Skill.Strength} />,
-  intelligence: <SkillChip skill={Skill.Intelligence} />,
-  cunning: <SkillChip skill={Skill.Cunning} />,
-  luck: <SkillChip skill={Skill.Luck} />
-}
+/** The four-coloured emblem standing for the cubes, inline with the text. */
+export const SkillsEmblem: FC = () => <Picture src={Skills} css={skillIconCss} />
 
 const adventureIconCss = css`
   display: inline-block;
